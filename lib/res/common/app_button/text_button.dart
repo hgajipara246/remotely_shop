@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class TextButtons extends StatelessWidget {
   final textButtonName;
   final Color color;
-  final void Function()? onPress;
+  final VoidCallback textonpress;
   const TextButtons({
     Key? key,
     this.textButtonName,
-    this.onPress,
     required this.color,
+    required this.textonpress,
   }) : super(key: key);
 
   @override
@@ -21,7 +21,7 @@ class TextButtons extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      onPressed: () {},
+      onPressed: textonpress,
       // onPressed: onPress,
       child: Text(
         textButtonName ?? "",

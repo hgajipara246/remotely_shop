@@ -46,15 +46,15 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: height / 30,
                   ),
-                  NormalButton(
+                  const NormalButton(
                     images: "assets/icons/google_logo.png",
                     editText: "Login with Google",
                   ),
                   SizedBox(
                     height: height / 50,
                   ),
-                  NormalButton(
-                    images: "assets/icons/google_logo.png",
+                  const NormalButton(
+                    images: "assets/icons/facebook_logo.png",
                     editText: "Login with facebook",
                   ),
                   SizedBox(
@@ -138,7 +138,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    child: MainButton(textName: "Login"),
+                    child: MainButton(
+                      textName: "Login",
+                      mainOnPress: () {},
+                    ),
                   ),
                   SizedBox(
                     height: height / 20,
@@ -149,10 +152,12 @@ class _LoginPageState extends State<LoginPage> {
                       TextButtons(
                         textButtonName: "Forgot password?",
                         color: Color(0xFF8A8B7A),
+                        textonpress: () {},
                       ),
                       TextButtons(
                         textButtonName: "Sign Up",
                         color: Color(0xFFBA5C3D),
+                        textonpress: () {},
                       ),
                     ],
                   ),

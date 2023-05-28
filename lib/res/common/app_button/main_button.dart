@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 
 class MainButton extends StatelessWidget {
   final textName;
-  const MainButton({Key? key, this.textName}) : super(key: key);
+  final VoidCallback mainOnPress;
+  const MainButton({
+    Key? key,
+    this.textName,
+    required this.mainOnPress,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +19,7 @@ class MainButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
         ),
       ),
-      onPressed: () {},
+      onPressed: mainOnPress,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height / 55),
         child: Text(

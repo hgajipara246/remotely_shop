@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class NormalButton extends StatelessWidget {
   final String? editText;
   final String? images;
+
   const NormalButton({
     Key? key,
     this.editText,
@@ -35,7 +36,6 @@ class NormalButton extends StatelessWidget {
         child: Row(
           children: [
             Image.asset(
-              // "assets/icons/google_logo.png",
               images!,
               width: 30,
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'view/login_screen.dart';
+import 'package:remotely_shop/view/onBoard_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const OnBoardScreen(),
     );
   }
 }
