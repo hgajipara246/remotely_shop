@@ -19,9 +19,23 @@ extension MobileValidator on String {
 }
 
 class AppTextFormField extends StatelessWidget {
-  final List validator;
-  final List controller;
-  const AppTextFormField({Key? key, required this.validator, required this.controller}) : super(key: key);
+  final TextEditingController? controllers;
+  final String? hintText;
+  final TextInputType? keyboardType;
+  final Function? validator;
+  final FocusNode? focusNode;
+  final Function? onFieldSunmitted;
+  final IconButton? sufixIcon;
+  const AppTextFormField({
+    Key? key,
+    this.validator,
+    this.controllers,
+    this.hintText,
+    this.keyboardType,
+    this.focusNode,
+    this.onFieldSunmitted,
+    this.sufixIcon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +45,15 @@ class AppTextFormField extends StatelessWidget {
     bool _passwordVisible = false;
     return TextFormField(
       // validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
-
-      controller: emailController,
+      // validator: (value) => validator!(value!),
+      controller: controllers,
+      keyboardType: keyboardType,
+      focusNode: focusNode,
       decoration: InputDecoration(
-        hintText: "Eg. jamesburnes@gmail.com",
+        // hintText: "Eg. jamesburnes@gmail.com",
+        hintText: hintText,
         focusColor: const Color(0xFFA6A798),
+        suffixIcon: sufixIcon,
         filled: true,
         // prefixIcon: const Icon(Icons.lock, color: Colors.grey),
         border: OutlineInputBorder(
@@ -44,8 +62,9 @@ class AppTextFormField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: const BorderSide(color: Colors.black),
+          borderSide: const BorderSide(color: Color(0xFFCED55B)),
         ),
+
         fillColor: const Color(0xFFF6F6F5),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),

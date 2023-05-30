@@ -3,6 +3,8 @@ import 'package:remotely_shop/res/common/app_button/main_button.dart';
 import 'package:remotely_shop/res/common/app_button/normal_button.dart';
 import 'package:remotely_shop/res/common/app_button/text_button.dart';
 import 'package:remotely_shop/res/common/app_textformfild.dart';
+import 'package:remotely_shop/view/home_page.dart';
+import 'package:remotely_shop/view/signup_page.dart';
 
 import '../res/constant/app_text.dart';
 
@@ -20,7 +22,22 @@ class _LoginPageState extends State<LoginPage> {
   bool _passwordVisible = false;
   @override
   void initState() {
+    super.initState();
     _passwordVisible = false;
+  }
+
+  void loginButton() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const HomePage()),
+    );
+  }
+
+  void signUpTextButton() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const SignUpPage()),
+    );
   }
 
   @override
@@ -40,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: height / 10),
+                  SizedBox(height: height / 9),
                   AppText.Hello,
                   AppText.welcomeback,
                   SizedBox(
@@ -65,74 +82,97 @@ class _LoginPageState extends State<LoginPage> {
                     height: height / 30,
                   ),
                   AppText.email,
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: height / 200),
-                    child: TextFormField(
-                      validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        hintText: "Eg. jamesburnes@gmail.com",
-                        focusColor: const Color(0xFFA6A798),
-                        filled: true,
-                        // prefixIcon: const Icon(Icons.lock, color: Colors.grey),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: const BorderSide(color: Colors.transparent),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: const BorderSide(color: Colors.black),
-                        ),
-                        fillColor: const Color(0xFFF6F6F5),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: const BorderSide(color: Colors.transparent),
-                        ),
-                      ),
-                    ),
+                  AppTextFormField(
+                    // validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct E-mail",
+                    hintText: "Eg. jamesburnes@gmail.com",
+                    controllers: emailController,
+                    // keyboardType: TextInputType.emailAddress,
                   ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(vertical: height / 200),
+                  //   child: TextFormField(
+                  //     validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
+                  //     controller: emailController,
+                  //     decoration: InputDecoration(
+                  //       hintText: "Eg. jamesburnes@gmail.com",
+                  //       focusColor: const Color(0xFFA6A798),
+                  //       filled: true,
+                  //       // prefixIcon: const Icon(Icons.lock, color: Colors.grey),
+                  //       border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         borderSide: const BorderSide(color: Colors.transparent),
+                  //       ),
+                  //       focusedBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         borderSide: const BorderSide(color: Colors.black),
+                  //       ),
+                  //       fillColor: const Color(0xFFF6F6F5),
+                  //       enabledBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         borderSide: const BorderSide(color: Colors.transparent),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   SizedBox(
                     height: height / 60,
                   ),
                   AppText.password,
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: height / 200),
-                    child: TextFormField(
-                      validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct Password",
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        hintText: "Password",
-                        focusColor: Colors.black38,
-                        filled: true,
-                        suffixIcon: IconButton(
-                          style: const ButtonStyle(),
-                          icon: Icon(
-                            _passwordVisible ? Icons.visibility : Icons.visibility_off,
-                            color: Theme.of(context).hintColor,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _passwordVisible = !_passwordVisible;
-                            });
-                          },
-                        ),
-                        // prefixIcon: const Icon(Icons.lock, color: Colors.grey),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: const BorderSide(color: Colors.transparent),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: const BorderSide(color: Colors.black),
-                        ),
-                        fillColor: const Color(0xFFF6F6F5),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: const BorderSide(color: Colors.transparent),
-                        ),
+
+                  AppTextFormField(
+                    controllers: passwordController,
+                    hintText: "Password",
+                    sufixIcon: IconButton(
+                      style: const ButtonStyle(),
+                      icon: Icon(
+                        _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                        color: Theme.of(context).hintColor,
                       ),
+                      onPressed: () {
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      },
                     ),
                   ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(vertical: height / 200),
+                  //   child: TextFormField(
+                  //     validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct Password",
+                  //     controller: passwordController,
+                  //     decoration: InputDecoration(
+                  //       hintText: "Password",
+                  //       focusColor: Colors.black38,
+                  //       filled: true,
+                  //       suffixIcon: IconButton(
+                  //         style: const ButtonStyle(),
+                  //         icon: Icon(
+                  //           _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  //           color: Theme.of(context).hintColor,
+                  //         ),
+                  //         onPressed: () {
+                  //           setState(() {
+                  //             _passwordVisible = !_passwordVisible;
+                  //           });
+                  //         },
+                  //       ),
+                  //       // prefixIcon: const Icon(Icons.lock, color: Colors.grey),
+                  //       border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         borderSide: const BorderSide(color: Colors.transparent),
+                  //       ),
+                  //       focusedBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         borderSide: const BorderSide(color: Colors.black),
+                  //       ),
+                  //       fillColor: const Color(0xFFF6F6F5),
+                  //       enabledBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         borderSide: const BorderSide(color: Colors.transparent),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   SizedBox(
                     height: height / 35,
                   ),
@@ -140,11 +180,11 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.infinity,
                     child: MainButton(
                       textName: "Login",
-                      mainOnPress: () {},
+                      mainOnPress: loginButton,
                     ),
                   ),
                   SizedBox(
-                    height: height / 20,
+                    height: height / 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -157,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                       TextButtons(
                         textButtonName: "Sign Up",
                         color: Color(0xFFBA5C3D),
-                        textonpress: () {},
+                        textonpress: signUpTextButton,
                       ),
                     ],
                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:remotely_shop/res/common/app_button/main_button.dart';
 import 'package:remotely_shop/res/common/app_button/text_button.dart';
 import 'package:remotely_shop/res/constant/app_text.dart';
+import 'package:remotely_shop/view/home_page.dart';
 import 'package:remotely_shop/view/login_screen.dart';
 
 class OnBoardScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _OnBoard_ScreenState extends State<OnBoardScreen> {
   void bwoseShop() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const LoginPage()),
+      MaterialPageRoute(builder: (context) => const HomePage()),
     );
   }
 

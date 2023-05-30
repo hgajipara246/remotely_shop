@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "436620757860",
+    "project_id": "remotely-application",
+    "storage_bucket": "remotely-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436620757860:android:1cc1da342e1a389562c871",
+        "android_client_info": {
+          "package_name": "com.app.remotely_shop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1bFb_QsBMUFr1vYlPD62W69742Fa3iPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

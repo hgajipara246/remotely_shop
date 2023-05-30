@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
-
 class AppImages {
-  static Image onboardImage = Image.asset("assets/images/onboard_photo.png");
+  static String onboardImage = "assets/images/onboard_photo.png";
+  static String shoppingCart = "assets/icons/shopping_cart.png";
+  static String profile = "assets/images/profiles.png";
+  static String search = "assets/icons/search_icon.png";
+  static String happyBag = "assets/icons/happy_bag.png";
+  static String chairOne = "assets/images/chair_one.png";
 }

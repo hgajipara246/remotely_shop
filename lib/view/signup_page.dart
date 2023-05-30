@@ -1,0 +1,275 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:remotely_shop/res/common/app_button/main_button.dart';
+import 'package:remotely_shop/res/common/app_button/normal_button.dart';
+import 'package:remotely_shop/res/common/app_button/text_button.dart';
+import 'package:remotely_shop/res/common/app_textformfild.dart';
+import 'package:remotely_shop/res/constant/app_text.dart';
+import 'package:remotely_shop/view/login_screen.dart';
+
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  User? user;
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool _passwordVisible = false;
+  @override
+  void initState() {
+    super.initState();
+    _passwordVisible = false;
+  }
+
+  void signUpMainButton() {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => const HomePage()),
+    //
+    creatUser();
+    debugPrint("User ------->> $user");
+  }
+
+  void loginTextButton() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginPage()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(height / 40),
+          child: Form(
+            key: formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: height / 50),
+                  AppText.Hello,
+                  RichText(
+                    text: const TextSpan(
+                      text: "Welcome To ",
+                      style: TextStyle(
+                        fontFamily: "Avenir",
+                        fontWeight: FontWeight.w900,
+                        fontSize: 22,
+                        color: Color(0xFF040B14),
+                      ),
+                      children: [
+                        TextSpan(
+                          text: "Remotely.io",
+                          style: TextStyle(
+                            fontFamily: "Avenir",
+                            fontWeight: FontWeight.w900,
+                            fontSize: 22,
+                            color: Color(0xFFCED55B),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: height / 30,
+                  ),
+
+                  const NormalButton(
+                    images: "assets/icons/google_logo.png",
+                    editText: "Sign Up with Google",
+                  ),
+                  SizedBox(
+                    height: height / 50,
+                  ),
+                  const NormalButton(
+                    images: "assets/icons/facebook_logo.png",
+                    editText: "Sign Up with facebook",
+                  ),
+                  SizedBox(
+                    height: height / 30,
+                  ),
+                  Center(child: AppText.or),
+                  SizedBox(
+                    height: height / 40,
+                  ),
+                  AppText.email,
+                  AppTextFormField(
+                    // validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct E-mail",
+                    hintText: "Eg. jamesburnes@gmail.com",
+                    controllers: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+
+                  SizedBox(
+                    height: height / 60,
+                  ),
+                  AppText.phoneNumber,
+                  AppTextFormField(
+                    // validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct E-mail",
+                    hintText: "00000 00000",
+                    controllers: phoneNumberController,
+                    keyboardType: TextInputType.phone,
+                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(vertical: height / 200),
+                  //   child: TextFormField(
+                  //     validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
+                  //     controller: emailController,
+                  //     decoration: InputDecoration(
+                  //       hintText: "Eg. jamesburnes@gmail.com",
+                  //       focusColor: const Color(0xFFA6A798),
+                  //       filled: true,
+                  //       // prefixIcon: const Icon(Icons.lock, color: Colors.grey),
+                  //       border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         borderSide: const BorderSide(color: Colors.transparent),
+                  //       ),
+                  //       focusedBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         borderSide: const BorderSide(color: Colors.black),
+                  //       ),
+                  //       fillColor: const Color(0xFFF6F6F5),
+                  //       enabledBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         borderSide: const BorderSide(color: Colors.transparent),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  SizedBox(
+                    height: height / 60,
+                  ),
+                  AppText.password,
+
+                  AppTextFormField(
+                    keyboardType: TextInputType.visiblePassword,
+                    controllers: passwordController,
+                    hintText: "Password",
+                    sufixIcon: IconButton(
+                      style: const ButtonStyle(),
+                      icon: Icon(
+                        _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                        color: Theme.of(context).hintColor,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      },
+                    ),
+                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(vertical: height / 200),
+                  //   child: TextFormField(
+                  //     validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct Password",
+                  //     controller: passwordController,
+                  //     decoration: InputDecoration(
+                  //       hintText: "Password",
+                  //       focusColor: Colors.black38,
+                  //       filled: true,
+                  //       suffixIcon: IconButton(
+                  //         style: const ButtonStyle(),
+                  //         icon: Icon(
+                  //           _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  //           color: Theme.of(context).hintColor,
+                  //         ),
+                  //         onPressed: () {
+                  //           setState(() {
+                  //             _passwordVisible = !_passwordVisible;
+                  //           });
+                  //         },
+                  //       ),
+                  //       // prefixIcon: const Icon(Icons.lock, color: Colors.grey),
+                  //       border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         borderSide: const BorderSide(color: Colors.transparent),
+                  //       ),
+                  //       focusedBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         borderSide: const BorderSide(color: Colors.black),
+                  //       ),
+                  //       fillColor: const Color(0xFFF6F6F5),
+                  //       enabledBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         borderSide: const BorderSide(color: Colors.transparent),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  SizedBox(
+                    height: height / 25,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: MainButton(
+                      textName: "Sign Up",
+                      mainOnPress: signUpMainButton,
+                    ),
+                  ),
+                  SizedBox(
+                    height: height / 25,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButtons(
+                        textButtonName: "Don't have an account?",
+                        color: const Color(0xbd8a8b7a),
+                        textonpress: () {},
+                      ),
+                      TextButtons(
+                        textButtonName: "Login",
+                        color: const Color(0xFFBA5C3D),
+                        textonpress: loginTextButton,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  creatUser() async {
+    try {
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      )
+          .then((value) {
+        debugPrint("Value --> ${value.user}");
+        user = value.user;
+      });
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        debugPrint('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        debugPrint('The account already exists for that email.');
+      } else if (e.code == 'strong-password') {
+        debugPrint('The Password provided is fully strong');
+      }
+    } catch (e) {
+      debugPrint("Error --->  $e");
+    }
+  }
+}

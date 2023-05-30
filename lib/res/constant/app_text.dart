@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppText {
   /// onboard screen
-  static Text welcom = Text(
+  static Text welcom = const Text(
     "WELCOME",
     style: TextStyle(
       fontFamily: "Avenir",
@@ -12,7 +12,7 @@ class AppText {
     ),
   );
 
-  static Text remotely = Text(
+  static Text remotely = const Text(
     "Remotely.io",
     style: TextStyle(
       fontFamily: "Avenir",
@@ -22,7 +22,7 @@ class AppText {
     ),
   );
 
-  static Text onboardinfo = Text(
+  static Text onboardinfo = const Text(
     "We serve you with the best gadgets for your home workspace",
     style: TextStyle(
       fontFamily: "Avenir",
@@ -34,7 +34,7 @@ class AppText {
 
   /// login Screen
 
-  static Text Hello = Text(
+  static Text Hello = const Text(
     "HI FELLA  👋",
     style: TextStyle(
       fontFamily: "Avenir",
@@ -44,7 +44,7 @@ class AppText {
     ),
   );
 
-  static Text welcomeback = Text(
+  static Text welcomeback = const Text(
     "Welcome Back",
     style: TextStyle(
       fontFamily: "Avenir",
@@ -54,7 +54,7 @@ class AppText {
     ),
   );
 
-  static Text or = Text(
+  static Text or = const Text(
     "OR",
     style: TextStyle(
       fontFamily: "Avenir",
@@ -64,7 +64,7 @@ class AppText {
     ),
   );
 
-  static Text email = Text(
+  static Text email = const Text(
     "Email",
     style: TextStyle(
       fontFamily: "Avenir",
@@ -74,7 +74,17 @@ class AppText {
     ),
   );
 
-  static Text password = Text(
+  static Text phoneNumber = const Text(
+    "Phone Number",
+    style: TextStyle(
+      fontFamily: "Avenir",
+      fontWeight: FontWeight.w500,
+      fontSize: 15,
+      color: Color(0xFF000000),
+    ),
+  );
+
+  static Text password = const Text(
     "Password",
     style: TextStyle(
       fontFamily: "Avenir",
@@ -83,4 +93,12 @@ class AppText {
       color: Color(0xFF000000),
     ),
   );
+
+  static String popularNow = "Popular Now";
+  static String chairName = "Adjustable Office \nChair";
+  static String childTextChairName = "Hughlan Workspaces";
+  static String rateFourPointEight = "4.8";
+
+  static String workSpace = "Workspaces";
+  static String seeMore = "See more";
 }
