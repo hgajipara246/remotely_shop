@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:remotely_shop/res/common/app_button/main_button.dart';
 import 'package:remotely_shop/res/common/app_button/text_button.dart';
@@ -13,12 +15,10 @@ class OnBoardScreen extends StatefulWidget {
 }
 
 class _OnBoard_ScreenState extends State<OnBoardScreen> {
-  void bwoseShop() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const HomePage()),
-    );
-  }
+  void bwoseShop() => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
 
   void textButtonlogin() {
     Navigator.push(
@@ -33,7 +33,7 @@ class _OnBoard_ScreenState extends State<OnBoardScreen> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
               "assets/images/onboard_photo.png",
@@ -42,7 +42,7 @@ class _OnBoard_ScreenState extends State<OnBoardScreen> {
           ),
         ),
         child: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: width / 15, vertical: height / 50),
             child: Column(
@@ -78,7 +78,7 @@ class _OnBoard_ScreenState extends State<OnBoardScreen> {
                   child: Center(
                     child: TextButtons(
                       textButtonName: "Log in",
-                      color: Color(0xFFFFFFFF),
+                      color: const Color(0xFFFFFFFF),
                       textonpress: textButtonlogin,
                     ),
                   ),

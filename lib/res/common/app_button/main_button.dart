@@ -13,7 +13,7 @@ class MainButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color(0xFFCED55B),
+        backgroundColor: const Color(0xFFCED55B),
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
@@ -24,7 +24,7 @@ class MainButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height / 55),
         child: Text(
           textName ?? "",
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w500,
             fontFamily: "Inter",
             color: Colors.black,

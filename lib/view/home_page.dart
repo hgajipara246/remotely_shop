@@ -314,7 +314,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: height / 1.2,
                   child: ListView.separated(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     separatorBuilder: (contex, index) => SizedBox(
                       height: height / 60,
@@ -323,10 +323,10 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, index) => Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Color(0x0fffffff),
+                        color: const Color(0x0fffffff),
                         borderRadius: BorderRadius.circular(height / 100),
                         border: Border.all(
-                          color: Color(0xFFDDDDDB),
+                          color: const Color(0xFFDDDDDB),
                         ),
                       ),
                       child: Column(
@@ -345,11 +345,11 @@ class _HomePageState extends State<HomePage> {
                                         color: const Color(0xFFF4F5F7),
                                         borderRadius: BorderRadius.circular(height / 100),
                                       ),
+                                      width: width / 3.3,
                                       child: Image.asset(
                                         "${remotelyModelNewArrivals!.newArrivalsData![index].image}",
                                         height: height / 8,
                                       ),
-                                      width: width / 3.3,
                                     ),
                                     Align(
                                       alignment: Alignment.topRight,
@@ -357,7 +357,7 @@ class _HomePageState extends State<HomePage> {
                                         padding: EdgeInsets.all(height / 70),
                                         child: Container(
                                           height: height / 20,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             shape: BoxShape.circle,
                                             color: Colors.white,
                                           ),
@@ -384,7 +384,7 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Text(
                                         "${remotelyModelNewArrivals!.newArrivalsData![index].title}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 21,
                                           color: Color(0xFF040B14),
@@ -398,7 +398,7 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           Text(
                                             "${remotelyModelNewArrivals!.newArrivalsData![index].subTitle}",
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 16,
                                               color: Color(0xFFA6A798),
@@ -408,13 +408,13 @@ class _HomePageState extends State<HomePage> {
                                           SizedBox(width: width / 70),
                                           Icon(
                                             Icons.circle,
-                                            color: Color(0xFFA6A798),
+                                            color: const Color(0xFFA6A798),
                                             size: height / 100,
                                           ),
                                           SizedBox(width: width / 70),
                                           Text(
                                             "${remotelyModelNewArrivals!.newArrivalsData![index].rate}",
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 16,
                                               color: Color(0xFFA6A798),
@@ -424,7 +424,7 @@ class _HomePageState extends State<HomePage> {
                                           SizedBox(width: width / 70),
                                           Icon(
                                             Icons.star_outlined,
-                                            color: Color(0xFFF2C94C),
+                                            color: const Color(0xFFF2C94C),
                                             size: height / 45,
                                           ),
                                         ],
@@ -434,7 +434,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       Text(
                                         "${remotelyModelNewArrivals!.newArrivalsData![index].price}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: "Avenir",
                                           color: Color(0xFFBA5C3D),
                                           fontWeight: FontWeight.w800,
@@ -466,9 +466,9 @@ class _HomePageState extends State<HomePage> {
                           "assets/images/products/laptops.png",
                         ),
                         SizedBox(height: height / 40),
-                        Text(
+                        const Text(
                           "Apple Macbook Pro 16inch",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontFamily: "Avenir",
                             fontWeight: FontWeight.w800,
                             fontSize: 18,
@@ -476,9 +476,9 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         SizedBox(height: height / 130),
-                        Text(
+                        const Text(
                           "USD 1,799.00",
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Color(0xFFA6A798),
                             fontWeight: FontWeight.w500,
                             fontSize: 15,
