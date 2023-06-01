@@ -100,5 +100,7 @@ class AppText {
   static String rateFourPointEight = "4.8";
 
   static String workSpace = "Workspaces";
+  static String newArrivals = "New Arrivals";
   static String seeMore = "See more";
+  static String viewItem = "View Item";
 }
