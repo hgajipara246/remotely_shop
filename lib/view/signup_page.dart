@@ -48,7 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -89,7 +89,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(
                     height: height / 30,
                   ),
-
                   const NormalButton(
                     images: "assets/icons/google_logo.png",
                     editText: "Sign Up with Google",
@@ -115,49 +114,22 @@ class _SignUpPageState extends State<SignUpPage> {
                     controllers: emailController,
                     keyboardType: TextInputType.emailAddress,
                   ),
-
                   SizedBox(
                     height: height / 60,
                   ),
                   AppText.phoneNumber,
                   AppTextFormField(
-                    // validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct E-mail",
+                    validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
                     hintText: "00000 00000",
                     controllers: phoneNumberController,
                     keyboardType: TextInputType.phone,
                   ),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(vertical: height / 200),
-                  //   child: TextFormField(
-                  //     validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
-                  //     controller: emailController,
-                  //     decoration: InputDecoration(
-                  //       hintText: "Eg. jamesburnes@gmail.com",
-                  //       focusColor: const Color(0xFFA6A798),
-                  //       filled: true,
-                  //       // prefixIcon: const Icon(Icons.lock, color: Colors.grey),
-                  //       border: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(5),
-                  //         borderSide: const BorderSide(color: Colors.transparent),
-                  //       ),
-                  //       focusedBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(5),
-                  //         borderSide: const BorderSide(color: Colors.black),
-                  //       ),
-                  //       fillColor: const Color(0xFFF6F6F5),
-                  //       enabledBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(5),
-                  //         borderSide: const BorderSide(color: Colors.transparent),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   SizedBox(
                     height: height / 60,
                   ),
                   AppText.password,
-
                   AppTextFormField(
+                    validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct E-mail",
                     keyboardType: TextInputType.visiblePassword,
                     controllers: passwordController,
                     hintText: "Password",
@@ -174,44 +146,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       },
                     ),
                   ),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(vertical: height / 200),
-                  //   child: TextFormField(
-                  //     validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct Password",
-                  //     controller: passwordController,
-                  //     decoration: InputDecoration(
-                  //       hintText: "Password",
-                  //       focusColor: Colors.black38,
-                  //       filled: true,
-                  //       suffixIcon: IconButton(
-                  //         style: const ButtonStyle(),
-                  //         icon: Icon(
-                  //           _passwordVisible ? Icons.visibility : Icons.visibility_off,
-                  //           color: Theme.of(context).hintColor,
-                  //         ),
-                  //         onPressed: () {
-                  //           setState(() {
-                  //             _passwordVisible = !_passwordVisible;
-                  //           });
-                  //         },
-                  //       ),
-                  //       // prefixIcon: const Icon(Icons.lock, color: Colors.grey),
-                  //       border: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(5),
-                  //         borderSide: const BorderSide(color: Colors.transparent),
-                  //       ),
-                  //       focusedBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(5),
-                  //         borderSide: const BorderSide(color: Colors.black),
-                  //       ),
-                  //       fillColor: const Color(0xFFF6F6F5),
-                  //       enabledBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(5),
-                  //         borderSide: const BorderSide(color: Colors.transparent),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   SizedBox(
                     height: height / 25,
                   ),
@@ -259,6 +193,8 @@ class _SignUpPageState extends State<SignUpPage> {
           .then((value) {
         debugPrint("Value --> ${value.user}");
         user = value.user;
+        user!.sendEmailVerification();
+        Navigator.pop(context);
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

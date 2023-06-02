@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
         leading: Padding(
           padding: EdgeInsets.all(height / 120),
@@ -311,145 +312,165 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: height / 1.2,
-                  child: ListView.separated(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    separatorBuilder: (contex, index) => SizedBox(
-                      height: height / 60,
-                    ),
-                    itemCount: remotelyModelNewArrivals!.newArrivalsData!.length,
-                    itemBuilder: (context, index) => Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: const Color(0x0fffffff),
-                        borderRadius: BorderRadius.circular(height / 100),
-                        border: Border.all(
-                          color: const Color(0xFFDDDDDB),
-                        ),
+                ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  separatorBuilder: (contex, index) => SizedBox(
+                    height: height / 60,
+                  ),
+                  itemCount: remotelyModelNewArrivals!.newArrivalsData!.length,
+                  itemBuilder: (context, index) => Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: const Color(0x0fffffff),
+                      borderRadius: BorderRadius.circular(height / 100),
+                      border: Border.all(
+                        color: const Color(0xFFDDDDDB),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: height / 80, horizontal: width / 35),
-                            child: Row(
-                              children: [
-                                Stack(
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.symmetric(horizontal: width / 35, vertical: height / 80),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFFF4F5F7),
-                                        borderRadius: BorderRadius.circular(height / 100),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: height / 80, horizontal: width / 35),
+                          child: Row(
+                            children: [
+                              Stack(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.symmetric(horizontal: width / 35, vertical: height / 80),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFF4F5F7),
+                                      borderRadius: BorderRadius.circular(height / 100),
+                                    ),
+                                    width: width / 3.3,
+                                    child: Image.asset(
+                                      "${remotelyModelNewArrivals!.newArrivalsData![index].image}",
+                                      height: height / 8,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 60, top: 8),
+                                    height: height / 20,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white,
+                                    ),
+                                    child: IconButton(
+                                      icon: Image.asset(
+                                        liked ? AppImages.darkLike : AppImages.lightLike,
+                                        // height: height / 40,
                                       ),
-                                      width: width / 3.3,
-                                      child: Image.asset(
-                                        "${remotelyModelNewArrivals!.newArrivalsData![index].image}",
-                                        height: height / 8,
+                                      onPressed: () => _pressed(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: width / 40),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${remotelyModelNewArrivals!.newArrivalsData![index].title}",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 21,
+                                        color: Color(0xFF040B14),
+                                        fontFamily: "Avenir",
                                       ),
                                     ),
-                                    Align(
-                                      alignment: Alignment.topRight,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(height / 70),
-                                        child: Container(
-                                          height: height / 20,
-                                          decoration: const BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.white,
-                                          ),
-                                          child: Positioned(
-                                            right: 0,
-                                            child: IconButton(
-                                              icon: Image.asset(
-                                                liked ? AppImages.darkLike : AppImages.lightLike,
-                                                // height: height / 40,
-                                              ),
-                                              onPressed: () => _pressed(),
-                                            ),
+                                    SizedBox(height: height / 180),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "${remotelyModelNewArrivals!.newArrivalsData![index].subTitle}",
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16,
+                                            color: Color(0xFFA6A798),
+                                            fontFamily: "Avenir",
                                           ),
                                         ),
+                                        SizedBox(width: width / 70),
+                                        Icon(
+                                          Icons.circle,
+                                          color: const Color(0xFFA6A798),
+                                          size: height / 100,
+                                        ),
+                                        SizedBox(width: width / 70),
+                                        Text(
+                                          "${remotelyModelNewArrivals!.newArrivalsData![index].rate}",
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16,
+                                            color: Color(0xFFA6A798),
+                                            fontFamily: "Avenir",
+                                          ),
+                                        ),
+                                        SizedBox(width: width / 70),
+                                        Icon(
+                                          Icons.star_outlined,
+                                          color: const Color(0xFFF2C94C),
+                                          size: height / 45,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: height / 30,
+                                    ),
+                                    Text(
+                                      "${remotelyModelNewArrivals!.newArrivalsData![index].price}",
+                                      style: const TextStyle(
+                                        fontFamily: "Avenir",
+                                        color: Color(0xFFBA5C3D),
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 25,
                                       ),
                                     ),
                                   ],
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: width / 40),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "${remotelyModelNewArrivals!.newArrivalsData![index].title}",
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 21,
-                                          color: Color(0xFF040B14),
-                                          fontFamily: "Avenir",
-                                        ),
-                                      ),
-                                      SizedBox(height: height / 180),
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "${remotelyModelNewArrivals!.newArrivalsData![index].subTitle}",
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16,
-                                              color: Color(0xFFA6A798),
-                                              fontFamily: "Avenir",
-                                            ),
-                                          ),
-                                          SizedBox(width: width / 70),
-                                          Icon(
-                                            Icons.circle,
-                                            color: const Color(0xFFA6A798),
-                                            size: height / 100,
-                                          ),
-                                          SizedBox(width: width / 70),
-                                          Text(
-                                            "${remotelyModelNewArrivals!.newArrivalsData![index].rate}",
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16,
-                                              color: Color(0xFFA6A798),
-                                              fontFamily: "Avenir",
-                                            ),
-                                          ),
-                                          SizedBox(width: width / 70),
-                                          Icon(
-                                            Icons.star_outlined,
-                                            color: const Color(0xFFF2C94C),
-                                            size: height / 45,
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: height / 30,
-                                      ),
-                                      Text(
-                                        "${remotelyModelNewArrivals!.newArrivalsData![index].price}",
-                                        style: const TextStyle(
-                                          fontFamily: "Avenir",
-                                          color: Color(0xFFBA5C3D),
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 25,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
+                  ),
+                ),
+                SizedBox(height: height / 60),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: Checkbox.width / 20, vertical: height / 35),
+                  child: Row(
+                    children: [
+                      Text(
+                        AppText.laptops,
+                        style: const TextStyle(
+                          fontFamily: "Avenir",
+                          fontWeight: FontWeight.w900,
+                          fontSize: 25,
+                          color: Color(0xFF000000),
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        AppText.seeMore,
+                        style: const TextStyle(
+                          fontFamily: "Avenir",
+                          fontWeight: FontWeight.w500,
+                          fontSize: 17,
+                          color: Color(0xFF8A8B7A),
+                        ),
+                      ),
+                      const Icon(
+                        Icons.chevron_right_outlined,
+                        color: Color(0xFF8A8B7A),
+                      ),
+                    ],
                   ),
                 ),
                 Container(

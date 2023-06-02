@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:remotely_shop/res/common/app_button/main_button.dart';
 import 'package:remotely_shop/res/common/app_button/normal_button.dart';
@@ -16,6 +17,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  User? user;
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -27,10 +31,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void loginButton() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const HomePage()),
-    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => const HomePage()),
+    // );
+    loginUser();
   }
 
   void signUpTextButton() {
@@ -43,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -83,43 +88,19 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   AppText.email,
                   AppTextFormField(
-                    // validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct E-mail",
+                    validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
                     hintText: "Eg. jamesburnes@gmail.com",
                     controllers: emailController,
-                    // keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.emailAddress,
                   ),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(vertical: height / 200),
-                  //   child: TextFormField(
-                  //     validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
-                  //     controller: emailController,
-                  //     decoration: InputDecoration(
-                  //       hintText: "Eg. jamesburnes@gmail.com",
-                  //       focusColor: const Color(0xFFA6A798),
-                  //       filled: true,
-                  //       // prefixIcon: const Icon(Icons.lock, color: Colors.grey),
-                  //       border: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(5),
-                  //         borderSide: const BorderSide(color: Colors.transparent),
-                  //       ),
-                  //       focusedBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(5),
-                  //         borderSide: const BorderSide(color: Colors.black),
-                  //       ),
-                  //       fillColor: const Color(0xFFF6F6F5),
-                  //       enabledBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(5),
-                  //         borderSide: const BorderSide(color: Colors.transparent),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+
                   SizedBox(
                     height: height / 60,
                   ),
                   AppText.password,
 
                   AppTextFormField(
+                    validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct E-mail",
                     controllers: passwordController,
                     hintText: "Password",
                     sufixIcon: IconButton(
@@ -191,12 +172,12 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       TextButtons(
                         textButtonName: "Forgot password?",
-                        color: Color(0xFF8A8B7A),
+                        color: const Color(0xFF8A8B7A),
                         textonpress: () {},
                       ),
                       TextButtons(
                         textButtonName: "Sign Up",
-                        color: Color(0xFFBA5C3D),
+                        color: const Color(0xFFBA5C3D),
                         textonpress: signUpTextButton,
                       ),
                     ],
@@ -208,5 +189,66 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  loginUser() async {
+    try {
+      await firebaseAuth
+          .signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      )
+          .then((value) {
+        debugPrint("value ----> ${value.user}");
+        user = value.user;
+
+        if (user!.emailVerified) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.white,
+              elevation: 0,
+              content: Text(
+                "Login Succsesfull",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: "Avenir",
+                ),
+              ),
+            ),
+          );
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomePage(),
+              ),
+              (route) => false);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.white,
+              elevation: 0,
+              content: Text(
+                "Please Verify Your Email",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: "Avenir",
+                ),
+              ),
+            ),
+          );
+          debugPrint("Please Verify your Email");
+        }
+      });
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        debugPrint('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        debugPrint("wrong password provided for that user.");
+      }
+    }
   }
 }

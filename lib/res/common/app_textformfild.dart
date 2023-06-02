@@ -39,10 +39,6 @@ class AppTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    bool _passwordVisible = false;
     return TextFormField(
       // validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
       // validator: (value) => validator!(value!),
@@ -50,12 +46,10 @@ class AppTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       focusNode: focusNode,
       decoration: InputDecoration(
-        // hintText: "Eg. jamesburnes@gmail.com",
         hintText: hintText,
         focusColor: const Color(0xFFA6A798),
         suffixIcon: sufixIcon,
         filled: true,
-        // prefixIcon: const Icon(Icons.lock, color: Colors.grey),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: const BorderSide(color: Colors.transparent),
@@ -64,7 +58,7 @@ class AppTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           borderSide: const BorderSide(color: Color(0xFFCED55B)),
         ),
-
+        errorBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
         fillColor: const Color(0xFFF6F6F5),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),

@@ -101,6 +101,7 @@ class AppText {
 
   static String workSpace = "Workspaces";
   static String newArrivals = "New Arrivals";
+  static String laptops = "Laptops";
   static String seeMore = "See more";
   static String viewItem = "View Item";
 }
