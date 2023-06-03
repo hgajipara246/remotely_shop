@@ -20,10 +20,10 @@ extension MobileValidator on String {
 
 class AppTextFormField extends StatelessWidget {
   final TextEditingController? controllers;
+  final bool? obscuretext;
   final String? hintText;
   final TextInputType? keyboardType;
-  final Function? validator;
-  final FocusNode? focusNode;
+  final String? Function(String?)? validator;
   final Function? onFieldSunmitted;
   final IconButton? sufixIcon;
   const AppTextFormField({
@@ -32,19 +32,19 @@ class AppTextFormField extends StatelessWidget {
     this.controllers,
     this.hintText,
     this.keyboardType,
-    this.focusNode,
     this.onFieldSunmitted,
     this.sufixIcon,
+    this.obscuretext,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       // validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
-      // validator: (value) => validator!(value!),
+      validator: validator,
+      obscureText: obscuretext ?? false,
       controller: controllers,
       keyboardType: keyboardType,
-      focusNode: focusNode,
       decoration: InputDecoration(
         hintText: hintText,
         focusColor: const Color(0xFFA6A798),
@@ -58,7 +58,6 @@ class AppTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           borderSide: const BorderSide(color: Color(0xFFCED55B)),
         ),
-        errorBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
         fillColor: const Color(0xFFF6F6F5),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),

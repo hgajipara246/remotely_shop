@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: height / 9),
+                  SizedBox(height: height / 15),
                   AppText.Hello,
                   AppText.welcomeback,
                   SizedBox(
@@ -93,14 +93,12 @@ class _LoginPageState extends State<LoginPage> {
                     controllers: emailController,
                     keyboardType: TextInputType.emailAddress,
                   ),
-
                   SizedBox(
                     height: height / 60,
                   ),
                   AppText.password,
-
                   AppTextFormField(
-                    validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct E-mail",
+                    validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct Password",
                     controllers: passwordController,
                     hintText: "Password",
                     sufixIcon: IconButton(
@@ -116,44 +114,6 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                   ),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(vertical: height / 200),
-                  //   child: TextFormField(
-                  //     validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct Password",
-                  //     controller: passwordController,
-                  //     decoration: InputDecoration(
-                  //       hintText: "Password",
-                  //       focusColor: Colors.black38,
-                  //       filled: true,
-                  //       suffixIcon: IconButton(
-                  //         style: const ButtonStyle(),
-                  //         icon: Icon(
-                  //           _passwordVisible ? Icons.visibility : Icons.visibility_off,
-                  //           color: Theme.of(context).hintColor,
-                  //         ),
-                  //         onPressed: () {
-                  //           setState(() {
-                  //             _passwordVisible = !_passwordVisible;
-                  //           });
-                  //         },
-                  //       ),
-                  //       // prefixIcon: const Icon(Icons.lock, color: Colors.grey),
-                  //       border: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(5),
-                  //         borderSide: const BorderSide(color: Colors.transparent),
-                  //       ),
-                  //       focusedBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(5),
-                  //         borderSide: const BorderSide(color: Colors.black),
-                  //       ),
-                  //       fillColor: const Color(0xFFF6F6F5),
-                  //       enabledBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(5),
-                  //         borderSide: const BorderSide(color: Colors.transparent),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   SizedBox(
                     height: height / 35,
                   ),

@@ -15,9 +15,12 @@ class OnBoardScreen extends StatefulWidget {
 }
 
 class _OnBoard_ScreenState extends State<OnBoardScreen> {
-  void bwoseShop() => Navigator.push(
+  void bwoseShop() => Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+        (route) => false,
       );
 
   void textButtonlogin() {

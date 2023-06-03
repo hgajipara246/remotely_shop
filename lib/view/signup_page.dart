@@ -22,12 +22,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  bool _passwordVisible = false;
-  @override
-  void initState() {
-    super.initState();
-    _passwordVisible = false;
-  }
+  bool password = false;
 
   void signUpMainButton() {
     // Navigator.push(
@@ -109,7 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   AppText.email,
                   AppTextFormField(
-                    // validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct E-mail",
+                    validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
                     hintText: "Eg. jamesburnes@gmail.com",
                     controllers: emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -119,7 +114,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   AppText.phoneNumber,
                   AppTextFormField(
-                    validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
+                    validator: (value) => value!.isValidMobile() ? null : "Please Enter Correct Phone Number",
                     hintText: "00000 00000",
                     controllers: phoneNumberController,
                     keyboardType: TextInputType.phone,
@@ -129,20 +124,19 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   AppText.password,
                   AppTextFormField(
-                    validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct E-mail",
+                    validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct Password",
                     keyboardType: TextInputType.visiblePassword,
                     controllers: passwordController,
                     hintText: "Password",
+                    obscuretext: password,
                     sufixIcon: IconButton(
-                      style: const ButtonStyle(),
-                      icon: Icon(
-                        _passwordVisible ? Icons.visibility : Icons.visibility_off,
-                        color: Theme.of(context).hintColor,
-                      ),
+                      icon: Icon(color: Color(0xFF242424), password ? Icons.visibility_off : Icons.visibility),
                       onPressed: () {
-                        setState(() {
-                          _passwordVisible = !_passwordVisible;
-                        });
+                        setState(
+                          () {
+                            password = password;
+                          },
+                        );
                       },
                     ),
                   ),
