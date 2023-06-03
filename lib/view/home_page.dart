@@ -15,6 +15,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   RemotelyModel? remotelyModel = RemotelyModel.fromJson(remotelyDataWorkSpases);
   RemotelyModelNewArrivals? remotelyModelNewArrivals = RemotelyModelNewArrivals.fromJson(remotelyDataNewArrivals);
+  RemotelyModelLaptops? remotelyModelLaptops = RemotelyModelLaptops.fromJson(remotelyDataLaptops);
+  RemotelyModelTrendingCollection? remotelyModelTrendingCollection = RemotelyModelTrendingCollection.fromJson(remotelyDataTrendingCollection);
 
   bool liked = false;
 
@@ -473,43 +475,183 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                Container(
-                  width: width / 2.5,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF4F5F7),
-                    borderRadius: BorderRadius.circular(height / 90),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(height / 65),
-                    child: Column(
+                SizedBox(
+                  height: height / 3.3,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (context, index) => SizedBox(width: width / 30),
+                    itemCount: remotelyModelLaptops!.laptopsData!.length,
+                    itemBuilder: (context, index) => Stack(
                       children: [
-                        Image.asset(
-                          "assets/images/products/laptops.png",
-                        ),
-                        SizedBox(height: height / 40),
-                        const Text(
-                          "Apple Macbook Pro 16inch",
-                          style: TextStyle(
-                            fontFamily: "Avenir",
-                            fontWeight: FontWeight.w800,
-                            fontSize: 18,
-                            color: Colors.black,
+                        Container(
+                          width: width / 2,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF4F5F7),
+                            borderRadius: BorderRadius.circular(height / 90),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(height / 65),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  "${remotelyModelLaptops!.laptopsData![index].image}",
+                                  height: height / 7,
+                                ),
+                                SizedBox(height: height / 80),
+                                Text(
+                                  "${remotelyModelLaptops!.laptopsData![index].title}",
+                                  style: const TextStyle(
+                                    fontFamily: "Avenir",
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                SizedBox(height: height / 130),
+                                Text(
+                                  "${remotelyModelLaptops!.laptopsData![index].price}",
+                                  style: const TextStyle(
+                                    color: Color(0xFFBA5C3D),
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15,
+                                    fontFamily: "Avenir",
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "${remotelyModelLaptops!.laptopsData![index].rate}",
+                                      style: TextStyle(
+                                        fontSize: height / 45,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "Avenir",
+                                        color: const Color(0xFF8A8B7A),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: width / 80,
+                                    ),
+                                    Icon(
+                                      Icons.star_purple500_outlined,
+                                      size: height / 45,
+                                      color: const Color(0xFFF2C94C),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        SizedBox(height: height / 130),
-                        const Text(
-                          "USD 1,799.00",
-                          style: TextStyle(
-                            color: Color(0xFFA6A798),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
-                            fontFamily: "Avenir",
+                        Positioned(
+                          right: 0,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 60, top: 8),
+                            height: height / 20,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                            ),
+                            child: IconButton(
+                              icon: Image.asset(
+                                liked ? AppImages.darkLike : AppImages.lightLike,
+                                // height: height / 40,
+                              ),
+                              onPressed: () => _pressed(),
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
                 ),
+                SizedBox(height: height / 60),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: Checkbox.width / 20, vertical: height / 35),
+                  child: Row(
+                    children: [
+                      Text(
+                        AppText.collection,
+                        style: const TextStyle(
+                          fontFamily: "Avenir",
+                          fontWeight: FontWeight.w900,
+                          fontSize: 25,
+                          color: Color(0xFF000000),
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        AppText.seeMore,
+                        style: const TextStyle(
+                          fontFamily: "Avenir",
+                          fontWeight: FontWeight.w500,
+                          fontSize: 17,
+                          color: Color(0xFF8A8B7A),
+                        ),
+                      ),
+                      const Icon(
+                        Icons.chevron_right_outlined,
+                        color: Color(0xFF8A8B7A),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: height / 3,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (context, index) => SizedBox(width: width / 30),
+                    itemCount: 5,
+                    itemBuilder: (context, index) => Container(
+                      width: width / 2,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF4F5F7),
+                        borderRadius: BorderRadius.circular(height / 80),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: height / 60, horizontal: width / 30),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFFFFFFF),
+                                borderRadius: BorderRadius.circular(height / 80),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.asset("assets/images/products/smart_watches.png"),
+                              ),
+                            ),
+                            SizedBox(height: height / 50),
+                            Text(
+                              "Smart Watch",
+                              style: TextStyle(
+                                color: const Color(0xFF040B14),
+                                fontWeight: FontWeight.w800,
+                                fontSize: height / 30,
+                                fontFamily: "Avenir",
+                              ),
+                            ),
+                            SizedBox(height: height / 150),
+                            Text(
+                              "See collection",
+                              style: TextStyle(
+                                color: const Color(0xFFBA5C3D),
+                                fontWeight: FontWeight.w800,
+                                fontSize: height / 40,
+                                fontFamily: "Avenir",
+                              ),
+                            ),
+                            SizedBox(height: height / 100),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),

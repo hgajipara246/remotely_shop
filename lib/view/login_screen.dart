@@ -23,12 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  bool _passwordVisible = false;
-  @override
-  void initState() {
-    super.initState();
-    _passwordVisible = false;
-  }
+  bool password = true;
 
   void loginButton() {
     // Navigator.push(
@@ -101,16 +96,22 @@ class _LoginPageState extends State<LoginPage> {
                     validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct Password",
                     controllers: passwordController,
                     hintText: "Password",
+                    obscuretext: password,
                     sufixIcon: IconButton(
-                      style: const ButtonStyle(),
-                      icon: Icon(
-                        _passwordVisible ? Icons.visibility : Icons.visibility_off,
-                        color: Theme.of(context).hintColor,
-                      ),
+                      icon: password
+                          ? const Icon(
+                              Icons.visibility_off,
+                              color: Colors.black,
+                            )
+                          : const Icon(
+                              Icons.visibility,
+                              color: Colors.black,
+                            ),
                       onPressed: () {
-                        setState(() {
-                          _passwordVisible = !_passwordVisible;
-                        });
+                        password = !password;
+                        setState(
+                          () {},
+                        );
                       },
                     ),
                   ),

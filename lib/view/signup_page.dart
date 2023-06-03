@@ -130,12 +130,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: "Password",
                     obscuretext: password,
                     sufixIcon: IconButton(
-                      icon: Icon(color: Color(0xFF242424), password ? Icons.visibility_off : Icons.visibility),
+                      icon: password
+                          ? const Icon(
+                              Icons.visibility_off,
+                              color: Colors.black,
+                            )
+                          : const Icon(
+                              Icons.visibility,
+                              color: Colors.black,
+                            ),
                       onPressed: () {
+                        password = !password;
                         setState(
-                          () {
-                            password = password;
-                          },
+                          () {},
                         );
                       },
                     ),

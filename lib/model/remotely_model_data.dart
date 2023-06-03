@@ -60,3 +60,61 @@ Map<String, dynamic> remotelyDataNewArrivals = {
     },
   ],
 };
+
+Map<String, dynamic> remotelyDataLaptops = {
+  "laptopsData": [
+    {
+      "imageOne": "assets/images/products/laptop_one.png",
+      "titleOne": "Apple Macbook Pro 16inch",
+      "priceOne": "USD 1,799.00",
+      "rateOne": "4.8",
+    },
+    {
+      "imageOne": "assets/images/products/laptop_two.png",
+      "titleOne": "Microsoft Surface Laptop 4 ",
+      "priceOne": "USD 1,499.00",
+      "rateOne": "4.3",
+    },
+    {
+      "imageOne": "assets/images/products/laptop_three.png",
+      "titleOne": "HP Laptop 8th Gen Core i3",
+      "priceOne": "USD 1,354.00",
+      "rateOne": "4.5",
+    },
+    {
+      "imageOne": "assets/images/products/laptop_four.png",
+      "titleOne": "Dell Inspiron  3583 Core i5",
+      "priceOne": "USD 1,412.00",
+      "rateOne": "4.6",
+    },
+  ]
+};
+
+Map<String, dynamic> remotelyDataTrendingCollection = {
+  "trendingCollections": [
+    {
+      "image": "assets/images/products/smart_watches.png",
+      "title": "Smart Watch",
+      "subTitle": "See collection",
+    },
+    {
+      "image": "assets/images/products/red_headphone.png",
+      "title": "Headsets",
+      "subTitle": "See collection",
+    },
+    {
+      "image": "assets/images/products/comfort_chair.png",
+      "title": "Ergonomic Chair",
+      "subTitle": "See collection",
+    },
+    {
+      "image": "assets/images/products/ipad.png",
+      "title": "Apple iPads",
+      "subTitle": "See collection",
+    },
+    {
+      "image": "assets/images/products/night_lamp.png",
+      "title": "Desk Lamps",
+    },
+  ]
+};

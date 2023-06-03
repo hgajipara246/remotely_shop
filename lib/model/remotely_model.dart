@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+/// model for work spases listview
 RemotelyModel remotelyModelFromJson(String str) => RemotelyModel.fromJson(json.decode(str));
 
 String remotelyModelToJson(RemotelyModel data) => json.encode(data.toJson());
@@ -43,6 +44,8 @@ class WorkSpasesDatum {
         "suggestion": suggestion,
       };
 }
+
+/// model for New Arrival Items Listview
 
 RemotelyModelNewArrivals remotelyModelNewArrivalsFromJson(String str) => RemotelyModelNewArrivals.fromJson(json.decode(str));
 
@@ -93,5 +96,97 @@ class NewArrivalsDatum {
         "subTitle": subTitle,
         "rate": rate,
         "price": price,
+      };
+}
+
+///model For Laptops Listview
+
+RemotelyModelLaptops remotelyModelLaptopsFromJson(String str) => RemotelyModelLaptops.fromJson(json.decode(str));
+
+String remotelyModelLaptopsToJson(RemotelyModelLaptops data) => json.encode(data.toJson());
+
+class RemotelyModelLaptops {
+  List<LaptopsDatum>? laptopsData;
+
+  RemotelyModelLaptops({
+    this.laptopsData,
+  });
+
+  factory RemotelyModelLaptops.fromJson(Map<String, dynamic> json) => RemotelyModelLaptops(
+        laptopsData: json["laptopsData"] == null ? [] : List<LaptopsDatum>.from(json["laptopsData"]!.map((x) => LaptopsDatum.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "laptopsData": laptopsData == null ? [] : List<dynamic>.from(laptopsData!.map((x) => x.toJson())),
+      };
+}
+
+class LaptopsDatum {
+  String? image;
+  String? title;
+  String? price;
+  String? rate;
+
+  LaptopsDatum({
+    this.image,
+    this.title,
+    this.price,
+    this.rate,
+  });
+
+  factory LaptopsDatum.fromJson(Map<String, dynamic> json) => LaptopsDatum(
+        image: json["imageOne"],
+        title: json["titleOne"],
+        price: json["priceOne"],
+        rate: json["rateOne"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "imageOne": image,
+        "titleOne": title,
+        "priceOne": price,
+        "rateOne": rate,
+      };
+}
+
+/// model for the Trending Collection
+
+RemotelyModelTrendingCollection remotelyModelTrendingCollectionFromJson(String str) => RemotelyModelTrendingCollection.fromJson(json.decode(str));
+
+String remotelyModelTrendingCollectionToJson(RemotelyModelTrendingCollection data) => json.encode(data.toJson());
+
+class RemotelyModelTrendingCollection {
+  List<TrendingCollection>? trendingCollections;
+
+  RemotelyModelTrendingCollection({
+    this.trendingCollections,
+  });
+
+  factory RemotelyModelTrendingCollection.fromJson(Map<String, dynamic> json) => RemotelyModelTrendingCollection(
+        trendingCollections: json["trendingCollections"] == null ? [] : List<TrendingCollection>.from(json["trendingCollections"]!.map((x) => TrendingCollection.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "trendingCollections": trendingCollections == null ? [] : List<dynamic>.from(trendingCollections!.map((x) => x.toJson())),
+      };
+}
+
+class TrendingCollection {
+  String? image;
+  String? title;
+
+  TrendingCollection({
+    this.image,
+    this.title,
+  });
+
+  factory TrendingCollection.fromJson(Map<String, dynamic> json) => TrendingCollection(
+        image: json["image"],
+        title: json["title"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "image": image,
+        "title": title,
       };
 }
