@@ -1,4 +1,5 @@
 import 'dart:convert';
+// HOME SCREEN MODEL //
 
 /// model for work spases listview
 RemotelyModel remotelyModelFromJson(String str) => RemotelyModel.fromJson(json.decode(str));

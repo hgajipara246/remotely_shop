@@ -603,7 +603,7 @@ class _HomePageState extends State<HomePage> {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     separatorBuilder: (context, index) => SizedBox(width: width / 30),
-                    itemCount: 5,
+                    itemCount: remotelyModelTrendingCollection!.trendingCollections!.length,
                     itemBuilder: (context, index) => Container(
                       width: width / 2,
                       decoration: BoxDecoration(
@@ -622,16 +622,18 @@ class _HomePageState extends State<HomePage> {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Image.asset("assets/images/products/smart_watches.png"),
+                                child: Image.asset(
+                                  "${remotelyModelTrendingCollection!.trendingCollections![index].image}",
+                                ),
                               ),
                             ),
                             SizedBox(height: height / 50),
                             Text(
-                              "Smart Watch",
+                              "${remotelyModelTrendingCollection!.trendingCollections![index].title}",
                               style: TextStyle(
                                 color: const Color(0xFF040B14),
                                 fontWeight: FontWeight.w800,
-                                fontSize: height / 30,
+                                fontSize: height / 35,
                                 fontFamily: "Avenir",
                               ),
                             ),

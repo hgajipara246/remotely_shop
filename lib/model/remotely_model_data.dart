@@ -95,22 +95,18 @@ Map<String, dynamic> remotelyDataTrendingCollection = {
     {
       "image": "assets/images/products/smart_watches.png",
       "title": "Smart Watch",
-      "subTitle": "See collection",
     },
     {
       "image": "assets/images/products/red_headphone.png",
       "title": "Headsets",
-      "subTitle": "See collection",
     },
     {
       "image": "assets/images/products/comfort_chair.png",
       "title": "Ergonomic Chair",
-      "subTitle": "See collection",
     },
     {
       "image": "assets/images/products/ipad.png",
       "title": "Apple iPads",
-      "subTitle": "See collection",
     },
     {
       "image": "assets/images/products/night_lamp.png",
