@@ -5,9 +5,9 @@ import 'package:remotely_shop/res/common/app_button/normal_button.dart';
 import 'package:remotely_shop/res/common/app_button/text_button.dart';
 import 'package:remotely_shop/res/common/app_textformfild.dart';
 import 'package:remotely_shop/view/home_page.dart';
-import 'package:remotely_shop/view/signup_page.dart';
+import 'package:remotely_shop/view/login_signup_screen/signup_page.dart';
 
-import '../res/constant/app_text.dart';
+import '../../res/constant/app_text.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   SizedBox(height: height / 15),
                   AppText.Hello,
-                  AppText.welcomeback,
+                  AppText.welcomeBack,
                   SizedBox(
                     height: height / 30,
                   ),

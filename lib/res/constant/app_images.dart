@@ -7,4 +7,5 @@ class AppImages {
   static String chairOne = "assets/images/chair_one.png";
   static String darkLike = "assets/icons/dark_heart.png";
   static String lightLike = "assets/icons/light_heart.png";
+  static String exportIcon = "assets/icons/export-icon.png";
 }

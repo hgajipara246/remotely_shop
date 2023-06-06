@@ -1,8 +1,10 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 class AppText {
   /// onboard screen
-  static Text welcom = const Text(
+  static Text welcome = const Text(
     "WELCOME",
     style: TextStyle(
       fontFamily: "Avenir",
@@ -44,7 +46,7 @@ class AppText {
     ),
   );
 
-  static Text welcomeback = const Text(
+  static Text welcomeBack = const Text(
     "Welcome Back",
     style: TextStyle(
       fontFamily: "Avenir",

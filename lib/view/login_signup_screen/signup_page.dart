@@ -5,7 +5,7 @@ import 'package:remotely_shop/res/common/app_button/normal_button.dart';
 import 'package:remotely_shop/res/common/app_button/text_button.dart';
 import 'package:remotely_shop/res/common/app_textformfild.dart';
 import 'package:remotely_shop/res/constant/app_text.dart';
-import 'package:remotely_shop/view/login_screen.dart';
+import 'package:remotely_shop/view/login_signup_screen/login_screen.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
