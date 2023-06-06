@@ -118,6 +118,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: "00000 00000",
                     controllers: phoneNumberController,
                     keyboardType: TextInputType.phone,
+                    onTap: phoneAuth,
                   ),
                   SizedBox(
                     height: height / 60,
@@ -181,6 +182,16 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
       ),
+    );
+  }
+
+  phoneAuth() async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: phoneNumberController.text,
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {},
+      codeSent: (String verificationId, int? resendToken) {},
+      codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
 
