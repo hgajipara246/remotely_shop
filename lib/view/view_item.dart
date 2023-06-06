@@ -16,9 +16,9 @@ class _ViewItemsState extends State<ViewItems> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color(0xFFF4F5F7),
+      backgroundColor: const Color(0xFFF4F5F7),
       appBar: AppBar(
-        backgroundColor: Color(0xFFF4F5F7),
+        backgroundColor: const Color(0xFFF4F5F7),
         elevation: 0,
         automaticallyImplyLeading: false,
         leading: Image.asset(
@@ -57,19 +57,19 @@ class _ViewItemsState extends State<ViewItems> {
                       "assets/images/chair_one.png",
                       height: height / 2.6,
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Column(
                       children: [
                         Container(
                           height: height / 10,
                           width: width / 5,
                           decoration: BoxDecoration(
-                            color: Color(0xFFECEDDE),
+                            color: const Color(0xFFECEDDE),
                             borderRadius: BorderRadius.circular(
                               height / 60,
                             ),
                             border: Border.all(
-                              color: Color(0xFFFFFFFF),
+                              color: const Color(0xFFFFFFFF),
                               width: height / 150,
                             ),
                           ),
@@ -85,12 +85,12 @@ class _ViewItemsState extends State<ViewItems> {
                           height: height / 10,
                           width: width / 5,
                           decoration: BoxDecoration(
-                            color: Color(0xFFECEDDE),
+                            color: const Color(0xFFECEDDE),
                             borderRadius: BorderRadius.circular(
                               height / 60,
                             ),
                             border: Border.all(
-                              color: Color(0xFFFFFFFF),
+                              color: const Color(0xFFFFFFFF),
                               width: height / 150,
                             ),
                           ),
@@ -103,12 +103,12 @@ class _ViewItemsState extends State<ViewItems> {
                           height: height / 10,
                           width: width / 5,
                           decoration: BoxDecoration(
-                            color: Color(0xFFECEDDE),
+                            color: const Color(0xFFECEDDE),
                             borderRadius: BorderRadius.circular(
                               height / 60,
                             ),
                             border: Border.all(
-                              color: Color(0xFFFFFFFF),
+                              color: const Color(0xFFFFFFFF),
                               width: height / 150,
                             ),
                           ),
