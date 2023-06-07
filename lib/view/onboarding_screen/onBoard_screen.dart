@@ -81,8 +81,9 @@ class _OnBoard_ScreenState extends State<OnBoardScreen> {
                   child: Center(
                     child: TextButtons(
                       textButtonName: "Log in",
+                      fontSize: 18,
                       color: const Color(0xFFFFFFFF),
-                      textonpress: textButtonlogin,
+                      textOnPress: textButtonlogin,
                     ),
                   ),
                 ),

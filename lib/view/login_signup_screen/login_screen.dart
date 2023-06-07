@@ -5,6 +5,7 @@ import 'package:remotely_shop/res/common/app_button/normal_button.dart';
 import 'package:remotely_shop/res/common/app_button/text_button.dart';
 import 'package:remotely_shop/res/common/app_textformfild.dart';
 import 'package:remotely_shop/view/home_page.dart';
+import 'package:remotely_shop/view/login_signup_screen/phone_number_screen.dart';
 import 'package:remotely_shop/view/login_signup_screen/signup_page.dart';
 
 import '../../res/constant/app_text.dart';
@@ -126,20 +127,36 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   SizedBox(
-                    height: height / 15,
+                    height: height / 150,
+                  ),
+                  Center(
+                    child: TextButtons(
+                      textButtonName: "Login with Mobile",
+                      color: Color(0xFF8A8B7A),
+                      fontSize: height / 50,
+                      textOnPress: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PhoneNumberScreen(),
+                            ));
+                      },
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButtons(
                         textButtonName: "Forgot password?",
+                        fontSize: 18,
                         color: const Color(0xFF8A8B7A),
-                        textonpress: () {},
+                        textOnPress: () {},
                       ),
                       TextButtons(
                         textButtonName: "Sign Up",
+                        fontSize: 18,
                         color: const Color(0xFFBA5C3D),
-                        textonpress: signUpTextButton,
+                        textOnPress: signUpTextButton,
                       ),
                     ],
                   ),

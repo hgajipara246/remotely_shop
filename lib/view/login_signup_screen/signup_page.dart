@@ -166,13 +166,15 @@ class _SignUpPageState extends State<SignUpPage> {
                     children: [
                       TextButtons(
                         textButtonName: "Don't have an account?",
+                        fontSize: 18,
                         color: const Color(0xbd8a8b7a),
-                        textonpress: () {},
+                        textOnPress: () {},
                       ),
                       TextButtons(
                         textButtonName: "Login",
+                        fontSize: 18,
                         color: const Color(0xFFBA5C3D),
-                        textonpress: loginTextButton,
+                        textOnPress: loginTextButton,
                       ),
                     ],
                   ),

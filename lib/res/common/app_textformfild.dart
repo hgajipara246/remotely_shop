@@ -32,6 +32,7 @@ class AppTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final Function? onFieldSunmitted;
   final IconButton? sufixIcon;
+  final Widget? prefixIcon;
   final GestureTapCallback? onTap;
   const AppTextFormField({
     Key? key,
@@ -43,12 +44,12 @@ class AppTextFormField extends StatelessWidget {
     this.sufixIcon,
     this.obscuretext,
     this.onTap,
+    this.prefixIcon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onTap: onTap,
       validator: validator,
       obscureText: obscuretext ?? false,
       controller: controllers,
@@ -57,6 +58,7 @@ class AppTextFormField extends StatelessWidget {
         hintText: hintText,
         focusColor: const Color(0xFFA6A798),
         suffixIcon: sufixIcon,
+        prefixIcon: prefixIcon,
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
