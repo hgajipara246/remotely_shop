@@ -124,6 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: MainButton(
                       textName: "Login",
                       mainOnPress: loginButton,
+                      backgroundColor: Color(0xFFCED55B),
                     ),
                   ),
                   SizedBox(
@@ -133,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: TextButtons(
                       textButtonName: "Login with Mobile",
                       color: Color(0xFF8A8B7A),
-                      fontSize: height / 50,
+                      fontSize: height / 30,
                       textOnPress: () {
                         Navigator.push(
                             context,

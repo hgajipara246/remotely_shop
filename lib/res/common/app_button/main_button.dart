@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 
 class MainButton extends StatelessWidget {
   final textName;
+  final Color backgroundColor;
   final VoidCallback mainOnPress;
   const MainButton({
     Key? key,
     this.textName,
     required this.mainOnPress,
+    required this.backgroundColor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFFCED55B),
+        backgroundColor: backgroundColor,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),

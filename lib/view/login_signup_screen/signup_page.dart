@@ -155,6 +155,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     width: double.infinity,
                     child: MainButton(
                       textName: "Sign Up",
+                      backgroundColor: Color(0xFFCED55B),
                       mainOnPress: signUpMainButton,
                     ),
                   ),

@@ -40,6 +40,7 @@ dependencies:
   csc_picker: ^0.2.7
   flutter_otp_text_field: ^1.1.1
   intl_phone_field: ^3.1.0
+  pinput: ^2.2.31
 
 dev_dependencies:
   flutter_test:

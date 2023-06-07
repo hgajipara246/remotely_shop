@@ -168,6 +168,7 @@ class _HomePageState extends State<HomePage> {
                                   height: height / 17,
                                   width: width / 3.1,
                                   child: MainButton(
+                                    backgroundColor: Color(0xFFCED55B),
                                     textName: AppText.viewItem,
                                     mainOnPress: () {
                                       Navigator.push(
