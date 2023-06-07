@@ -16,7 +16,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    countryCode.text = "91";
+    countryCode.text = "+91";
     super.initState();
   }
 
