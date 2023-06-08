@@ -114,3 +114,23 @@ Map<String, dynamic> remotelyDataTrendingCollection = {
     },
   ]
 };
+
+Map<String, dynamic> remotelyDataViewItemsChairs = {
+  "viewItemsChair": [
+    {
+      "image": "assets/images/chair_one.png",
+      "imageOne": "assets/images/chair_one.png",
+      "imageTwo": "assets/images/chair_one.png",
+    },
+    {
+      "image": "assets/images/products/brown_chair.png",
+      "imageOne": "assets/images/products/brown_chair.png",
+      "imageTwo": "assets/images/products/brown_chair.png",
+    },
+    {
+      "image": "assets/images/products/blue_chair.png",
+      "imageOne": "assets/images/products/blue_chair.png",
+      "imageTwo": "assets/images/products/blue_chair.png",
+    },
+  ],
+};

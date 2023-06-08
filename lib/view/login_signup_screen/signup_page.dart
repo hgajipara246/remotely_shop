@@ -84,16 +84,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(
                     height: height / 30,
                   ),
-                  const NormalButton(
+                  NormalButton(
                     images: "assets/icons/google_logo.png",
                     editText: "Sign Up with Google",
+                    onPressed: () {},
                   ),
                   SizedBox(
                     height: height / 50,
                   ),
-                  const NormalButton(
+                  NormalButton(
                     images: "assets/icons/facebook_logo.png",
                     editText: "Sign Up with facebook",
+                    onPressed: () {},
                   ),
                   SizedBox(
                     height: height / 30,
@@ -155,8 +157,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     width: double.infinity,
                     child: MainButton(
                       textName: "Sign Up",
-                      backgroundColor: Color(0xFFCED55B),
+                      backgroundColor: const Color(0xFFCED55B),
                       mainOnPress: signUpMainButton,
+                      textColor: Colors.black,
                     ),
                   ),
                   SizedBox(

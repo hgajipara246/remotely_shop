@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class MainButton extends StatelessWidget {
   final textName;
   final Color backgroundColor;
+  final Color? textColor;
   final VoidCallback mainOnPress;
   const MainButton({
     Key? key,
     this.textName,
     required this.mainOnPress,
     required this.backgroundColor,
+    this.textColor,
   }) : super(key: key);
 
   @override
@@ -26,10 +28,10 @@ class MainButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height / 55),
         child: Text(
           textName ?? "",
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.w500,
             fontFamily: "Inter",
-            color: Colors.black,
+            color: textColor,
             fontSize: 18,
           ),
         ),

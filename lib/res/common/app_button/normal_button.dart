@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class NormalButton extends StatelessWidget {
   final String? editText;
   final String? images;
+  final void Function() onPressed;
 
   const NormalButton({
     Key? key,
     this.editText,
     this.images,
+    required this.onPressed,
   }) : super(key: key);
 
   @override

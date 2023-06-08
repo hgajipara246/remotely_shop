@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         leading: Padding(
           padding: EdgeInsets.all(height / 120),
           child: Image.asset(AppImages.profile, height: height / 50),
@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                                   height: height / 17,
                                   width: width / 3.1,
                                   child: MainButton(
-                                    backgroundColor: Color(0xFFCED55B),
+                                    backgroundColor: const Color(0xFFCED55B),
                                     textName: AppText.viewItem,
                                     mainOnPress: () {
                                       Navigator.push(
@@ -178,6 +178,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       );
                                     },
+                                    textColor: Colors.black,
                                   ),
                                 ),
                                 SizedBox(
@@ -246,7 +247,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(
-                  height: height / 4,
+                  height: height / 3.8,
                   child: ListView.separated(
                     itemCount: remotelyModel!.workSpasesData!.length,
                     physics: const BouncingScrollPhysics(),
@@ -485,7 +486,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(
-                  height: height / 3.3,
+                  height: height / 3.2,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     separatorBuilder: (context, index) => SizedBox(width: width / 30),

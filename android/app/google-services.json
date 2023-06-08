@@ -12,7 +12,20 @@
           "package_name": "com.app.remotely_shop"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "436620757860-6ep7fmovc4rai2srdmv5are81sbiudno.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.remotely_shop",
+            "certificate_hash": "785b2a98ebb3944f724bfe1e9ce59dc31ef0324e"
+          }
+        },
+        {
+          "client_id": "436620757860-6ssi3qedu8l5lf6dee8omb0irvn5l49a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB1bFb_QsBMUFr1vYlPD62W69742Fa3iPo"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "436620757860-6ssi3qedu8l5lf6dee8omb0irvn5l49a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

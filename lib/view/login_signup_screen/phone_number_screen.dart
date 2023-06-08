@@ -43,18 +43,30 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
           ),
         ),
       ),
-      body: SafeArea(
+      body: Container(
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0x9e6ee383),
+              Color(0xFFC3E8CC),
+              Color(0xFFE4EFE5),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(height / 30),
             child: Column(
               children: [
-                SizedBox(height: height / 25),
+                SizedBox(height: height / 7),
                 Image.asset(
-                  "assets/images/phoneNumber.png",
+                  "assets/images/phone_numbers.png",
                   height: height / 4,
                 ),
-                SizedBox(height: height / 30),
+                SizedBox(height: height / 20),
                 Text(
                   "Phone Verification",
                   style: TextStyle(
@@ -147,6 +159,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                     },
                     textName: "Sent the code",
                     backgroundColor: const Color(0x91079810),
+                    textColor: Colors.white,
                   ),
                 ),
               ],

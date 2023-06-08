@@ -191,3 +191,47 @@ class TrendingCollection {
         "title": title,
       };
 }
+
+RemotelyModelViewItemsChairs remotelyModelViewItemsChairsFromJson(String str) => RemotelyModelViewItemsChairs.fromJson(json.decode(str));
+
+String remotelyModelViewItemsChairsToJson(RemotelyModelViewItemsChairs data) => json.encode(data.toJson());
+
+class RemotelyModelViewItemsChairs {
+  List<ViewItemsChair>? viewItemsChair;
+
+  RemotelyModelViewItemsChairs({
+    this.viewItemsChair,
+  });
+
+  factory RemotelyModelViewItemsChairs.fromJson(Map<String, dynamic> json) => RemotelyModelViewItemsChairs(
+        viewItemsChair: json["viewItemsChair"] == null ? [] : List<ViewItemsChair>.from(json["viewItemsChair"]!.map((x) => ViewItemsChair.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "viewItemsChair": viewItemsChair == null ? [] : List<dynamic>.from(viewItemsChair!.map((x) => x.toJson())),
+      };
+}
+
+class ViewItemsChair {
+  String? image;
+  String? imageOne;
+  String? imageTwo;
+
+  ViewItemsChair({
+    this.image,
+    this.imageOne,
+    this.imageTwo,
+  });
+
+  factory ViewItemsChair.fromJson(Map<String, dynamic> json) => ViewItemsChair(
+        image: json["image"],
+        imageOne: json["imageOne"],
+        imageTwo: json["imageTwo"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "image": image,
+        "imageOne": imageOne,
+        "imageTwo": imageTwo,
+      };
+}

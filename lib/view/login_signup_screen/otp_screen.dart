@@ -15,6 +15,8 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  var code = "";
+
   final FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,6 @@ class _OtpScreenState extends State<OtpScreen> {
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    var code = "";
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -66,7 +67,19 @@ class _OtpScreenState extends State<OtpScreen> {
           ),
         ),
       ),
-      body: SafeArea(
+      body: Container(
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0x9e6ee383),
+              Color(0xFFC3E8CC),
+              Color(0xFFE4EFE5),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(height / 30),
@@ -74,7 +87,7 @@ class _OtpScreenState extends State<OtpScreen> {
               children: [
                 SizedBox(height: height / 25),
                 Image.asset(
-                  "assets/images/phoneNumber.png",
+                  "assets/images/phone_otp.png",
                   height: height / 4,
                 ),
                 SizedBox(height: height / 30),
@@ -100,6 +113,8 @@ class _OtpScreenState extends State<OtpScreen> {
                   length: 6,
                   onChanged: (value) {
                     code = value;
+                    setState(() {});
+                    debugPrint("value is ---->  $value");
                   },
                 ),
                 SizedBox(height: height / 45),
@@ -109,7 +124,11 @@ class _OtpScreenState extends State<OtpScreen> {
                   child: MainButton(
                     mainOnPress: () async {
                       try {
-                        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: PhoneNumberScreen.verify, smsCode: code);
+                        debugPrint('code is ---->   $code');
+                        PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                          verificationId: PhoneNumberScreen.verify,
+                          smsCode: code,
+                        );
                         await auth.signInWithCredential(credential);
                         {
                           Navigator.pushAndRemoveUntil(
@@ -125,6 +144,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     },
                     textName: "Verify phone number",
                     backgroundColor: const Color(0x91079810),
+                    textColor: Colors.white,
                   ),
                 ),
                 Align(

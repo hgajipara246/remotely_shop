@@ -71,8 +71,9 @@ class _OnBoard_ScreenState extends State<OnBoardScreen> {
                     width: double.infinity,
                     child: MainButton(
                       textName: "Bwose Shop",
-                      backgroundColor: Color(0xFFCED55B),
+                      backgroundColor: const Color(0xFFCED55B),
                       mainOnPress: bwoseShop,
+                      textColor: Colors.black,
                     ),
                   ),
                 ),
