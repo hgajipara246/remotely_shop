@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:remotely_shop/res/common/app_button/main_button.dart';
@@ -6,12 +7,14 @@ import 'package:remotely_shop/view/login_signup_screen/otp_screen.dart';
 class PhoneNumberScreen extends StatefulWidget {
   const PhoneNumberScreen({Key? key}) : super(key: key);
 
+  static String verify = "";
   @override
   State<PhoneNumberScreen> createState() => _PhoneNumberScreenState();
 }
 
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   TextEditingController countryCode = TextEditingController();
+  var phone = "";
 
   @override
   void initState() {
@@ -25,13 +28,28 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          color: Colors.black,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.black,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(height / 30),
             child: Column(
               children: [
-                SizedBox(height: height / 9),
+                SizedBox(height: height / 25),
                 Image.asset(
                   "assets/images/phoneNumber.png",
                   height: height / 4,
@@ -59,7 +77,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                   decoration: BoxDecoration(
                       border: Border.all(
                         width: 1,
-                        color: Color(0x91079810),
+                        color: const Color(0x91079810),
                       ),
                       borderRadius: BorderRadius.circular(height / 100)),
                   child: Row(
@@ -67,13 +85,15 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: width / 55,
+                        width: width / 30,
                       ),
                       SizedBox(
-                        width: width / 8,
+                        width: width / 10,
                         child: TextField(
                           controller: countryCode,
-                          decoration: InputDecoration(border: InputBorder.none),
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                          ),
                         ),
                       ),
                       Text(
@@ -88,7 +108,14 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                       ),
                       Expanded(
                         child: TextField(
-                          decoration: InputDecoration(border: InputBorder.none, hintText: "Phone Number"),
+                          keyboardType: TextInputType.phone,
+                          onChanged: (value) {
+                            phone = value;
+                          },
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Phone Number",
+                          ),
                         ),
                       ),
                     ],
@@ -99,16 +126,27 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                   width: double.infinity,
                   height: height / 15,
                   child: MainButton(
-                    mainOnPress: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => OtpScreen(),
-                        ),
+                    mainOnPress: () async {
+                      await FirebaseAuth.instance.verifyPhoneNumber(
+                        phoneNumber: " ${countryCode.text + phone}",
+                        verificationCompleted: (
+                          PhoneAuthCredential credential,
+                        ) {},
+                        verificationFailed: (FirebaseAuthException e) {},
+                        codeSent: (String verificationId, int? resendToken) {
+                          PhoneNumberScreen.verify = verificationId;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const OtpScreen(),
+                            ),
+                          );
+                        },
+                        codeAutoRetrievalTimeout: (String verificationId) {},
                       );
                     },
                     textName: "Sent the code",
-                    backgroundColor: Color(0x91079810),
+                    backgroundColor: const Color(0x91079810),
                   ),
                 ),
               ],

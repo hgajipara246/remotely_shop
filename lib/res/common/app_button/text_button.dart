@@ -22,6 +22,7 @@ class TextButtons extends StatelessWidget {
         primary: const Color(0xFFFFFFFF),
         textStyle: const TextStyle(
           fontSize: 20,
+          fontFamily: "Avenir",
           color: Colors.white,
         ),
       ),

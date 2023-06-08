@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: MainButton(
                       textName: "Login",
                       mainOnPress: loginButton,
-                      backgroundColor: Color(0xFFCED55B),
+                      backgroundColor: const Color(0xFFCED55B),
                     ),
                   ),
                   SizedBox(
@@ -133,13 +133,13 @@ class _LoginPageState extends State<LoginPage> {
                   Center(
                     child: TextButtons(
                       textButtonName: "Login with Mobile",
-                      color: Color(0xFF8A8B7A),
-                      fontSize: height / 30,
+                      color: const Color(0xFF8A8B7A),
+                      fontSize: height / 50,
                       textOnPress: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PhoneNumberScreen(),
+                              builder: (context) => const PhoneNumberScreen(),
                             ));
                       },
                     ),
