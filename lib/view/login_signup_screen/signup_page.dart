@@ -47,13 +47,13 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(height / 40),
-          child: Form(
-            key: formKey,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: SingleChildScrollView(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+        child: Form(
+          key: formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+            child: Padding(
+              padding: EdgeInsets.all(height / 40),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -87,14 +87,16 @@ class _SignUpPageState extends State<SignUpPage> {
                   NormalButton(
                     images: "assets/icons/google_logo.png",
                     editText: "Sign Up with Google",
+                    height: 30,
                     onPressed: () {},
                   ),
                   SizedBox(
                     height: height / 50,
                   ),
                   NormalButton(
-                    images: "assets/icons/facebook_logo.png",
-                    editText: "Sign Up with facebook",
+                    images: "assets/images/github.png",
+                    height: 30,
+                    editText: "Sign Up with github",
                     onPressed: () {},
                   ),
                   SizedBox(

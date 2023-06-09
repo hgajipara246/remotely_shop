@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:github_sign_in/github_sign_in.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:remotely_shop/res/common/app_button/main_button.dart';
 import 'package:remotely_shop/res/common/app_button/normal_button.dart';
@@ -20,6 +23,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  UserCredential? userCredential;
+
   User? user;
 
   TextEditingController emailController = TextEditingController();
@@ -28,10 +33,6 @@ class _LoginPageState extends State<LoginPage> {
   bool password = true;
 
   void loginButton() {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => const HomePage()),
-    // );
     loginUser();
   }
 
@@ -49,13 +50,13 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(height / 40),
-          child: Form(
-            key: formKey,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: SingleChildScrollView(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+        child: Form(
+          key: formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+            child: Padding(
+              padding: EdgeInsets.all(height / 40),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -68,14 +69,30 @@ class _LoginPageState extends State<LoginPage> {
                   NormalButton(
                     images: "assets/icons/google_logo.png",
                     editText: "Login with Google",
-                    onPressed: () {},
+                    height: 30,
+                    onPressed: () async {
+                      debugPrint("userdata =$user");
+
+                      userCredential = await signInWithGoogle();
+                      user = userCredential!.user;
+                      debugPrint("userdata =$user");
+
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ),
+                        (route) => false,
+                      );
+                    },
                   ),
                   SizedBox(
                     height: height / 50,
                   ),
                   NormalButton(
-                    images: "assets/icons/facebook_logo.png",
-                    editText: "Login with facebook",
+                    images: "assets/images/github.png",
+                    height: 30,
+                    editText: "Login with github",
                     onPressed: () {},
                   ),
                   SizedBox(
@@ -174,25 +191,41 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  googleSignIn() {
-    Future<UserCredential> signInWithGoogle() async {
-      // Trigger the authentication flow
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    debugPrint("googleUser----->$googleUser");
 
-      debugPrint("google user ---> $googleUser");
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
-      // Obtain the auth details from the request
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
 
-      // Create a new credential
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
 
-      // Once signed in, return the UserCredential
-      return await FirebaseAuth.instance.signInWithCredential(credential);
-    }
+  Future<UserCredential> signInWithGitHub() async {
+    // Create a GitHubSignIn instance
+    final GitHubSignIn gitHubSignIn = GitHubSignIn(
+      clientId: "a9df22eeaceb96806120",
+      clientSecret: "c6c127e2b2b242b19c43100d8c40bca722800a63",
+      redirectUrl: 'https://my-project.firebaseapp.com/__/auth/handler',
+    );
+    debugPrint("github Signin ------------------->>>   $GitHubSignIn");
+
+    // Trigger the sign-in flow
+    final result = await gitHubSignIn.signIn(context);
+
+    // Create a credential from the access token
+    final githubAuthCredential = GithubAuthProvider.credential(result.token!);
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
   }
 
   loginUser() async {

@@ -4,12 +4,14 @@ class NormalButton extends StatelessWidget {
   final String? editText;
   final String? images;
   final void Function() onPressed;
+  final double? height;
 
   const NormalButton({
     Key? key,
     this.editText,
     this.images,
     required this.onPressed,
+    this.height,
   }) : super(key: key);
 
   @override
@@ -32,17 +34,19 @@ class NormalButton extends StatelessWidget {
           fontStyle: FontStyle.normal,
         ),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
               images!,
-              width: 30,
+              width: height,
             ),
-            const SizedBox(
-              width: 50,
+            SizedBox(
+              width: height,
             ),
             Text(
               editText ?? "",
