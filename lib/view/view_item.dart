@@ -1,5 +1,9 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:remotely_shop/model/remotely_model.dart';
+import 'package:remotely_shop/model/remotely_model_data.dart';
 import 'package:remotely_shop/res/constant/app_images.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ViewItems extends StatefulWidget {
   const ViewItems({Key? key}) : super(key: key);
@@ -8,8 +12,23 @@ class ViewItems extends StatefulWidget {
   State<ViewItems> createState() => _ViewItemsState();
 }
 
+RemotelyModelViewItemsChairs? remotelyModelViewItemsChairs = RemotelyModelViewItemsChairs.fromJson(remotelyDataViewItemsChairs);
+
 class _ViewItemsState extends State<ViewItems> {
   final PageController pageController = PageController(initialPage: 0);
+
+  // list of images
+  List chairs = [
+    Image.asset(' "assets/images/chair_one.png",'),
+    Image.asset('assets/images/products/brown_chair.png'),
+    Image.asset('assets/images/products/blue_chair.png'),
+  ];
+
+  List imgList = [
+    "assets/images/chair_one.png",
+    'assets/images/products/brown_chair.png',
+    'assets/images/products/blue_chair.png',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -50,74 +69,43 @@ class _ViewItemsState extends State<ViewItems> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Row(
+                Stack(
                   children: [
-                    SizedBox(width: width / 7),
-                    Image.asset(
-                      "assets/images/chair_one.png",
-                      height: height / 2.6,
-                    ),
-                    const Spacer(),
-                    Column(
-                      children: [
+                    CarouselSlider(
+                      items: [
                         Container(
-                          height: height / 10,
-                          width: width / 5,
+                          margin: EdgeInsets.all(6.0),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFECEDDE),
-                            borderRadius: BorderRadius.circular(
-                              height / 60,
-                            ),
-                            border: Border.all(
-                              color: const Color(0xFFFFFFFF),
-                              width: height / 150,
-                            ),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.all(height / 200),
-                            child: Image.asset(
-                              "assets/images/chair_one.png",
-                            ),
-                          ),
+                          child: Image.asset("assets/images/chair_one.png"),
                         ),
-                        SizedBox(height: height / 100),
                         Container(
-                          height: height / 10,
-                          width: width / 5,
+                          margin: EdgeInsets.all(6.0),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFECEDDE),
-                            borderRadius: BorderRadius.circular(
-                              height / 60,
-                            ),
-                            border: Border.all(
-                              color: const Color(0xFFFFFFFF),
-                              width: height / 150,
-                            ),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          child: Image.asset(
-                            "assets/images/products/brown_chair.png",
-                          ),
+                          child: Image.asset("assets/images/products/brown_chair.png"),
                         ),
-                        SizedBox(height: height / 100),
                         Container(
-                          height: height / 10,
-                          width: width / 5,
+                          margin: EdgeInsets.all(6.0),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFECEDDE),
-                            borderRadius: BorderRadius.circular(
-                              height / 60,
-                            ),
-                            border: Border.all(
-                              color: const Color(0xFFFFFFFF),
-                              width: height / 150,
-                            ),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          child: Image.asset(
-                            "assets/images/products/blue_chair.png",
-                          ),
+                          child: Image.asset("assets/images/products/blue_chair.png"),
                         ),
                       ],
+                      options: CarouselOptions(),
                     ),
+                    Positioned(
+                      bottom: 0,
+                      left: 50,
+                      child: SmoothPageIndicator(
+                          controller: pageController, // PageController
+                          count: 6,
+                          effect: WormEffect(), // your preferred effect
+                          onDotClicked: (index) {}),
+                    )
                   ],
                 ),
               ],

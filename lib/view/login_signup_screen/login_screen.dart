@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomePage(),
+                          builder: (context) => const HomePage(),
                         ),
                         (route) => false,
                       );
@@ -216,7 +216,7 @@ class _LoginPageState extends State<LoginPage> {
       clientSecret: "c6c127e2b2b242b19c43100d8c40bca722800a63",
       redirectUrl: 'https://my-project.firebaseapp.com/__/auth/handler',
     );
-    debugPrint("github Signin ------------------->>>   $GitHubSignIn");
+    debugPrint("github SignIn ------------------->>>   $GitHubSignIn");
 
     // Trigger the sign-in flow
     final result = await gitHubSignIn.signIn(context);
