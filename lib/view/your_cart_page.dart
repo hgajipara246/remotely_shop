@@ -73,7 +73,7 @@ class _YourCartsPageState extends State<YourCartsPage> {
                 SizedBox(height: height / 50),
                 ListView.separated(
                   scrollDirection: Axis.vertical,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   separatorBuilder: (context, index) => SizedBox(
                     height: height / 70,
@@ -110,7 +110,7 @@ class _YourCartsPageState extends State<YourCartsPage> {
                             children: [
                               Text(
                                 "${remotelyModelYourCartPage!.yourCartPage![index].title}",
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 20,
                                 ),
@@ -118,7 +118,7 @@ class _YourCartsPageState extends State<YourCartsPage> {
                               SizedBox(height: height / 90),
                               Text(
                                 "${remotelyModelYourCartPage!.yourCartPage![index].price}",
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Color(0xFFBA5C3D),
                                   fontSize: 12,
                                   fontWeight: FontWeight.w800,
@@ -206,7 +206,7 @@ class _YourCartsPageState extends State<YourCartsPage> {
           textName: "Proceed to Checkout",
           textColor: Colors.black,
           mainOnPress: () {},
-          backgroundColor: Color(0xFFCED55B),
+          backgroundColor: const Color(0xFFCED55B),
         ),
       ),
     );

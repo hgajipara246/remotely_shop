@@ -93,7 +93,9 @@ class _LoginPageState extends State<LoginPage> {
                     images: "assets/images/github.png",
                     height: 30,
                     editText: "Login with github",
-                    onPressed: () {},
+                    onPressed: () {
+                      signInWithGitHub();
+                    },
                   ),
                   SizedBox(
                     height: height / 30,
