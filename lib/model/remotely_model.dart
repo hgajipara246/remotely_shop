@@ -235,3 +235,47 @@ class ViewItemsChair {
         "imageTwo": imageTwo,
       };
 }
+
+RemotelyModelYourCartPage remotelyModelYourCartPageFromJson(String str) => RemotelyModelYourCartPage.fromJson(json.decode(str));
+
+String remotelyModelYourCartPageToJson(RemotelyModelYourCartPage data) => json.encode(data.toJson());
+
+class RemotelyModelYourCartPage {
+  List<YourCartPage>? yourCartPage;
+
+  RemotelyModelYourCartPage({
+    this.yourCartPage,
+  });
+
+  factory RemotelyModelYourCartPage.fromJson(Map<String, dynamic> json) => RemotelyModelYourCartPage(
+        yourCartPage: json["yourCartPage"] == null ? [] : List<YourCartPage>.from(json["yourCartPage"]!.map((x) => YourCartPage.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "yourCartPage": yourCartPage == null ? [] : List<dynamic>.from(yourCartPage!.map((x) => x.toJson())),
+      };
+}
+
+class YourCartPage {
+  String? image;
+  String? title;
+  String? price;
+
+  YourCartPage({
+    this.image,
+    this.title,
+    this.price,
+  });
+
+  factory YourCartPage.fromJson(Map<String, dynamic> json) => YourCartPage(
+        image: json["image"],
+        title: json["title"],
+        price: json["price"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "image": image,
+        "title": title,
+        "price": price,
+      };
+}

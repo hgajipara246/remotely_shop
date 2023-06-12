@@ -5,6 +5,7 @@ import 'package:remotely_shop/res/common/app_button/main_button.dart';
 import 'package:remotely_shop/res/constant/app_images.dart';
 import 'package:remotely_shop/res/constant/app_text.dart';
 import 'package:remotely_shop/view/view_item.dart';
+import 'package:remotely_shop/view/your_cart_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -674,7 +675,14 @@ class _HomePageState extends State<HomePage> {
         foregroundColor: Colors.white,
         focusColor: Colors.white,
         backgroundColor: Colors.black,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const YourCartsPage(),
+            ),
+          );
+        },
         child: Image.asset(
           AppImages.shoppingCart,
           height: height / 32,

@@ -115,6 +115,8 @@ Map<String, dynamic> remotelyDataTrendingCollection = {
   ]
 };
 
+///  Item view Screen's ModelData
+
 Map<String, dynamic> remotelyDataViewItemsChairs = {
   "viewItemsChair": [
     {
@@ -132,5 +134,27 @@ Map<String, dynamic> remotelyDataViewItemsChairs = {
       "imageOne": "assets/images/products/blue_chair.png",
       "imageTwo": "assets/images/products/blue_chair.png",
     },
+  ],
+};
+
+/// Your cart Screen's ModelData
+
+Map<String, dynamic> remotelyDataYourCartPage = {
+  "yourCartPage": [
+    {
+      "image": "assets/images/cartPage/blue_chair_cartPage.png",
+      "title": "Furniture Manila Adjustable \nOffice Chair",
+      "price": "USD 87.00",
+    },
+    {
+      "image": "assets/images/cartPage/speaker_cartPage.png",
+      "title": "JBL Link Music Wifi Speaker",
+      "price": "USD 69.00",
+    },
+    {
+      "image": "assets/images/cartPage/mouse_cartPage.png",
+      "title": "Logitech MX Master 2S \nWireless Mouse",
+      "price": "USD 92.00",
+    }
   ],
 };
