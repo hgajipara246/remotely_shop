@@ -16,19 +16,6 @@ class _ViewItemsState extends State<ViewItems> {
   final PageController pageController = PageController(initialPage: 0);
   RemotelyModelYourCartPage? remotelyModelYourCartPage = RemotelyModelYourCartPage.fromJson(remotelyDataViewItemsChairs);
 
-  // list of images
-  List chairs = [
-    Image.asset(' "assets/images/chair_one.png",'),
-    Image.asset('assets/images/products/brown_chair.png'),
-    Image.asset('assets/images/products/blue_chair.png'),
-  ];
-
-  List imgList = [
-    "assets/images/chair_one.png",
-    'assets/images/products/brown_chair.png',
-    'assets/images/products/blue_chair.png',
-  ];
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -51,7 +38,7 @@ class _ViewItemsState extends State<ViewItems> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HomePage(),
+                                builder: (context) => const HomePage(),
                               ),
                             );
                           },
@@ -60,7 +47,7 @@ class _ViewItemsState extends State<ViewItems> {
                             height: height / 20,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Container(
                           padding: EdgeInsets.all(height / 70),
                           decoration: BoxDecoration(
@@ -80,9 +67,7 @@ class _ViewItemsState extends State<ViewItems> {
                       items: [
                         Padding(
                           padding: EdgeInsets.all(height / 15),
-                          child: Image.asset(
-                            "assets/images/chair_one.png",
-                          ),
+                          child: Image.asset("assets/images/chair_one.png"),
                         ),
                         Image.asset("assets/images/products/brown_chair.png"),
                         Image.asset("assets/images/products/blue_chair.png"),

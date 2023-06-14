@@ -1,13 +1,18 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, use_build_context_synchronously
 
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:github_sign_in/github_sign_in.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:remotely_shop/model/remotely_model.dart';
 import 'package:remotely_shop/res/common/app_button/main_button.dart';
 import 'package:remotely_shop/res/common/app_button/normal_button.dart';
 import 'package:remotely_shop/res/common/app_button/text_button.dart';
 import 'package:remotely_shop/res/common/app_textformfild.dart';
+import 'package:remotely_shop/utils/utils.dart';
 import 'package:remotely_shop/view/home_page.dart';
 import 'package:remotely_shop/view/login_signup_screen/phone_number_screen.dart';
 import 'package:remotely_shop/view/login_signup_screen/signup_page.dart';
@@ -24,17 +29,17 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   UserCredential? userCredential;
-
   User? user;
+
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
+  Utils utils = Utils();
+  UserModel userModel = UserModel();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool password = true;
-
-  void loginButton() {
-    loginUser();
-  }
 
   void signUpTextButton() {
     Navigator.push(
@@ -73,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () async {
                       debugPrint("userdata =$user");
 
-                      userCredential = await signInWithGoogle();
+                      signInWithGoogle();
                       user = userCredential!.user;
                       debugPrint("userdata =$user");
 
@@ -145,7 +150,9 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.infinity,
                     child: MainButton(
                       textName: "Login",
-                      mainOnPress: loginButton,
+                      mainOnPress: () {
+                        loginUser();
+                      },
                       backgroundColor: const Color(0xFFCED55B),
                       textColor: Colors.black,
                     ),
@@ -193,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future<UserCredential> signInWithGoogle() async {
+  Future<void> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     debugPrint("googleUser----->$googleUser");
@@ -208,7 +215,10 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+    user = userCredential!.user;
+    debugPrint("User Data ------->>  $user");
+    utils.showSnackBar(context, message: "Login Successfully.");
   }
 
   Future<UserCredential> signInWithGitHub() async {
@@ -242,52 +252,50 @@ class _LoginPageState extends State<LoginPage> {
         user = value.user;
 
         if (user!.emailVerified) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              content: Text(
-                "Login Succsesfull",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: "Avenir",
-                ),
-              ),
-            ),
-          );
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomePage(),
-              ),
-              (route) => false);
+          debugPrint("User is LogIn.");
+          user = value.user;
+          getUser();
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              content: Text(
-                "Please Verify Your Email",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: "Avenir",
-                ),
-              ),
-            ),
+          debugPrint("Please Verify The Email.");
+          utils.showSnackBar(
+            context,
+            message: "please verify you Email or Resent The Mail",
+            label: 'Resent',
+            onPressed: () => value.user!.sendEmailVerification(),
           );
-          debugPrint("Please Verify your Email");
         }
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         debugPrint('No user found for that email.');
+        utils.showSnackBar(
+          context,
+          message: "No User Found For That Email",
+        );
       } else if (e.code == 'wrong-password') {
         debugPrint("wrong password provided for that user.");
+
+        utils.showSnackBar(
+          context,
+          message: "Your Password Is Incorrect. Please, Check Your Password And Try Again.",
+        );
       }
     }
+  }
+
+  getUser() {
+    CollectionReference users = firebaseFirestore.collection('user');
+    users.doc(user!.uid).get().then((value) {
+      debugPrint("User Added -------- > ${jsonEncode(value.data())} ");
+      userModel = userModelFromJson(jsonEncode(value.data()));
+      utils.showSnackBar(context, message: "LogIn SuccessFully");
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ));
+    }).catchError((error) {
+      debugPrint("Failed to Add User : $error");
+    });
   }
 }

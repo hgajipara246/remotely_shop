@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:remotely_shop/res/common/app_button/main_button.dart';
@@ -5,6 +6,7 @@ import 'package:remotely_shop/res/common/app_button/normal_button.dart';
 import 'package:remotely_shop/res/common/app_button/text_button.dart';
 import 'package:remotely_shop/res/common/app_textformfild.dart';
 import 'package:remotely_shop/res/constant/app_text.dart';
+import 'package:remotely_shop/utils/utils.dart';
 import 'package:remotely_shop/view/login_signup_screen/login_screen.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -18,27 +20,15 @@ class _SignUpPageState extends State<SignUpPage> {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   User? user;
 
+  Utils utils = Utils();
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool password = false;
-
-  void signUpMainButton() {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => const HomePage()),
-    //
-    creatUser();
-    debugPrint("User ------->> $user");
-  }
-
-  void loginTextButton() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const LoginPage()),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,9 +98,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   AppText.email,
                   AppTextFormField(
+                    // validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
+                    hintText: "Enter Your Name",
+                    controllers: nameController,
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                  ),
+                  AppText.email,
+                  AppTextFormField(
                     validator: (value) => value!.isValidEmail() ? null : "Please Enter Correct E-mail",
                     hintText: "Eg. jamesburnes@gmail.com",
                     controllers: emailController,
+                    textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.emailAddress,
                   ),
                   SizedBox(
@@ -122,7 +121,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: "00000 00000",
                     controllers: phoneNumberController,
                     keyboardType: TextInputType.phone,
-                    onTap: phoneAuth,
+                    textInputAction: TextInputAction.next,
                   ),
                   SizedBox(
                     height: height / 60,
@@ -133,6 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     keyboardType: TextInputType.visiblePassword,
                     controllers: passwordController,
                     hintText: "Password",
+                    textInputAction: TextInputAction.done,
                     obscuretext: password,
                     sufixIcon: IconButton(
                       icon: password
@@ -160,7 +160,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: MainButton(
                       textName: "Sign Up",
                       backgroundColor: const Color(0xFFCED55B),
-                      mainOnPress: signUpMainButton,
+                      mainOnPress: () {
+                        creatUser();
+                        debugPrint("User ------->> $user");
+                      },
                       textColor: Colors.black,
                     ),
                   ),
@@ -180,7 +183,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         textButtonName: "Login",
                         fontSize: 18,
                         color: const Color(0xFFBA5C3D),
-                        textOnPress: loginTextButton,
+                        textOnPress: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const LoginPage()),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -205,7 +213,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   creatUser() async {
     try {
-      await FirebaseAuth.instance
+      await firebaseAuth
           .createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
@@ -214,7 +222,7 @@ class _SignUpPageState extends State<SignUpPage> {
         debugPrint("Value --> ${value.user}");
         user = value.user;
         user!.sendEmailVerification();
-        Navigator.pop(context);
+        createUserData();
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -227,5 +235,23 @@ class _SignUpPageState extends State<SignUpPage> {
     } catch (e) {
       debugPrint("Error --->  $e");
     }
+  }
+
+  createUserData() {
+    CollectionReference users = firebaseFirestore.collection('user');
+    users.doc(user!.uid).set(
+      {
+        'id': user!.uid,
+        'name': nameController.text,
+        'email': user!.email,
+        'number': phoneNumberController.text,
+      },
+    ).then((value) {
+      debugPrint("User added -------> $users ");
+      utils.showSnackBar(context, message: "SignUp Successfully, please verify Your Email.");
+      Navigator.pop(context);
+    }).catchError((error) {
+      debugPrint("Failed to add user : $error");
+    });
   }
 }

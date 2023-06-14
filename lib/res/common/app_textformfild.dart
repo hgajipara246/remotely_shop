@@ -33,6 +33,7 @@ class AppTextFormField extends StatelessWidget {
   final Function? onFieldSunmitted;
   final IconButton? sufixIcon;
   final Widget? prefixIcon;
+  final TextInputAction? textInputAction;
   final GestureTapCallback? onTap;
   const AppTextFormField({
     Key? key,
@@ -45,11 +46,13 @@ class AppTextFormField extends StatelessWidget {
     this.obscuretext,
     this.onTap,
     this.prefixIcon,
+    this.textInputAction,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction: textInputAction,
       validator: validator,
       obscureText: obscuretext ?? false,
       controller: controllers,
