@@ -14,6 +14,7 @@ import 'package:remotely_shop/res/common/app_button/text_button.dart';
 import 'package:remotely_shop/res/common/app_textformfild.dart';
 import 'package:remotely_shop/utils/utils.dart';
 import 'package:remotely_shop/view/home_page.dart';
+import 'package:remotely_shop/view/login_signup_screen/forgot_password_page.dart';
 import 'package:remotely_shop/view/login_signup_screen/phone_number_screen.dart';
 import 'package:remotely_shop/view/login_signup_screen/signup_page.dart';
 
@@ -181,7 +182,13 @@ class _LoginPageState extends State<LoginPage> {
                         textButtonName: "Forgot password?",
                         fontSize: 18,
                         color: const Color(0xFF8A8B7A),
-                        textOnPress: () {},
+                        textOnPress: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ForgotPassword(),
+                              ));
+                        },
                       ),
                       TextButtons(
                         textButtonName: "Sign Up",
@@ -198,6 +205,17 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future<String> signUp(String username, String email, String password) async {
+    FirebaseUser user = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+    try {
+      await user.sendEmailVerification();
+      return user.uid;
+    } catch (e) {
+      print("An error occured while trying to send email        verification");
+      print(e.message);
+    }
   }
 
   Future<void> signInWithGoogle() async {
