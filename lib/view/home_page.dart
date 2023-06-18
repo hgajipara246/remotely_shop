@@ -15,6 +15,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   RemotelyModel? remotelyModel = RemotelyModel.fromJson(remotelyDataWorkSpases);
   RemotelyModelNewArrivals? remotelyModelNewArrivals = RemotelyModelNewArrivals.fromJson(remotelyDataNewArrivals);
   RemotelyModelLaptops? remotelyModelLaptops = RemotelyModelLaptops.fromJson(remotelyDataLaptops);
@@ -35,12 +37,125 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      key: _scaffoldKey,
+      drawer: Drawer(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(
+              height / 20,
+            ),
+          ),
+        ),
+        child: SafeArea(
+          child: BottomSheet(
+            enableDrag: true,
+            onClosing: () {},
+            builder: (context) => ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                DrawerHeader(
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        AppImages.profile,
+                        height: height / 8,
+                      ),
+                      SizedBox(height: height / 70),
+                      Text(
+                        "Harshil",
+                        style: TextStyle(
+                          fontSize: height / 35,
+                          fontFamily: "Avenir",
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                    'Profile',
+                    style: TextStyle(
+                      fontSize: height / 38,
+                      fontFamily: "Avenir",
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  onTap: () {
+                    // Update the state of the app.
+                    // ...
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    'Cart',
+                    style: TextStyle(
+                      fontSize: height / 38,
+                      fontFamily: "Avenir",
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  onTap: () {
+                    // Update the state of the app.
+                    // ...
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    'Setting',
+                    style: TextStyle(
+                      fontSize: height / 38,
+                      fontFamily: "Avenir",
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  onTap: () {
+                    // Update the state of the app.
+                    // ...
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    'About',
+                    style: TextStyle(
+                      fontSize: height / 38,
+                      fontFamily: "Avenir",
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  onTap: () {
+                    // Update the state of the app.
+                    // ...
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    'Logout',
+                    style: TextStyle(
+                      fontSize: height / 38,
+                      fontFamily: "Avenir",
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  onTap: () {
+                    // Update the state of the app.
+                    // ...
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: Padding(
-          padding: EdgeInsets.all(height / 120),
-          child: Image.asset(AppImages.profile, height: height / 50),
+        leading: InkWell(
+          onTap: () => _scaffoldKey.currentState!.openDrawer(),
+          child: Padding(
+            padding: EdgeInsets.all(height / 120),
+            child: Image.asset(AppImages.profile, height: height / 50),
+          ),
         ),
         actions: [
           Padding(
