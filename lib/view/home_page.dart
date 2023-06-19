@@ -1,9 +1,15 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:remotely_shop/model/remotely_model.dart';
 import 'package:remotely_shop/model/remotely_model_data.dart';
 import 'package:remotely_shop/res/common/app_button/main_button.dart';
 import 'package:remotely_shop/res/constant/app_images.dart';
 import 'package:remotely_shop/res/constant/app_text.dart';
+import 'package:remotely_shop/view/login_signup_screen/login_screen.dart';
+import 'package:remotely_shop/view/profile_page.dart';
 import 'package:remotely_shop/view/view_item.dart';
 import 'package:remotely_shop/view/your_cart_page.dart';
 
@@ -15,7 +21,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  UserModel? userModel = UserModel();
+
+  getUser() {
+    CollectionReference users = firebaseFirestore.collection("user");
+    users.doc(firebaseAuth.currentUser!.uid).get().then((value) {
+      debugPrint("User Added successfully  --------> ${jsonEncode(value.data())}");
+      userModel = userModelFromJson(jsonEncode(value.data()));
+    }).catchError((error) {
+      debugPrint("Faild to get user  : $error");
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getUser();
+    super.initState();
+  }
 
   RemotelyModel? remotelyModel = RemotelyModel.fromJson(remotelyDataWorkSpases);
   RemotelyModelNewArrivals? remotelyModelNewArrivals = RemotelyModelNewArrivals.fromJson(remotelyDataNewArrivals);
@@ -39,6 +66,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       key: _scaffoldKey,
       drawer: Drawer(
+        shadowColor: Colors.black,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(
@@ -62,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       SizedBox(height: height / 70),
                       Text(
-                        "Harshil",
+                        userModel!.name!,
                         style: TextStyle(
                           fontSize: height / 35,
                           fontFamily: "Avenir",
@@ -82,8 +110,12 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   onTap: () {
-                    // Update the state of the app.
-                    // ...
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ProfilePage(),
+                      ),
+                    );
                   },
                 ),
                 ListTile(
@@ -123,10 +155,7 @@ class _HomePageState extends State<HomePage> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  onTap: () {
-                    // Update the state of the app.
-                    // ...
-                  },
+                  onTap: () {},
                 ),
                 ListTile(
                   title: Text(
@@ -138,8 +167,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   onTap: () {
-                    // Update the state of the app.
-                    // ...
+                    firebaseAuth.signOut();
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                        (route) => false);
                   },
                 ),
               ],
