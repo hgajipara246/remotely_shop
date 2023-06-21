@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:remotely_shop/model/remotely_model.dart';
@@ -14,7 +15,9 @@ import 'package:remotely_shop/view/view_item.dart';
 import 'package:remotely_shop/view/your_cart_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -32,15 +35,27 @@ class _HomePageState extends State<HomePage> {
     users.doc(firebaseAuth.currentUser!.uid).get().then((value) {
       debugPrint("User Added successfully  --------> ${jsonEncode(value.data())}");
       userModel = userModelFromJson(jsonEncode(value.data()));
+      setState(() {});
     }).catchError((error) {
-      debugPrint("Faild to get user  : $error");
+      debugPrint("Fail to get user  : $error");
     });
+  }
+
+  signOut() async {
+    await firebaseAuth.signOut();
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginPage(),
+      ),
+      (route) => false,
+    );
   }
 
   @override
   void initState() {
     // TODO: implement initState
-    getUser();
+
     super.initState();
   }
 
@@ -88,15 +103,15 @@ class _HomePageState extends State<HomePage> {
                         AppImages.profile,
                         height: height / 8,
                       ),
-                      SizedBox(height: height / 70),
-                      Text(
-                        userModel!.name!,
-                        style: TextStyle(
-                          fontSize: height / 35,
-                          fontFamily: "Avenir",
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
+                      // SizedBox(height: height / 70),
+                      // Text(
+                      //   "${userModel!.name!}",
+                      //   style: TextStyle(
+                      //     fontSize: height / 35,
+                      //     fontFamily: "Avenir",
+                      //     fontWeight: FontWeight.w800,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -167,13 +182,33 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   onTap: () {
-                    firebaseAuth.signOut();
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ),
-                        (route) => false);
+                    CoolAlert.show(
+                      context: context,
+                      type: CoolAlertType.warning,
+                      title: "Are you sure?",
+                      text: "Do you want to Logout",
+                      cancelBtnText: "No",
+                      cancelBtnTextStyle: TextStyle(
+                        fontSize: height / 40,
+                        fontFamily: "Avenir",
+                        color: Colors.black,
+                        fontWeight: FontWeight.w800,
+                      ),
+                      showCancelBtn: true,
+                      closeOnConfirmBtnTap: true,
+                      confirmBtnText: "Yes",
+                      confirmBtnTextStyle: TextStyle(
+                        fontSize: height / 40,
+                        fontFamily: "Avenir",
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      confirmBtnColor: const Color(0xFFCED55B),
+                      onCancelBtnTap: () {
+                        Navigator.pop(context);
+                      },
+                      onConfirmBtnTap: () => signOut(),
+                    );
                   },
                 ),
               ],

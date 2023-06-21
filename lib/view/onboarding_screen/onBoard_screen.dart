@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:remotely_shop/res/common/app_button/main_button.dart';
 import 'package:remotely_shop/res/common/app_button/text_button.dart';
 import 'package:remotely_shop/res/constant/app_text.dart';
-import 'package:remotely_shop/view/home_page.dart';
 import 'package:remotely_shop/view/login_signup_screen/login_screen.dart';
+import 'package:remotely_shop/view/login_signup_screen/signup_page.dart';
 
 class OnBoardScreen extends StatefulWidget {
   const OnBoardScreen({Key? key}) : super(key: key);
@@ -15,21 +15,6 @@ class OnBoardScreen extends StatefulWidget {
 }
 
 class _OnBoard_ScreenState extends State<OnBoardScreen> {
-  void bwoseShop() => Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        ),
-        (route) => false,
-      );
-
-  void textButtonlogin() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const LoginPage()),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -70,9 +55,16 @@ class _OnBoard_ScreenState extends State<OnBoardScreen> {
                   child: SizedBox(
                     width: double.infinity,
                     child: MainButton(
-                      textName: "Bwose Shop",
+                      textName: "Login",
                       backgroundColor: const Color(0xFFCED55B),
-                      mainOnPress: bwoseShop,
+                      mainOnPress: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ),
+                        );
+                      },
                       textColor: Colors.black,
                     ),
                   ),
@@ -82,10 +74,17 @@ class _OnBoard_ScreenState extends State<OnBoardScreen> {
                   padding: EdgeInsets.only(bottom: height / 25),
                   child: Center(
                     child: TextButtons(
-                      textButtonName: "Log in",
+                      textButtonName: "Sign Up",
                       fontSize: 18,
                       color: const Color(0xFFFFFFFF),
-                      textOnPress: textButtonlogin,
+                      textOnPress: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignUpPage(),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),

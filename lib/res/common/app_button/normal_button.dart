@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class NormalButton extends StatelessWidget {
   final String? editText;
   final String? images;
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final double? height;
 
   const NormalButton({
