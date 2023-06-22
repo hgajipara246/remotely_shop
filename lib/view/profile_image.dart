@@ -12,9 +12,7 @@ class _ProfileImageState extends State<ProfileImage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [
-          Image.file(),
-        ],
+        children: [],
       ),
     );
   }

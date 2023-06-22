@@ -49,6 +49,9 @@ dependencies:
   cool_alert: ^2.0.1
   firebase_storage: ^11.2.3
   image_picker: ^0.8.9
+  path_provider: ^2.0.15
+  http: ^0.13.5
+  flutter_file_dialog: ^3.0.0
 
 
 dev_dependencies:
