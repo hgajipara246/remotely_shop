@@ -56,13 +56,14 @@ class _YourCartsPageState extends State<YourCartsPage> {
                         fontWeight: FontWeight.w900,
                         color: Colors.black,
                         fontFamily: "Avenir",
+                        overflow: TextOverflow.visible,
                       ),
                     ),
                     const Spacer(),
                     Text(
                       "3 items",
                       style: TextStyle(
-                        fontSize: height / 45,
+                        fontSize: height / 50,
                         fontWeight: FontWeight.w800,
                         color: const Color(0xFFA6A798),
                         fontFamily: "Avenir",
@@ -110,9 +111,11 @@ class _YourCartsPageState extends State<YourCartsPage> {
                             children: [
                               Text(
                                 "${remotelyModelYourCartPage!.yourCartPage![index].title}",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 20,
+                                  fontSize: width / 22,
+                                  fontFamily: "Avenir",
+                                  overflow: TextOverflow.visible,
                                 ),
                               ),
                               SizedBox(height: height / 90),
@@ -123,6 +126,7 @@ class _YourCartsPageState extends State<YourCartsPage> {
                                   fontSize: 12,
                                   fontWeight: FontWeight.w800,
                                   fontFamily: "Avenir",
+                                  overflow: TextOverflow.visible,
                                 ),
                               ),
                               SizedBox(height: height / 90),

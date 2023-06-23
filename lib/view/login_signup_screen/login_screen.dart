@@ -117,12 +117,14 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: "Eg. jamesburnes@gmail.com",
                     controllers: emailController,
                     keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
                   ),
                   SizedBox(
                     height: height / 60,
                   ),
                   AppText.password,
                   AppTextFormField(
+                    textInputAction: TextInputAction.done,
                     validator: (value) => value!.isValidPassword() ? null : "Please Enter Correct Password",
                     controllers: passwordController,
                     hintText: "Password",
@@ -188,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ForgotPassword(),
+                                builder: (context) => const ForgotPassword(),
                               ));
                         },
                       ),
@@ -298,11 +300,13 @@ class _LoginPageState extends State<LoginPage> {
       debugPrint("User Added -------- > ${jsonEncode(value.data())} ");
       userModel = userModelFromJson(jsonEncode(value.data()));
       utils.showSnackBar(context, message: "LogIn SuccessFully");
-      Navigator.push(
+      Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (context) => const HomePage(),
-          ));
+          ),
+          (route) => false);
+      setState(() {});
     }).catchError((error) {
       debugPrint("Failed to Add User : $error");
     });

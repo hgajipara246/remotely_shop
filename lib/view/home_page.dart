@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
-        builder: (context) => LoginPage(),
+        builder: (context) => const LoginPage(),
       ),
       (route) => false,
     );
@@ -432,7 +432,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(
-                  height: height / 3.8,
+                  height: height / 3.5,
                   child: ListView.separated(
                     itemCount: remotelyModel!.workSpasesData!.length,
                     physics: const BouncingScrollPhysics(),
@@ -452,23 +452,29 @@ class _HomePageState extends State<HomePage> {
                               "${remotelyModel!.workSpasesData![index].image}",
                             ),
                             SizedBox(height: height / 40),
-                            Text(
-                              "${remotelyModel!.workSpasesData![index].post}",
-                              style: const TextStyle(
-                                fontFamily: "Avenir",
-                                fontWeight: FontWeight.w800,
-                                fontSize: 18,
-                                color: Colors.black,
+                            Flexible(
+                              child: Text(
+                                "${remotelyModel!.workSpasesData![index].post}",
+                                style: const TextStyle(
+                                  fontFamily: "Avenir",
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  overflow: TextOverflow.fade,
+                                ),
                               ),
                             ),
                             SizedBox(height: height / 130),
-                            Text(
-                              "${remotelyModel!.workSpasesData![index].suggestion}",
-                              style: const TextStyle(
-                                color: Color(0xFFA6A798),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15,
-                                fontFamily: "Avenir",
+                            Expanded(
+                              child: Text(
+                                "${remotelyModel!.workSpasesData![index].suggestion}",
+                                style: const TextStyle(
+                                  color: Color(0xFFA6A798),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15,
+                                  fontFamily: "Avenir",
+                                  overflow: TextOverflow.visible,
+                                ),
                               ),
                             )
                           ],
@@ -517,7 +523,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                   itemCount: remotelyModelNewArrivals!.newArrivalsData!.length,
                   itemBuilder: (context, index) => Container(
-                    width: double.infinity,
                     decoration: BoxDecoration(
                       color: const Color(0x0fffffff),
                       borderRadius: BorderRadius.circular(height / 100),
@@ -572,11 +577,12 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Text(
                                       "${remotelyModelNewArrivals!.newArrivalsData![index].title}",
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 21,
-                                        color: Color(0xFF040B14),
+                                        fontSize: width / 22,
+                                        color: const Color(0xFF040B14),
                                         fontFamily: "Avenir",
+                                        overflow: TextOverflow.visible,
                                       ),
                                     ),
                                     SizedBox(height: height / 180),
@@ -591,29 +597,31 @@ class _HomePageState extends State<HomePage> {
                                             fontSize: 16,
                                             color: Color(0xFFA6A798),
                                             fontFamily: "Avenir",
+                                            overflow: TextOverflow.visible,
                                           ),
                                         ),
-                                        SizedBox(width: width / 70),
+                                        SizedBox(width: width / 75),
                                         Icon(
                                           Icons.circle,
                                           color: const Color(0xFFA6A798),
-                                          size: height / 100,
+                                          size: height / 110,
                                         ),
-                                        SizedBox(width: width / 70),
+                                        SizedBox(width: width / 75),
                                         Text(
                                           "${remotelyModelNewArrivals!.newArrivalsData![index].rate}",
                                           style: const TextStyle(
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 16,
+                                            fontSize: 15,
                                             color: Color(0xFFA6A798),
                                             fontFamily: "Avenir",
+                                            overflow: TextOverflow.visible,
                                           ),
                                         ),
-                                        SizedBox(width: width / 70),
+                                        SizedBox(width: width / 75),
                                         Icon(
                                           Icons.star_outlined,
                                           color: const Color(0xFFF2C94C),
-                                          size: height / 45,
+                                          size: height / 50,
                                         ),
                                       ],
                                     ),
@@ -627,6 +635,7 @@ class _HomePageState extends State<HomePage> {
                                         color: Color(0xFFBA5C3D),
                                         fontWeight: FontWeight.w800,
                                         fontSize: 25,
+                                        overflow: TextOverflow.visible,
                                       ),
                                     ),
                                   ],
@@ -671,7 +680,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(
-                  height: height / 3.2,
+                  height: height / 3.0,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     separatorBuilder: (context, index) => SizedBox(width: width / 30),
@@ -701,6 +710,7 @@ class _HomePageState extends State<HomePage> {
                                     fontWeight: FontWeight.w400,
                                     fontSize: 20,
                                     color: Colors.black,
+                                    overflow: TextOverflow.visible,
                                   ),
                                 ),
                                 SizedBox(height: height / 130),
@@ -711,6 +721,7 @@ class _HomePageState extends State<HomePage> {
                                     fontWeight: FontWeight.w800,
                                     fontSize: 15,
                                     fontFamily: "Avenir",
+                                    overflow: TextOverflow.visible,
                                   ),
                                 ),
                                 Row(
@@ -724,6 +735,7 @@ class _HomePageState extends State<HomePage> {
                                         fontWeight: FontWeight.w500,
                                         fontFamily: "Avenir",
                                         color: const Color(0xFF8A8B7A),
+                                        overflow: TextOverflow.visible,
                                       ),
                                     ),
                                     SizedBox(
@@ -794,7 +806,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(
-                  height: height / 3,
+                  height: height / 2.7,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     separatorBuilder: (context, index) => SizedBox(width: width / 30),
@@ -830,6 +842,8 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.w800,
                                 fontSize: height / 35,
                                 fontFamily: "Avenir",
+                                height: height / 700,
+                                overflow: TextOverflow.visible,
                               ),
                             ),
                             SizedBox(height: height / 150),
@@ -840,9 +854,9 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.w800,
                                 fontSize: height / 40,
                                 fontFamily: "Avenir",
+                                overflow: TextOverflow.visible,
                               ),
                             ),
-                            SizedBox(height: height / 100),
                           ],
                         ),
                       ),
