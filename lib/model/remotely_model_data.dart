@@ -158,3 +158,59 @@ Map<String, dynamic> remotelyDataYourCartPage = {
     }
   ],
 };
+
+Map<String, dynamic> remotelyDataViewCartWorkSpaceItem = {
+  "ViewCartWorkSpaceItem": [
+    {
+      "image": "assets/images/products/view_cart_1.png",
+      "title": "Devloper",
+      "subTitle": "21 suggested items",
+    },
+    {
+      "image": "assets/images/products/view_cart_2.png",
+      "title": "Marketer",
+      "subTitle": "19 suggested items",
+    },
+    {
+      "image": "assets/images/products/view_cart_3.png",
+      "title": "YouTuber",
+      "subTitle": "15 suggested items",
+    },
+    {
+      "image": "assets/images/products/view_cart_4.png",
+      "title": "YouTuber",
+      "subTitle": "12 suggested items",
+    },
+    {
+      "image": "assets/images/products/view_cart_5.png",
+      "title": "Creative",
+      "subTitle": "8 suggested items",
+    },
+  ],
+};
+
+Map<String, dynamic> remotelyDataViewItemRelatesItems = {
+  "ViewItemRelatedItem": [
+    {
+      "image": "assets/images/products/burbon_office_chair.png",
+      "title": "Burbun Office Chair",
+      "subTitle": "Orcc Office App",
+      "rate": "4.2",
+      "price": "\$301.00",
+    },
+    {
+      "image": "assets/images/products/Adjustable_Chair.png",
+      "title": "Adjustable Chair",
+      "subTitle": "Office home",
+      "rate": "4.3",
+      "price": "\$319.00",
+    },
+    {
+      "image": "assets/images/products/markus_office_chair.png",
+      "title": "Markus Office Chair",
+      "subTitle": "Markus Electronics",
+      "rate": "4.8",
+      "price": "\$432.00",
+    },
+  ],
+};

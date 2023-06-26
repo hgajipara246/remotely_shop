@@ -300,6 +300,7 @@ class _LoginPageState extends State<LoginPage> {
       debugPrint("User Added -------- > ${jsonEncode(value.data())} ");
       userModel = userModelFromJson(jsonEncode(value.data()));
       utils.showSnackBar(context, message: "LogIn SuccessFully");
+
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(

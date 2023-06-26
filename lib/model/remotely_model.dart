@@ -311,3 +311,106 @@ class UserModel {
         "number": "number",
       };
 }
+// To parse this JSON data, do
+//
+//     final remotelyModelViewWorkSpaceItem = remotelyModelViewWorkSpaceItemFromJson(jsonString);
+
+RemotelyModelViewWorkSpaceItem remotelyModelViewWorkSpaceItemFromJson(String str) => RemotelyModelViewWorkSpaceItem.fromJson(json.decode(str));
+
+String remotelyModelViewWorkSpaceItemToJson(RemotelyModelViewWorkSpaceItem data) => json.encode(data.toJson());
+
+class RemotelyModelViewWorkSpaceItem {
+  List<ViewCartWorkSpaceItem>? viewCartWorkSpaceItem;
+
+  RemotelyModelViewWorkSpaceItem({
+    this.viewCartWorkSpaceItem,
+  });
+
+  factory RemotelyModelViewWorkSpaceItem.fromJson(Map<String, dynamic> json) => RemotelyModelViewWorkSpaceItem(
+        viewCartWorkSpaceItem: json["ViewCartWorkSpaceItem"] == null ? [] : List<ViewCartWorkSpaceItem>.from(json["ViewCartWorkSpaceItem"]!.map((x) => ViewCartWorkSpaceItem.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "ViewCartWorkSpaceItem": viewCartWorkSpaceItem == null ? [] : List<dynamic>.from(viewCartWorkSpaceItem!.map((x) => x.toJson())),
+      };
+}
+
+class ViewCartWorkSpaceItem {
+  String? image;
+  String? title;
+  String? subTitle;
+
+  ViewCartWorkSpaceItem({
+    this.image,
+    this.title,
+    this.subTitle,
+  });
+
+  factory ViewCartWorkSpaceItem.fromJson(Map<String, dynamic> json) => ViewCartWorkSpaceItem(
+        image: json["image"],
+        title: json["title"],
+        subTitle: json["subTitle"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "image": image,
+        "title": title,
+        "subTitle": subTitle,
+      };
+}
+
+// To parse this JSON data, do
+//
+//     final remotelyModelViewItemRelatedItems = remotelyModelViewItemRelatedItemsFromJson(jsonString);
+
+RemotelyModelViewItemRelatedItems remotelyModelViewItemRelatedItemsFromJson(String str) => RemotelyModelViewItemRelatedItems.fromJson(json.decode(str));
+
+String remotelyModelViewItemRelatedItemsToJson(RemotelyModelViewItemRelatedItems data) => json.encode(data.toJson());
+
+class RemotelyModelViewItemRelatedItems {
+  List<ViewItemRelatedItem>? viewItemRelatedItem;
+
+  RemotelyModelViewItemRelatedItems({
+    this.viewItemRelatedItem,
+  });
+
+  factory RemotelyModelViewItemRelatedItems.fromJson(Map<String, dynamic> json) => RemotelyModelViewItemRelatedItems(
+        viewItemRelatedItem: json["ViewItemRelatedItem"] == null ? [] : List<ViewItemRelatedItem>.from(json["ViewItemRelatedItem"]!.map((x) => ViewItemRelatedItem.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "ViewItemRelatedItem": viewItemRelatedItem == null ? [] : List<dynamic>.from(viewItemRelatedItem!.map((x) => x.toJson())),
+      };
+}
+
+class ViewItemRelatedItem {
+  String? image;
+  String? title;
+  String? subTitle;
+  String? rate;
+  String? price;
+
+  ViewItemRelatedItem({
+    this.image,
+    this.title,
+    this.subTitle,
+    this.rate,
+    this.price,
+  });
+
+  factory ViewItemRelatedItem.fromJson(Map<String, dynamic> json) => ViewItemRelatedItem(
+        image: json["image"],
+        title: json["title"],
+        subTitle: json["subTitle"],
+        rate: json["rate"],
+        price: json["price"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "image": image,
+        "title": title,
+        "subTitle": subTitle,
+        "rate": rate,
+        "price": price,
+      };
+}

@@ -13,18 +13,28 @@ class ViewItems extends StatefulWidget {
 
 class _ViewItemsState extends State<ViewItems> {
   final PageController pageController = PageController(initialPage: 0);
+  bool liked = false;
+
+  _pressed() {
+    setState(() {
+      liked = !liked;
+    });
+  }
+
   RemotelyModelYourCartPage? remotelyModelYourCartPage = RemotelyModelYourCartPage.fromJson(remotelyDataViewItemsChairs);
+  RemotelyModelViewWorkSpaceItem? remotelyModelViewWorkSpaceItem = RemotelyModelViewWorkSpaceItem.fromJson(remotelyDataViewCartWorkSpaceItem);
+  RemotelyModelViewItemRelatedItems? remotelyModelViewItemRelatedItems = RemotelyModelViewItemRelatedItems.fromJson(remotelyDataViewItemRelatesItems);
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F5F7),
+      // backgroundColor: const Color(0xFFF4F5F7),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(height / 50),
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(height / 50),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -223,12 +233,224 @@ class _ViewItemsState extends State<ViewItems> {
                     fontFamily: 'Avenir',
                     fontWeight: FontWeight.w900,
                   ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: height / 100),
+                  child: SizedBox(
+                    height: height / 10,
+                    child: ListView.separated(
+                      itemCount: remotelyModelViewWorkSpaceItem!.viewCartWorkSpaceItem!.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) => Container(
+                        // padding: const EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 12),
+                        decoration: ShapeDecoration(
+                          color: const Color(0xFFF4F5F7),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(height / 50),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: width / 5,
+                                decoration: ShapeDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage("${remotelyModelViewWorkSpaceItem!.viewCartWorkSpaceItem![index].image}"),
+                                    fit: BoxFit.fill,
+                                  ),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "${remotelyModelViewWorkSpaceItem!.viewCartWorkSpaceItem![index].title}",
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontFamily: 'Avenir',
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    "${remotelyModelViewWorkSpaceItem!.viewCartWorkSpaceItem![index].subTitle}",
+                                    style: const TextStyle(
+                                      color: Color(0xFFA6A798),
+                                      fontSize: 12,
+                                      fontFamily: 'Avenir',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: width / 40,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: height / 60),
+                Text(
+                  'RELATED ITEM',
+                  style: TextStyle(
+                    color: const Color(0xFF040B14),
+                    fontSize: width / 25,
+                    fontFamily: 'Avenir',
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                SizedBox(
+                  height: height / 3.7,
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: remotelyModelViewItemRelatedItems!.viewItemRelatedItem!.length,
+                    itemBuilder: (context, index) => Padding(
+                      padding: EdgeInsets.symmetric(vertical: height / 80),
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(width: 0.50, color: Color(0xFFDDDDDA)),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: height / 10,
+                              width: width / 2.8,
+                              decoration: ShapeDecoration(
+                                color: const Color(0xFFF4F5F7),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                              ),
+                              child: Center(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: height / 100),
+                                  child: Image.asset(
+                                    "${remotelyModelViewItemRelatedItems!.viewItemRelatedItem![index].image}",
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${remotelyModelViewItemRelatedItems!.viewItemRelatedItem![index].title}",
+                                  style: TextStyle(
+                                    color: Color(0xFF040B14),
+                                    fontSize: 16,
+                                    fontFamily: 'Avenir',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "${remotelyModelViewItemRelatedItems!.viewItemRelatedItem![index].subTitle}",
+                                      style: TextStyle(
+                                        color: Color(0xFFA6A798),
+                                        fontSize: width / 35,
+                                        fontFamily: 'Avenir',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    SizedBox(width: width / 75),
+                                    Icon(
+                                      Icons.circle,
+                                      color: const Color(0xFFA6A798),
+                                      size: height / 110,
+                                    ),
+                                    SizedBox(width: width / 75),
+                                    Text(
+                                      "${remotelyModelViewItemRelatedItems!.viewItemRelatedItem![index].rate}",
+                                      style: TextStyle(
+                                        color: Color(0xFF898A7A),
+                                        fontSize: 12,
+                                        fontFamily: 'Avenir',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.star_outlined,
+                                      color: const Color(0xFFF2C94C),
+                                      size: height / 50,
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: height / 80),
+                                Text(
+                                  "${remotelyModelViewItemRelatedItems!.viewItemRelatedItem![index].price}",
+                                  style: TextStyle(
+                                    color: Color(0xFFBA5C3D),
+                                    fontSize: width / 25,
+                                    fontFamily: 'Avenir',
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    separatorBuilder: (context, index) => SizedBox(
+                      width: width / 60,
+                    ),
+                  ),
                 )
               ],
             ),
           ),
         ),
       ),
+      // floatingActionButton: Row(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   children: [
+      //     SizedBox(
+      //       width: width / 1.5,
+      //       child: MainButton(
+      //         mainOnPress: () {},
+      //         textName: 'Add to cart',
+      //         textColor: Colors.black,
+      //         backgroundColor: Color(0xFFCED55B),
+      //       ),
+      //     ),
+      //     SizedBox(
+      //       width: width / 25,
+      //     ),
+      //     IconButton(
+      //       icon: Image.asset(
+      //         liked ? AppImages.darkLike : AppImages.lightLike,
+      //         // height: height / 40,
+      //       ),
+      //       onPressed: () => _pressed(),
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

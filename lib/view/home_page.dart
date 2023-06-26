@@ -37,19 +37,8 @@ class _HomePageState extends State<HomePage> {
       userModel = userModelFromJson(jsonEncode(value.data()));
       setState(() {});
     }).catchError((error) {
-      debugPrint("Fail to get user  : $error");
+      debugPrint("Failed to get user  : $error");
     });
-  }
-
-  signOut() async {
-    await firebaseAuth.signOut();
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const LoginPage(),
-      ),
-      (route) => false,
-    );
   }
 
   @override
@@ -103,15 +92,15 @@ class _HomePageState extends State<HomePage> {
                         AppImages.profile,
                         height: height / 8,
                       ),
-                      // SizedBox(height: height / 70),
-                      // Text(
-                      //   "${userModel!.name!}",
-                      //   style: TextStyle(
-                      //     fontSize: height / 35,
-                      //     fontFamily: "Avenir",
-                      //     fontWeight: FontWeight.w800,
-                      //   ),
-                      // ),
+                      Expanded(
+                        child: Text(
+                          "${userModel?.email}",
+                          style: TextStyle(
+                            fontFamily: "Avenir",
+                            fontSize: height / 48,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -143,8 +132,12 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   onTap: () {
-                    // Update the state of the app.
-                    // ...
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const YourCartsPage(),
+                      ),
+                    );
                   },
                 ),
                 ListTile(
@@ -183,32 +176,40 @@ class _HomePageState extends State<HomePage> {
                   ),
                   onTap: () {
                     CoolAlert.show(
-                      context: context,
-                      type: CoolAlertType.warning,
-                      title: "Are you sure?",
-                      text: "Do you want to Logout",
-                      cancelBtnText: "No",
-                      cancelBtnTextStyle: TextStyle(
-                        fontSize: height / 40,
-                        fontFamily: "Avenir",
-                        color: Colors.black,
-                        fontWeight: FontWeight.w800,
-                      ),
-                      showCancelBtn: true,
-                      closeOnConfirmBtnTap: true,
-                      confirmBtnText: "Yes",
-                      confirmBtnTextStyle: TextStyle(
-                        fontSize: height / 40,
-                        fontFamily: "Avenir",
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      ),
-                      confirmBtnColor: const Color(0xFFCED55B),
-                      onCancelBtnTap: () {
-                        Navigator.pop(context);
-                      },
-                      onConfirmBtnTap: () => signOut(),
-                    );
+                        context: context,
+                        type: CoolAlertType.warning,
+                        title: "Are you sure?",
+                        text: "Do you want to Logout",
+                        cancelBtnText: "No",
+                        cancelBtnTextStyle: TextStyle(
+                          fontSize: height / 40,
+                          fontFamily: "Avenir",
+                          color: Colors.black,
+                          fontWeight: FontWeight.w800,
+                        ),
+                        showCancelBtn: true,
+                        closeOnConfirmBtnTap: true,
+                        confirmBtnText: "Yes",
+                        confirmBtnTextStyle: TextStyle(
+                          fontSize: height / 40,
+                          fontFamily: "Avenir",
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        confirmBtnColor: const Color(0xFFCED55B),
+                        onCancelBtnTap: () {
+                          Navigator.pop(context);
+                        },
+                        onConfirmBtnTap: () async {
+                          await firebaseAuth.signOut();
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginPage(),
+                            ),
+                            (route) => false,
+                          );
+                        });
                   },
                 ),
               ],
