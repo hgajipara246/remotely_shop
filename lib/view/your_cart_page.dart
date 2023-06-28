@@ -3,7 +3,6 @@ import 'package:remotely_shop/model/remotely_model.dart';
 import 'package:remotely_shop/model/remotely_model_data.dart';
 import 'package:remotely_shop/res/common/app_button/main_button.dart';
 import 'package:remotely_shop/res/common/app_button/text_button.dart';
-import 'package:remotely_shop/view/home_page.dart';
 
 class YourCartsPage extends StatefulWidget {
   const YourCartsPage({Key? key}) : super(key: key);
@@ -28,12 +27,7 @@ class _YourCartsPageState extends State<YourCartsPage> {
         leading: InkWell(
           borderRadius: BorderRadius.circular(height / 30),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomePage(),
-              ),
-            );
+            Navigator.pop(context);
           },
           child: Image.asset(
             "assets/icons/arrow-left.png",

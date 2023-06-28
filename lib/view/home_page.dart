@@ -9,6 +9,7 @@ import 'package:remotely_shop/model/remotely_model_data.dart';
 import 'package:remotely_shop/res/common/app_button/main_button.dart';
 import 'package:remotely_shop/res/constant/app_images.dart';
 import 'package:remotely_shop/res/constant/app_text.dart';
+import 'package:remotely_shop/view/explores_workspace_page.dart';
 import 'package:remotely_shop/view/login_signup_screen/login_screen.dart';
 import 'package:remotely_shop/view/profile_page.dart';
 import 'package:remotely_shop/view/view_item.dart';
@@ -416,18 +417,31 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       const Spacer(),
-                      Text(
-                        AppText.seeMore,
-                        style: const TextStyle(
-                          fontFamily: "Avenir",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 17,
-                          color: Color(0xFF8A8B7A),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ExploresWorkspacePage(),
+                              ));
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              AppText.seeMore,
+                              style: const TextStyle(
+                                fontFamily: "Avenir",
+                                fontWeight: FontWeight.w500,
+                                fontSize: 17,
+                                color: Color(0xFF8A8B7A),
+                              ),
+                            ),
+                            const Icon(
+                              Icons.chevron_right_outlined,
+                              color: Color(0xFF8A8B7A),
+                            ),
+                          ],
                         ),
-                      ),
-                      const Icon(
-                        Icons.chevron_right_outlined,
-                        color: Color(0xFF8A8B7A),
                       ),
                     ],
                   ),

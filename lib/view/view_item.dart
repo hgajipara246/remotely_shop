@@ -2,7 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:remotely_shop/model/remotely_model.dart';
 import 'package:remotely_shop/model/remotely_model_data.dart';
+import 'package:remotely_shop/res/common/app_button/main_button.dart';
 import 'package:remotely_shop/res/constant/app_images.dart';
+import 'package:remotely_shop/view/your_cart_page.dart';
 
 class ViewItems extends StatefulWidget {
   const ViewItems({Key? key}) : super(key: key);
@@ -418,7 +420,7 @@ class _ViewItemsState extends State<ViewItems> {
                       ),
                     ),
                     separatorBuilder: (context, index) => SizedBox(
-                      width: width / 60,
+                      width: width / 25,
                     ),
                   ),
                 )
@@ -427,30 +429,37 @@ class _ViewItemsState extends State<ViewItems> {
           ),
         ),
       ),
-      // floatingActionButton: Row(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   children: [
-      //     SizedBox(
-      //       width: width / 1.5,
-      //       child: MainButton(
-      //         mainOnPress: () {},
-      //         textName: 'Add to cart',
-      //         textColor: Colors.black,
-      //         backgroundColor: Color(0xFFCED55B),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       width: width / 25,
-      //     ),
-      //     IconButton(
-      //       icon: Image.asset(
-      //         liked ? AppImages.darkLike : AppImages.lightLike,
-      //         // height: height / 40,
-      //       ),
-      //       onPressed: () => _pressed(),
-      //     ),
-      //   ],
-      // ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: width / 1.5,
+            child: MainButton(
+              mainOnPress: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => YourCartsPage(),
+                  ),
+                );
+              },
+              textName: 'Add to cart',
+              textColor: Colors.black,
+              backgroundColor: Color(0xFFCED55B),
+            ),
+          ),
+          SizedBox(
+            width: width / 25,
+          ),
+          IconButton(
+            icon: Image.asset(
+              liked ? AppImages.darkLike : AppImages.lightLike,
+              // height: height / 40,
+            ),
+            onPressed: () => _pressed(),
+          ),
+        ],
+      ),
     );
   }
 }
