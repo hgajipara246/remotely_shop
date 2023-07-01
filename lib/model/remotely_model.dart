@@ -462,3 +462,55 @@ class ExploresWorkspace {
         "rate": rate,
       };
 }
+
+RemotelyModelBrowsingHistory remotelyModelBrowsingHistoryFromJson(String str) => RemotelyModelBrowsingHistory.fromJson(json.decode(str));
+
+String remotelyModelBrowsingHistoryToJson(RemotelyModelBrowsingHistory data) => json.encode(data.toJson());
+
+class RemotelyModelBrowsingHistory {
+  List<BrowsingHistory>? browsingHistory;
+
+  RemotelyModelBrowsingHistory({
+    this.browsingHistory,
+  });
+
+  factory RemotelyModelBrowsingHistory.fromJson(Map<String, dynamic> json) => RemotelyModelBrowsingHistory(
+        browsingHistory: json["BrowsingHistory"] == null ? [] : List<BrowsingHistory>.from(json["BrowsingHistory"]!.map((x) => BrowsingHistory.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "BrowsingHistory": browsingHistory == null ? [] : List<dynamic>.from(browsingHistory!.map((x) => x.toJson())),
+      };
+}
+
+class BrowsingHistory {
+  String? image;
+  String? title;
+  String? subTitle;
+  String? rate;
+  String? price;
+
+  BrowsingHistory({
+    this.image,
+    this.title,
+    this.subTitle,
+    this.rate,
+    this.price,
+  });
+
+  factory BrowsingHistory.fromJson(Map<String, dynamic> json) => BrowsingHistory(
+        image: json["image"],
+        title: json["title"],
+        subTitle: json["subTitle"],
+        rate: json["rate"],
+        price: json["price"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "image": image,
+        "title": title,
+        "subTitle": subTitle,
+        "rate": rate,
+        "price": price,
+      };
+}

@@ -3,6 +3,7 @@ import 'package:remotely_shop/model/remotely_model.dart';
 import 'package:remotely_shop/model/remotely_model_data.dart';
 import 'package:remotely_shop/res/constant/app_images.dart';
 import 'package:remotely_shop/res/constant/app_text.dart';
+import 'package:remotely_shop/view/your_cart_page.dart';
 
 class ExploresWorkspacePage extends StatefulWidget {
   const ExploresWorkspacePage({Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
 
   bool liked = false;
   RemotelyModelExploresWorkspace remotelyModelExploresWorkspace = RemotelyModelExploresWorkspace.fromJson(remotelyDataExploresWorkspace);
+  RemotelyModelBrowsingHistory remotelyModelBrowsingHistory = RemotelyModelBrowsingHistory.fromJson(remotelyDataBrowsingHistory);
 
   _pressed() {
     setState(() {
@@ -63,6 +65,7 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
           child: Padding(
             padding: EdgeInsets.all(height / 60),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextField(
                   decoration: InputDecoration(
@@ -396,9 +399,267 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                     ),
                   ),
                 ),
+                SizedBox(height: height / 30),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(width / 25),
+                    border: Border.all(
+                      color: const Color(0xffF4F5F7),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(width / 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'PEOPLE SEARCH FOR',
+                          style: TextStyle(
+                            color: const Color(0xFF040B14),
+                            fontSize: width / 25,
+                            fontFamily: 'Avenir',
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        SizedBox(height: height / 40),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              "assets/images/Workspaces/devlopers.png",
+                              height: height / 13,
+                            ),
+                            SizedBox(width: width / 30),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Developer',
+                                  style: TextStyle(
+                                    color: const Color(0xFF040B14),
+                                    fontSize: width / 17,
+                                    fontFamily: 'Avenir',
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                Text(
+                                  '16 suggested items',
+                                  style: TextStyle(
+                                    color: const Color(0xFFA6A798),
+                                    fontSize: width / 25,
+                                    fontFamily: 'Avenir',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: height / 40),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              "assets/images/Workspaces/digital_marketing.png",
+                              height: height / 13,
+                            ),
+                            SizedBox(width: width / 30),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Digital Marketing',
+                                  style: TextStyle(
+                                    color: const Color(0xFF040B14),
+                                    fontSize: width / 17,
+                                    fontFamily: 'Avenir',
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                Text(
+                                  '8 suggested items',
+                                  style: TextStyle(
+                                    color: const Color(0xFFA6A798),
+                                    fontSize: width / 25,
+                                    fontFamily: 'Avenir',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: height / 35),
+                  child: Text(
+                    'Based on your bowsing history',
+                    style: TextStyle(
+                      color: const Color(0xFF040B14),
+                      fontSize: width / 18,
+                      fontFamily: 'Avenir',
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+                ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  separatorBuilder: (contex, index) => SizedBox(
+                    height: height / 60,
+                  ),
+                  itemCount: remotelyModelBrowsingHistory.browsingHistory!.length,
+                  itemBuilder: (context, index) => Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0x0fffffff),
+                      borderRadius: BorderRadius.circular(height / 100),
+                      border: Border.all(
+                        color: const Color(0xFFDDDDDB),
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: height / 80, horizontal: width / 35),
+                          child: Row(
+                            children: [
+                              Stack(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.symmetric(horizontal: width / 35, vertical: height / 80),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFF4F5F7),
+                                      borderRadius: BorderRadius.circular(height / 100),
+                                    ),
+                                    width: width / 3.3,
+                                    child: Image.asset(
+                                      "${remotelyModelBrowsingHistory.browsingHistory![index].image}",
+                                      height: height / 8,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 60, top: 8),
+                                    height: height / 20,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white,
+                                    ),
+                                    child: IconButton(
+                                      icon: Image.asset(
+                                        liked ? AppImages.darkLike : AppImages.lightLike,
+                                        // height: height / 40,
+                                      ),
+                                      onPressed: () => _pressed(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: width / 40),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${remotelyModelBrowsingHistory.browsingHistory![index].title}",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: width / 22,
+                                        color: const Color(0xFF040B14),
+                                        fontFamily: "Avenir",
+                                        overflow: TextOverflow.visible,
+                                      ),
+                                    ),
+                                    SizedBox(height: height / 180),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "${remotelyModelBrowsingHistory.browsingHistory![index].subTitle}",
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16,
+                                            color: Color(0xFFA6A798),
+                                            fontFamily: "Avenir",
+                                            overflow: TextOverflow.visible,
+                                          ),
+                                        ),
+                                        SizedBox(width: width / 75),
+                                        Icon(
+                                          Icons.circle,
+                                          color: const Color(0xFFA6A798),
+                                          size: height / 110,
+                                        ),
+                                        SizedBox(width: width / 75),
+                                        Text(
+                                          "${remotelyModelBrowsingHistory.browsingHistory![index].rate}",
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            color: Color(0xFFA6A798),
+                                            fontFamily: "Avenir",
+                                            overflow: TextOverflow.visible,
+                                          ),
+                                        ),
+                                        SizedBox(width: width / 75),
+                                        Icon(
+                                          Icons.star_outlined,
+                                          color: const Color(0xFFF2C94C),
+                                          size: height / 50,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: height / 30,
+                                    ),
+                                    Text(
+                                      "${remotelyModelBrowsingHistory.browsingHistory![index].price}",
+                                      style: const TextStyle(
+                                        fontFamily: "Avenir",
+                                        color: Color(0xFFBA5C3D),
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 25,
+                                        overflow: TextOverflow.visible,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        shape: const CircleBorder(),
+        foregroundColor: Colors.white,
+        focusColor: Colors.white,
+        backgroundColor: Colors.black,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const YourCartsPage(),
+            ),
+          );
+        },
+        child: Image.asset(
+          AppImages.shoppingCart,
+          height: height / 32,
         ),
       ),
     );
