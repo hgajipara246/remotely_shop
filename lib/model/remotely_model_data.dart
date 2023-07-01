@@ -214,3 +214,26 @@ Map<String, dynamic> remotelyDataViewItemRelatesItems = {
     },
   ],
 };
+
+Map<String, dynamic> remotelyDataExploresWorkspace = {
+  "ExploresWorkspace": [
+    {
+      "image": "assets/images/Workspaces/mick.png",
+      "title": "USB Microphone",
+      "price": "USD 87.00",
+      "rate": "4.8",
+    },
+    {
+      "image": "assets/images/Workspaces/headphone.png",
+      "title": "Wireless headset",
+      "price": "GHC USD 74.00",
+      "rate": "4.2",
+    },
+    {
+      "image": "assets/images/Workspaces/laptop_huawei.png",
+      "title": "Huawei Laptop",
+      "price": "USD 599.00",
+      "rate": "4.3",
+    },
+  ],
+};

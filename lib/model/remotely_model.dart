@@ -414,3 +414,51 @@ class ViewItemRelatedItem {
         "price": price,
       };
 }
+
+RemotelyModelExploresWorkspace remotelyModelExploresWorkspaceFromJson(String str) => RemotelyModelExploresWorkspace.fromJson(json.decode(str));
+
+String remotelyModelExploresWorkspaceToJson(RemotelyModelExploresWorkspace data) => json.encode(data.toJson());
+
+class RemotelyModelExploresWorkspace {
+  List<ExploresWorkspace>? exploresWorkspace;
+
+  RemotelyModelExploresWorkspace({
+    this.exploresWorkspace,
+  });
+
+  factory RemotelyModelExploresWorkspace.fromJson(Map<String, dynamic> json) => RemotelyModelExploresWorkspace(
+        exploresWorkspace: json["ExploresWorkspace"] == null ? [] : List<ExploresWorkspace>.from(json["ExploresWorkspace"]!.map((x) => ExploresWorkspace.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "ExploresWorkspace": exploresWorkspace == null ? [] : List<dynamic>.from(exploresWorkspace!.map((x) => x.toJson())),
+      };
+}
+
+class ExploresWorkspace {
+  String? image;
+  String? title;
+  String? price;
+  String? rate;
+
+  ExploresWorkspace({
+    this.image,
+    this.title,
+    this.price,
+    this.rate,
+  });
+
+  factory ExploresWorkspace.fromJson(Map<String, dynamic> json) => ExploresWorkspace(
+        image: json["image"],
+        title: json["title"],
+        price: json["price"],
+        rate: json["rate"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "image": image,
+        "title": title,
+        "price": price,
+        "rate": rate,
+      };
+}
