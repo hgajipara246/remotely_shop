@@ -242,28 +242,28 @@ Map<String, dynamic> remotelyDataBrowsingHistory = {
   "BrowsingHistory": [
     {
       "image": "assets/images/products/laptop_one.png",
-      "title": "Apple Macbook Pro 12inch",
+      "title": "Apple Macbook Pro\n12inch",
       "subTitle": "Apple",
       "rate": "4.9",
       "price": "\$1,499.00",
     },
     {
       "image": "assets/images/Workspaces/camera.png",
-      "title": "JVC Recording Camera 1500L ",
+      "title": "JVC Recording\nCamera 1500L ",
       "subTitle": "Jodde Electronics",
       "rate": "4.8",
       "price": "\$319.00",
     },
     {
       "image": "assets/images/products/blue_hadphone.png",
-      "title": "Logitech G433 Headset",
+      "title": "Logitech G433\nHeadset",
       "subTitle": "Zone Electroncs",
       "rate": "4.2",
       "price": "\$91.00",
     },
     {
       "image": "assets/images/products/ipad.png",
-      "title": "Apple iPad Pro Wifi -512GB",
+      "title": "Apple iPad Pro\nWifi -512GB",
       "subTitle": "Apple",
       "rate": "4.8",
       "price": "\$1379.00",

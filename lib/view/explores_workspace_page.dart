@@ -3,6 +3,7 @@ import 'package:remotely_shop/model/remotely_model.dart';
 import 'package:remotely_shop/model/remotely_model_data.dart';
 import 'package:remotely_shop/res/constant/app_images.dart';
 import 'package:remotely_shop/res/constant/app_text.dart';
+import 'package:remotely_shop/view/developer_workspace_screen.dart';
 import 'package:remotely_shop/view/your_cart_page.dart';
 
 class ExploresWorkspacePage extends StatefulWidget {
@@ -72,7 +73,7 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                     hintText: "What do you do?",
                     focusColor: const Color(0xFFA6A798),
                     suffixIcon: Padding(
-                      padding: EdgeInsets.all(height / 80),
+                      padding: EdgeInsets.all(height / 60),
                       child: Image.asset(
                         "assets/icons/setting.png",
                         height: 10,
@@ -126,7 +127,7 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                               ),
                             ),
                             SizedBox(
-                              height: height / 30,
+                              height: height / 40,
                             ),
                             Text(
                               'Professional Gaming \nAccessories',
@@ -165,7 +166,6 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                     ],
                   ),
                 ),
-                SizedBox(height: height / 40),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: Checkbox.width / 20, vertical: height / 35),
                   child: Row(
@@ -201,7 +201,7 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                   ),
                 ),
                 SizedBox(
-                  height: height / 16,
+                  height: height / 13,
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
@@ -346,7 +346,7 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                                       fontWeight: FontWeight.w800,
                                     ),
                                   ),
-                                  SizedBox(height: height / 95),
+                                  SizedBox(height: height / 130),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
@@ -423,72 +423,86 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                           ),
                         ),
                         SizedBox(height: height / 40),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              "assets/images/Workspaces/devlopers.png",
-                              height: height / 13,
-                            ),
-                            SizedBox(width: width / 30),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Developer',
-                                  style: TextStyle(
-                                    color: const Color(0xFF040B14),
-                                    fontSize: width / 17,
-                                    fontFamily: 'Avenir',
-                                    fontWeight: FontWeight.w800,
+                        InkWell(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DeveloperWorkspace(),
+                              )),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                "assets/images/Workspaces/devlopers.png",
+                                height: height / 13,
+                              ),
+                              SizedBox(width: width / 30),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Developer',
+                                    style: TextStyle(
+                                      color: const Color(0xFF040B14),
+                                      fontSize: width / 17,
+                                      fontFamily: 'Avenir',
+                                      fontWeight: FontWeight.w800,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '16 suggested items',
-                                  style: TextStyle(
-                                    color: const Color(0xFFA6A798),
-                                    fontSize: width / 25,
-                                    fontFamily: 'Avenir',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
+                                  Text(
+                                    '16 suggested items',
+                                    style: TextStyle(
+                                      color: const Color(0xFFA6A798),
+                                      fontSize: width / 25,
+                                      fontFamily: 'Avenir',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(height: height / 40),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              "assets/images/Workspaces/digital_marketing.png",
-                              height: height / 13,
-                            ),
-                            SizedBox(width: width / 30),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Digital Marketing',
-                                  style: TextStyle(
-                                    color: const Color(0xFF040B14),
-                                    fontSize: width / 17,
-                                    fontFamily: 'Avenir',
-                                    fontWeight: FontWeight.w800,
+                        InkWell(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DeveloperWorkspace(),
+                              )),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                "assets/images/Workspaces/digital_marketing.png",
+                                height: height / 13,
+                              ),
+                              SizedBox(width: width / 30),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Digital Marketing',
+                                    style: TextStyle(
+                                      color: const Color(0xFF040B14),
+                                      fontSize: width / 17,
+                                      fontFamily: 'Avenir',
+                                      fontWeight: FontWeight.w800,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '8 suggested items',
-                                  style: TextStyle(
-                                    color: const Color(0xFFA6A798),
-                                    fontSize: width / 25,
-                                    fontFamily: 'Avenir',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
+                                  Text(
+                                    '8 suggested items',
+                                    style: TextStyle(
+                                      color: const Color(0xFFA6A798),
+                                      fontSize: width / 25,
+                                      fontFamily: 'Avenir',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
