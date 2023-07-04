@@ -3,6 +3,7 @@ import 'package:remotely_shop/model/remotely_model.dart';
 import 'package:remotely_shop/model/remotely_model_data.dart';
 import 'package:remotely_shop/res/common/app_button/main_button.dart';
 import 'package:remotely_shop/res/common/app_button/text_button.dart';
+import 'package:remotely_shop/view/check_out.dart';
 
 class YourCartsPage extends StatefulWidget {
   const YourCartsPage({Key? key}) : super(key: key);
@@ -202,8 +203,14 @@ class _YourCartsPageState extends State<YourCartsPage> {
         padding: EdgeInsets.all(height / 30),
         child: MainButton(
           textName: "Proceed to Checkout",
+          fontSize: width / 25,
           textColor: Colors.black,
-          mainOnPress: () {},
+          mainOnPress: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CheckOut(),
+            ),
+          ),
           backgroundColor: const Color(0xFFCED55B),
         ),
       ),

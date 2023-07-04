@@ -242,31 +242,96 @@ Map<String, dynamic> remotelyDataBrowsingHistory = {
   "BrowsingHistory": [
     {
       "image": "assets/images/products/laptop_one.png",
-      "title": "Apple Macbook Pro\n12inch",
+      "title": "Apple Macbook Pro 12inch",
       "subTitle": "Apple",
       "rate": "4.9",
       "price": "\$1,499.00",
     },
     {
       "image": "assets/images/Workspaces/camera.png",
-      "title": "JVC Recording\nCamera 1500L ",
+      "title": "JVC Recording Camera\n1500L ",
       "subTitle": "Jodde Electronics",
       "rate": "4.8",
       "price": "\$319.00",
     },
     {
       "image": "assets/images/products/blue_hadphone.png",
-      "title": "Logitech G433\nHeadset",
+      "title": "Logitech G433 Headset",
       "subTitle": "Zone Electroncs",
       "rate": "4.2",
       "price": "\$91.00",
     },
     {
       "image": "assets/images/products/ipad.png",
-      "title": "Apple iPad Pro\nWifi -512GB",
+      "title": "Apple iPad Pro Wifi -512GB",
       "subTitle": "Apple",
       "rate": "4.8",
       "price": "\$1379.00",
+    },
+  ],
+};
+
+Map<String, dynamic> remotelyDataDeveloperWorkSpace = {
+  "DeveloperWorkSpace": [
+    {
+      "image": "assets/images/developer_product/laptop.png",
+      "title": "M1 Macbook Pro 2020",
+      "price": "USD 1,199.00",
+      "rate": "4.9",
+    },
+    {
+      "image": "assets/images/developer_product/wooden_table.png",
+      "title": "Sanchos Office Desk..",
+      "price": "USD 71.12",
+      "rate": "4.2",
+    },
+    {
+      "image": "assets/images/developer_product/coffee_machine.png",
+      "title": "Puton Coffee Maker Auto ..",
+      "price": "USD 83.00",
+      "rate": "4.7",
+    },
+    {
+      "image": "assets/images/developer_product/red_chair.png",
+      "title": "Adjustable Office Chair",
+      "price": "USD 64.00",
+      "rate": "4.5",
+    },
+    {
+      "image": "assets/images/developer_product/mouse.png",
+      "title": "2.4G Optical Wireless Mouse",
+      "price": "USD 23.00",
+      "rate": "4.2",
+    },
+    {
+      "image": "assets/images/developer_product/wooden_table_two.png",
+      "title": "Jarvis Hardwood Standing Desk",
+      "price": "USD 1,399.00",
+      "rate": "4.2",
+    },
+    {
+      "image": "assets/images/developer_product/Boat_Airpods.png",
+      "title": "Boat Airpods 203 - Wireless",
+      "price": "USD 79.00",
+      "rate": "4.2",
+    },
+    {
+      "image": "assets/images/developer_product/stand_laptop.png",
+      "title": "Logitech Folio Touch",
+      "price": "USD 329.00",
+      "rate": "4.2  ",
+    },
+    {
+      "image": "assets/images/developer_product/stand.png",
+      "title": "Black Slot 5 Shelf Unit",
+      "price": "USD 61.00",
+      "rate": "4.2",
+    },
+    {
+      "image": "assets/images/developer_product/speaker.png",
+      "title": "Portable Bluetooth Spea..",
+      "price": "USD 36.99",
+      "rate": "4.2",
     },
   ],
 };

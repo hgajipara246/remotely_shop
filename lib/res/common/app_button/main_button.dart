@@ -5,12 +5,14 @@ class MainButton extends StatelessWidget {
   final Color backgroundColor;
   final Color? textColor;
   final VoidCallback mainOnPress;
+  final double? fontSize;
   const MainButton({
     Key? key,
     this.textName,
     required this.mainOnPress,
     required this.backgroundColor,
     this.textColor,
+    this.fontSize,
   }) : super(key: key);
 
   @override
@@ -32,7 +34,7 @@ class MainButton extends StatelessWidget {
             fontWeight: FontWeight.w500,
             fontFamily: "Inter",
             color: textColor,
-            fontSize: 18,
+            fontSize: fontSize,
           ),
         ),
       ),

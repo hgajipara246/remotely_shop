@@ -514,3 +514,51 @@ class BrowsingHistory {
         "price": price,
       };
 }
+
+RemotelyModelDeveloperWorkSpace remotelyModelDeveloperWorkSpaceFromJson(String str) => RemotelyModelDeveloperWorkSpace.fromJson(json.decode(str));
+
+String remotelyModelDeveloperWorkSpaceToJson(RemotelyModelDeveloperWorkSpace data) => json.encode(data.toJson());
+
+class RemotelyModelDeveloperWorkSpace {
+  List<DeveloperWorkSpace>? developerWorkSpace;
+
+  RemotelyModelDeveloperWorkSpace({
+    this.developerWorkSpace,
+  });
+
+  factory RemotelyModelDeveloperWorkSpace.fromJson(Map<String, dynamic> json) => RemotelyModelDeveloperWorkSpace(
+        developerWorkSpace: json["DeveloperWorkSpace"] == null ? [] : List<DeveloperWorkSpace>.from(json["DeveloperWorkSpace"]!.map((x) => DeveloperWorkSpace.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "DeveloperWorkSpace": developerWorkSpace == null ? [] : List<dynamic>.from(developerWorkSpace!.map((x) => x.toJson())),
+      };
+}
+
+class DeveloperWorkSpace {
+  String? image;
+  String? title;
+  String? price;
+  String? rate;
+
+  DeveloperWorkSpace({
+    this.image,
+    this.title,
+    this.price,
+    this.rate,
+  });
+
+  factory DeveloperWorkSpace.fromJson(Map<String, dynamic> json) => DeveloperWorkSpace(
+        image: json["image"],
+        title: json["title"],
+        price: json["price"],
+        rate: json["rate"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "image": image,
+        "title": title,
+        "price": price,
+        "rate": rate,
+      };
+}

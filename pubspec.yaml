@@ -83,6 +83,7 @@ flutter:
     - assets/images/cartPage/
     - assets/images/products/
     - assets/images/Workspaces/
+    - assets/images/developer_product/
     - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:remotely_shop/model/remotely_model.dart';
 import 'package:remotely_shop/model/remotely_model_data.dart';
 import 'package:remotely_shop/res/constant/app_images.dart';
+import 'package:remotely_shop/view/your_cart_page.dart';
 
 class DeveloperWorkspace extends StatefulWidget {
   const DeveloperWorkspace({super.key});
@@ -11,8 +12,7 @@ class DeveloperWorkspace extends StatefulWidget {
 }
 
 class _DeveloperWorkspaceState extends State<DeveloperWorkspace> {
-  RemotelyModelExploresWorkspace remotelyModelExploresWorkspace = RemotelyModelExploresWorkspace.fromJson(remotelyDataExploresWorkspace);
-
+  RemotelyModelDeveloperWorkSpace remotelyModelDeveloperWorkSpace = RemotelyModelDeveloperWorkSpace.fromJson(remotelyDataDeveloperWorkSpace);
   bool liked = false;
 
   _pressed() {
@@ -108,18 +108,17 @@ class _DeveloperWorkspaceState extends State<DeveloperWorkspace> {
                 GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: remotelyModelExploresWorkspace.exploresWorkspace!.length,
+                  itemCount: remotelyModelDeveloperWorkSpace.developerWorkSpace!.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    crossAxisSpacing: 6.0,
-                    mainAxisSpacing: 15.0,
-                    mainAxisExtent: 190,
+                    mainAxisSpacing: 25.0,
+                    mainAxisExtent: 220,
+                    crossAxisSpacing: 10,
                   ),
                   itemBuilder: (context, index) => Stack(
                     children: [
                       Container(
-                        width: 158,
-                        height: 190,
+                        width: width / 2.3,
                         padding: EdgeInsets.all(height / 80),
                         decoration: ShapeDecoration(
                           color: const Color(0xFFF4F5F7),
@@ -128,16 +127,16 @@ class _DeveloperWorkspaceState extends State<DeveloperWorkspace> {
                         child: Align(
                           alignment: Alignment.topCenter,
                           child: Image.asset(
-                            "${remotelyModelExploresWorkspace.exploresWorkspace![index].image}",
+                            "${remotelyModelDeveloperWorkSpace.developerWorkSpace![index].image}",
                           ),
                         ),
                       ),
                       Positioned(
-                        bottom: 10,
-                        left: 8,
+                        bottom: height / 90,
+                        left: width / 40,
                         child: Container(
-                          width: 142,
-                          height: 80,
+                          width: width / 2.6,
+                          height: height / 8.5,
                           decoration: ShapeDecoration(
                             color: Colors.white,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -148,32 +147,33 @@ class _DeveloperWorkspaceState extends State<DeveloperWorkspace> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${remotelyModelExploresWorkspace.exploresWorkspace![index].title}",
-                                  style: const TextStyle(
-                                    color: Color(0xFF040B14),
-                                    fontSize: 16,
+                                  "${remotelyModelDeveloperWorkSpace.developerWorkSpace![index].title}",
+                                  style: TextStyle(
+                                    color: const Color(0xFF040B14),
+                                    fontSize: width / 30,
                                     fontFamily: 'Avenir',
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
                                 Text(
-                                  "${remotelyModelExploresWorkspace.exploresWorkspace![index].price}",
-                                  style: const TextStyle(
-                                    color: Color(0xFFBA5C3D),
-                                    fontSize: 12,
+                                  "${remotelyModelDeveloperWorkSpace.developerWorkSpace![index].price}",
+                                  style: TextStyle(
+                                    color: const Color(0xFFBA5C3D),
+                                    fontSize: width / 35,
                                     fontFamily: 'Avenir',
                                     fontWeight: FontWeight.w800,
                                   ),
                                 ),
-                                SizedBox(height: height / 95),
+                                const Spacer(),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(
-                                      "${remotelyModelExploresWorkspace.exploresWorkspace![index].rate}",
-                                      style: const TextStyle(
-                                        color: Color(0xFF898A7A),
-                                        fontSize: 12,
+                                      "${remotelyModelDeveloperWorkSpace.developerWorkSpace![index].rate}",
+                                      style: TextStyle(
+                                        color: const Color(0xFF898A7A),
+                                        fontSize: width / 30,
                                         fontFamily: 'Avenir',
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -196,7 +196,7 @@ class _DeveloperWorkspaceState extends State<DeveloperWorkspace> {
                       Positioned(
                         right: 3,
                         child: Container(
-                          margin: const EdgeInsets.only(left: 60, top: 8),
+                          margin: EdgeInsets.only(right: width / 15, top: height / 100),
                           height: height / 20,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
@@ -217,6 +217,24 @@ class _DeveloperWorkspaceState extends State<DeveloperWorkspace> {
               ],
             ),
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        shape: const CircleBorder(),
+        foregroundColor: Colors.white,
+        focusColor: Colors.white,
+        backgroundColor: Colors.black,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const YourCartsPage(),
+            ),
+          );
+        },
+        child: Image.asset(
+          AppImages.shoppingCart,
+          height: height / 32,
         ),
       ),
     );

@@ -317,8 +317,8 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                           bottom: 10,
                           left: 8,
                           child: Container(
-                            width: 142,
-                            height: 77,
+                            width: width / 2.9,
+                            height: height / 11,
                             decoration: ShapeDecoration(
                               color: Colors.white,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -330,31 +330,32 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                                 children: [
                                   Text(
                                     "${remotelyModelExploresWorkspace.exploresWorkspace![index].title}",
-                                    style: const TextStyle(
-                                      color: Color(0xFF040B14),
-                                      fontSize: 16,
+                                    style: TextStyle(
+                                      color: const Color(0xFF040B14),
+                                      fontSize: width / 30,
                                       fontFamily: 'Avenir',
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                   Text(
                                     "${remotelyModelExploresWorkspace.exploresWorkspace![index].price}",
-                                    style: const TextStyle(
-                                      color: Color(0xFFBA5C3D),
-                                      fontSize: 12,
+                                    style: TextStyle(
+                                      color: const Color(0xFFBA5C3D),
+                                      fontSize: width / 35,
                                       fontFamily: 'Avenir',
                                       fontWeight: FontWeight.w800,
                                     ),
                                   ),
-                                  SizedBox(height: height / 130),
+                                  const Spacer(),
                                   Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Text(
                                         "${remotelyModelExploresWorkspace.exploresWorkspace![index].rate}",
-                                        style: const TextStyle(
-                                          color: Color(0xFF898A7A),
-                                          fontSize: 12,
+                                        style: TextStyle(
+                                          color: const Color(0xFF898A7A),
+                                          fontSize: width / 30,
                                           fontFamily: 'Avenir',
                                           fontWeight: FontWeight.w500,
                                         ),
@@ -377,7 +378,7 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                         Positioned(
                           right: 3,
                           child: Container(
-                            margin: const EdgeInsets.only(left: 60, top: 8),
+                            margin: EdgeInsets.only(right: width / 15, top: height / 100),
                             height: height / 20,
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
@@ -427,7 +428,7 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DeveloperWorkspace(),
+                                builder: (context) => const DeveloperWorkspace(),
                               )),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -444,7 +445,7 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                                     'Developer',
                                     style: TextStyle(
                                       color: const Color(0xFF040B14),
-                                      fontSize: width / 17,
+                                      fontSize: width / 22,
                                       fontFamily: 'Avenir',
                                       fontWeight: FontWeight.w800,
                                     ),
@@ -453,7 +454,7 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                                     '16 suggested items',
                                     style: TextStyle(
                                       color: const Color(0xFFA6A798),
-                                      fontSize: width / 25,
+                                      fontSize: width / 28,
                                       fontFamily: 'Avenir',
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -468,7 +469,7 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DeveloperWorkspace(),
+                                builder: (context) => const DeveloperWorkspace(),
                               )),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -485,7 +486,7 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                                     'Digital Marketing',
                                     style: TextStyle(
                                       color: const Color(0xFF040B14),
-                                      fontSize: width / 17,
+                                      fontSize: width / 22,
                                       fontFamily: 'Avenir',
                                       fontWeight: FontWeight.w800,
                                     ),
@@ -494,7 +495,7 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                                     '8 suggested items',
                                     style: TextStyle(
                                       color: const Color(0xFFA6A798),
-                                      fontSize: width / 25,
+                                      fontSize: width / 28,
                                       fontFamily: 'Avenir',
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -584,11 +585,11 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                                       "${remotelyModelBrowsingHistory.browsingHistory![index].title}",
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: width / 22,
+                                        fontSize: width / 25,
                                         color: const Color(0xFF040B14),
                                         fontFamily: "Avenir",
-                                        overflow: TextOverflow.visible,
                                       ),
+                                      overflow: TextOverflow.visible,
                                     ),
                                     SizedBox(height: height / 180),
                                     Row(
@@ -602,8 +603,8 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                                             fontSize: 16,
                                             color: Color(0xFFA6A798),
                                             fontFamily: "Avenir",
-                                            overflow: TextOverflow.visible,
                                           ),
+                                          overflow: TextOverflow.visible,
                                         ),
                                         SizedBox(width: width / 75),
                                         Icon(
@@ -619,8 +620,8 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                                             fontSize: 15,
                                             color: Color(0xFFA6A798),
                                             fontFamily: "Avenir",
-                                            overflow: TextOverflow.visible,
                                           ),
+                                          overflow: TextOverflow.visible,
                                         ),
                                         SizedBox(width: width / 75),
                                         Icon(
@@ -640,8 +641,8 @@ class _ExploresWorkspacePageState extends State<ExploresWorkspacePage> {
                                         color: Color(0xFFBA5C3D),
                                         fontWeight: FontWeight.w800,
                                         fontSize: 25,
-                                        overflow: TextOverflow.visible,
                                       ),
+                                      overflow: TextOverflow.visible,
                                     ),
                                   ],
                                 ),
