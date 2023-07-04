@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remotely_shop/res/common/app_button/main_button.dart';
+import 'package:remotely_shop/view/home_page.dart';
 
 class AllDone extends StatefulWidget {
   const AllDone({super.key});
@@ -29,7 +30,7 @@ class _AllDoneState extends State<AllDone> {
             mainOnPress: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const AllDone(),
+                builder: (context) => const HomePage(),
               ),
             ),
             backgroundColor: const Color(0xFFCED55B),
