@@ -208,7 +208,7 @@ class _YourCartsPageState extends State<YourCartsPage> {
           mainOnPress: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CheckOut(),
+              builder: (context) => const CheckOut(),
             ),
           ),
           backgroundColor: const Color(0xFFCED55B),

@@ -362,7 +362,7 @@ class _ViewItemsState extends State<ViewItems> {
                               children: [
                                 Text(
                                   "${remotelyModelViewItemRelatedItems!.viewItemRelatedItem![index].title}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Color(0xFF040B14),
                                     fontSize: 16,
                                     fontFamily: 'Avenir',
@@ -374,7 +374,7 @@ class _ViewItemsState extends State<ViewItems> {
                                     Text(
                                       "${remotelyModelViewItemRelatedItems!.viewItemRelatedItem![index].subTitle}",
                                       style: TextStyle(
-                                        color: Color(0xFFA6A798),
+                                        color: const Color(0xFFA6A798),
                                         fontSize: width / 35,
                                         fontFamily: 'Avenir',
                                         fontWeight: FontWeight.w500,
@@ -389,7 +389,7 @@ class _ViewItemsState extends State<ViewItems> {
                                     SizedBox(width: width / 75),
                                     Text(
                                       "${remotelyModelViewItemRelatedItems!.viewItemRelatedItem![index].rate}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Color(0xFF898A7A),
                                         fontSize: 12,
                                         fontFamily: 'Avenir',
@@ -407,7 +407,7 @@ class _ViewItemsState extends State<ViewItems> {
                                 Text(
                                   "${remotelyModelViewItemRelatedItems!.viewItemRelatedItem![index].price}",
                                   style: TextStyle(
-                                    color: Color(0xFFBA5C3D),
+                                    color: const Color(0xFFBA5C3D),
                                     fontSize: width / 25,
                                     fontFamily: 'Avenir',
                                     fontWeight: FontWeight.w800,
@@ -439,13 +439,13 @@ class _ViewItemsState extends State<ViewItems> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => YourCartsPage(),
+                    builder: (context) => const YourCartsPage(),
                   ),
                 );
               },
               textName: 'Add to cart',
               textColor: Colors.black,
-              backgroundColor: Color(0xFFCED55B),
+              backgroundColor: const Color(0xFFCED55B),
             ),
           ),
           SizedBox(

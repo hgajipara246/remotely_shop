@@ -308,7 +308,7 @@ class _ProfilePageState extends State<ProfilePage> {
       userModel = userModelFromJson(jsonEncode(value.data()));
       setState(() {});
     }).catchError((error) {
-      debugPrint("Faild to get user  : $error");
+      debugPrint("Failed to get user  : $error");
     });
   }
 
