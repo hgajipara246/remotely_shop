@@ -7,13 +7,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:remotely_shop/model/remotely_model.dart';
-import 'package:remotely_shop/res/constant/app_images.dart';
 import 'package:remotely_shop/utils/utils.dart';
 import 'package:remotely_shop/view/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   final File? image;
@@ -34,17 +33,92 @@ class _ProfilePageState extends State<ProfilePage> {
   UserModel userModel = UserModel();
   Utils utils = Utils();
 
-  final ImagePicker picker = ImagePicker();
-  XFile? image;
-  File? cameraImage;
-  FirebaseStorage storage = FirebaseStorage.instance;
-  String? profileUrl;
+  // final ImagePicker picker = ImagePicker();
+  // XFile? image;
+  // File? cameraImage;
+  // FirebaseStorage storage = FirebaseStorage.instance;
+  // String? profileUrl;
+
+  // File? imgFile;
+  // String? imgPath;
+  //
+  // Future<void> getImgFromGallery() async {
+  //   final pickedImage = await ImagePicker().getImage(source: ImageSource.gallery);
+  //   if (pickedImage != null) {
+  //     saveData(pickedImage.path.toString());
+  //     setState(() {
+  //       imgFile = File(pickedImage.path);
+  //     });
+  //   }
+  // }
+  //
+  // Future<void> saveData(String val) async {
+  //   final sharedPref = await SharedPreferences.getInstance();
+  //   sharedPref.setString('path', val);
+  //   getData();
+  // }
+  //
+  // void getData() {
+  //   final sharedPref = SharedPreferences.getInstance();
+  //   setState(() {
+  //     imgPath = sharedPref.toString(path);
+  //   });
+  // }
+
+  File? imgFile;
+  String? imgPath;
+
+  Future<void> getImgFromGallery() async {
+    final pickedImage = await ImagePicker().getImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      await saveData(pickedImage.path.toString()); // Wait for the data to be saved
+      setState(() {
+        imgFile = File(pickedImage.path);
+      });
+    }
+  }
+
+  Future<void> pickImageFromCamera() async {
+    final pickedImage = await ImagePicker().getImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      await saveData(pickedImage.path.toString()); // Wait for the data to be saved
+      setState(() {
+        imgFile = File(pickedImage.path);
+      });
+    }
+  }
+
+  Future<void> saveData(String val) async {
+    final sharedPref = await SharedPreferences.getInstance();
+    await sharedPref.setString('path', val); // Wait for the data to be saved
+    getData();
+  }
+
+  Future<void> getData() async {
+    final sharedPref = await SharedPreferences.getInstance();
+    final imagePath = sharedPref.getString('path'); // Retrieve the stored value using the correct key
+    setState(() {
+      imgPath = imagePath;
+    });
+  }
+  //
+  // Future<void> downloadImage() async {
+  //   if (imgPath == null) {
+  //     // No image path stored in shared preferences
+  //     return;
+  //   }
+  //
+  //   final response = await http.get(Uri.parse(imgPath!));
+  //   final documentsDirectory = await getApplicationDocumentsDirectory();
+  //   final file = File('${documentsDirectory.path}/image.jpg');
+  //   await file.writeAsBytes(response.bodyBytes);
+  // }
 
   @override
   void initState() {
     // TODO: implement initState
-    _asyncMethod();
     getUser();
+    getData();
     super.initState();
   }
 
@@ -79,8 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
               color: Colors.pink,
             ),
             onPressed: () async {
-              await getDownloadUrl();
-              _asyncMethod();
+              // await getDownloadUrl();
             },
           ),
         ],
@@ -91,18 +164,185 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             children: [
               ClipOval(
-                child: cameraImage != null
-                    ? Image.file(
-                        cameraImage!,
-                        height: height / 6,
-                        width: width / 2.8,
-                        fit: BoxFit.cover,
+                child: imgPath != null
+                    ? InkWell(
+                        onTap: () => showModalBottomSheet(
+                          isDismissible: true,
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          // barrierColor: Colors.transparent,
+                          builder: (context) => Container(
+                            height: 150,
+                            width: double.infinity,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: const BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15),
+                                )),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Select option",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.white),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            pickImageFromCamera();
+                                            Navigator.of(context).pop();
+                                          },
+                                          icon: const Icon(
+                                            Icons.camera_alt_rounded,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.white),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            // pickImageFromGallery();
+                                            getImgFromGallery();
+                                            Navigator.of(context).pop();
+                                          },
+                                          icon: const Padding(
+                                            padding: EdgeInsets.all(4.0),
+                                            child: Icon(
+                                              Icons.image,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            if (imgPath != null)
+                              Image.file(
+                                File(imgPath!),
+                                height: height / 6,
+                                width: width / 2.8,
+                                fit: BoxFit.cover,
+                              ),
+                          ],
+                        ),
                       )
-                    : Image.asset(
-                        AppImages.profile,
-                        height: height / 6,
-                        width: width / 2.8,
-                        fit: BoxFit.cover,
+                    : InkWell(
+                        onTap: () => showModalBottomSheet(
+                          isDismissible: true,
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          // barrierColor: Colors.transparent,
+                          builder: (context) => Container(
+                            height: 150,
+                            width: double.infinity,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: const BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15),
+                                )),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Select option",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.white),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            // pickImageFromCamera();
+                                            Navigator.of(context).pop();
+                                          },
+                                          icon: const Icon(
+                                            Icons.camera_alt_rounded,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.white),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            // pickImageFromGallery();
+                                            getImgFromGallery();
+                                            Navigator.of(context).pop();
+                                          },
+                                          icon: const Padding(
+                                            padding: EdgeInsets.all(4.0),
+                                            child: Icon(
+                                              Icons.image,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        child: Image.asset(
+                          "assets/images/profiler.png",
+                          height: height / 6,
+                          width: width / 2.8,
+                          fit: BoxFit.cover,
+                        ),
                       ),
               ),
               Padding(
@@ -149,7 +389,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                   child: IconButton(
                                     onPressed: () {
-                                      pickImageFromCamera();
+                                      // pickImageFromCamera();
                                       Navigator.of(context).pop();
                                     },
                                     icon: const Icon(
@@ -168,7 +408,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                   child: IconButton(
                                     onPressed: () {
-                                      pickImageFromGallery();
+                                      // pickImageFromGallery();
+                                      getImgFromGallery();
                                       Navigator.of(context).pop();
                                     },
                                     icon: const Padding(
@@ -311,74 +552,74 @@ class _ProfilePageState extends State<ProfilePage> {
       debugPrint("Failed to get user  : $error");
     });
   }
-
-  storeImage() async {
-    try {
-      final UploadTask uploadTask = firebaseStorage.ref().child("images").child("profile.png").putFile(cameraImage!);
-// Listen for state changes, errors, and completion of the upload.
-      uploadTask.snapshotEvents.listen((TaskSnapshot taskSnapshot) {
-        switch (taskSnapshot.state) {
-          case TaskState.running:
-            final progress = 100.0 * (taskSnapshot.bytesTransferred / taskSnapshot.totalBytes);
-            debugPrint("Upload is $progress% complete.");
-            break;
-          case TaskState.paused:
-            debugPrint("Upload is paused.");
-            break;
-          case TaskState.canceled:
-            debugPrint("Upload was canceled");
-            break;
-          case TaskState.error:
-            debugPrint("Upload was error");
-            // Handle unsuccessful uploads
-            break;
-          case TaskState.success:
-            debugPrint("Upload was success");
-            // Handle successful uploads on complete
-            // ...
-            break;
-        }
-      });
-    } on FirebaseException catch (e) {
-      utils.showSnackBar(context, message: e.message);
-    }
-  }
-
-  pickImageFromCamera() async {
-    image = await picker.pickImage(source: ImageSource.camera);
-
-    setState(() {
-      if (image != null) {
-        cameraImage = File(image!.path);
-        storeImage();
-      } else {
-        debugPrint("No image selected------->");
-      }
-    });
-  }
-
-  pickImageFromGallery() async {
-    image = await picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      if (image != null) {
-        cameraImage = File(image!.path);
-        storeImage();
-      } else {
-        debugPrint("No image selected");
-      }
-    });
-  }
-
-  uploadFromString() async {
-    try {
-      await firebaseStorage.ref().child("images").child("url_image").putString(
-            dataUrl,
-            format: PutStringFormat.dataUrl,
-          );
-    } on FirebaseException catch (e) {
-      utils.showSnackBar(context, message: e.message);
-    }
-  }
+//
+//   storeImage() async {
+//     try {
+//       final UploadTask uploadTask = firebaseStorage.ref().child("images").child("profile.png").putFile(cameraImage!);
+// // Listen for state changes, errors, and completion of the upload.
+//       uploadTask.snapshotEvents.listen((TaskSnapshot taskSnapshot) {
+//         switch (taskSnapshot.state) {
+//           case TaskState.running:
+//             final progress = 100.0 * (taskSnapshot.bytesTransferred / taskSnapshot.totalBytes);
+//             debugPrint("Upload is $progress% complete.");
+//             break;
+//           case TaskState.paused:
+//             debugPrint("Upload is paused.");
+//             break;
+//           case TaskState.canceled:
+//             debugPrint("Upload was canceled");
+//             break;
+//           case TaskState.error:
+//             debugPrint("Upload was error");
+//             // Handle unsuccessful uploads
+//             break;
+//           case TaskState.success:
+//             debugPrint("Upload was success");
+//             // Handle successful uploads on complete
+//             // ...
+//             break;
+//         }
+//       });
+//     } on FirebaseException catch (e) {
+//       utils.showSnackBar(context, message: e.message);
+//     }
+//   }
+//
+//   pickImageFromCamera() async {
+//     image = await picker.pickImage(source: ImageSource.camera);
+//
+//     setState(() {
+//       if (image != null) {
+//         cameraImage = File(image!.path);
+//         storeImage();
+//       } else {
+//         debugPrint("No image selected------->");
+//       }
+//     });
+//   }
+//
+//   pickImageFromGallery() async {
+//     image = await picker.pickImage(source: ImageSource.gallery);
+//     setState(() {
+//       if (image != null) {
+//         cameraImage = File(image!.path);
+//         storeImage();
+//       } else {
+//         debugPrint("No image selected");
+//       }
+//     });
+//   }
+//
+//   uploadFromString() async {
+//     try {
+//       await firebaseStorage.ref().child("images").child("url_image").putString(
+//             dataUrl,
+//             format: PutStringFormat.dataUrl,
+//           );
+//     } on FirebaseException catch (e) {
+//       utils.showSnackBar(context, message: e.message);
+//     }
+//   }
   //
   // Future<void> saveImage(BuildContext context) async {
   //   final islandRef = storageRef.child("images/profile.png");
@@ -448,33 +689,10 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  getDownloadUrl() async {
-    final imageUrl = await firebaseStorage.ref().child("images").child("profile.png").getDownloadURL();
-    profileUrl = imageUrl.toString();
-    setState(() {});
-    debugPrint("image url=======>$imageUrl");
-  }
-
-  String? imageData;
-  bool dataLoaded = false;
-
-  _asyncMethod() async {
-    //comment out the next two lines to prevent the device from getting
-    // the image from the web in order to prove that the picture is
-    // coming from the device instead of the web.
-    var url = "https://firebasestorage.googleapis.com/v0/b/remotely-application.appspot.com/o/images%2Fprofile.png?alt=media&token=04a6552a-d10f-495e-8678-48b5aeefb1d2"; // <-- 1
-    var response = await get(Uri()); // <--2
-    var documentDirectory = await getApplicationDocumentsDirectory();
-    var firstPath = "${documentDirectory.path}/images";
-    var filePathAndName = '${documentDirectory.path}/images/profile.png';
-    //comment out the next three lines to prevent the image from being saved
-    //to the device to show that it's coming from the internet
-    await Directory(firstPath).create(recursive: true); // <-- 1
-    File file2 = File(filePathAndName); // <-- 2
-    file2.writeAsBytesSync(response.bodyBytes); // <-- 3
-    setState(() {
-      imageData = filePathAndName;
-      dataLoaded = true;
-    });
-  }
+  // getDownloadUrl() async {
+  //   final imageUrl = await firebaseStorage.ref().child("images").child("profile.png").getDownloadURL();
+  //   profileUrl = imageUrl.toString();
+  //   setState(() {});
+  //   debugPrint("image url=======>$imageUrl");
+  // }
 }

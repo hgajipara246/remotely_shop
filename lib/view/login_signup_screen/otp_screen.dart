@@ -30,7 +30,7 @@ class _OtpScreenState extends State<OtpScreen> {
       ),
       decoration: BoxDecoration(
         border: Border.all(
-          color: const Color.fromRGBO(234, 239, 243, 1),
+          color: const Color.fromRGBO(223, 243, 220, 1.0),
         ),
         borderRadius: BorderRadius.circular(20),
       ),
@@ -45,7 +45,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
     final submittedPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration?.copyWith(
-        color: const Color.fromRGBO(234, 239, 243, 1),
+        color: const Color.fromRGBO(223, 243, 220, 1.0),
       ),
     );
 

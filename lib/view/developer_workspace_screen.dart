@@ -150,7 +150,7 @@ class _DeveloperWorkspaceState extends State<DeveloperWorkspace> {
                                   "${remotelyModelDeveloperWorkSpace.developerWorkSpace![index].title}",
                                   style: TextStyle(
                                     color: const Color(0xFF040B14),
-                                    fontSize: width / 30,
+                                    fontSize: width / 22,
                                     fontFamily: 'Avenir',
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -159,7 +159,7 @@ class _DeveloperWorkspaceState extends State<DeveloperWorkspace> {
                                   "${remotelyModelDeveloperWorkSpace.developerWorkSpace![index].price}",
                                   style: TextStyle(
                                     color: const Color(0xFFBA5C3D),
-                                    fontSize: width / 35,
+                                    fontSize: width / 26,
                                     fontFamily: 'Avenir',
                                     fontWeight: FontWeight.w800,
                                   ),

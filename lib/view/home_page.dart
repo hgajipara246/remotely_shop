@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // TODO: implement initState
-
+    getUser();
     super.initState();
   }
 
@@ -92,8 +92,17 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       Image.asset(
-                        AppImages.profile,
-                        height: height / 8,
+                        "assets/images/profiler.png",
+                        height: height / 8.5,
+                      ),
+                      Expanded(
+                        child: Text(
+                          "${userModel?.name}",
+                          style: TextStyle(
+                            fontFamily: "Avenir",
+                            fontSize: height / 48,
+                          ),
+                        ),
                       ),
                       Expanded(
                         child: Text(
@@ -227,7 +236,7 @@ class _HomePageState extends State<HomePage> {
           onTap: () => _scaffoldKey.currentState!.openDrawer(),
           child: Padding(
             padding: EdgeInsets.all(height / 120),
-            child: Image.asset(AppImages.profile, height: height / 50),
+            child: Image.asset("assets/images/profiler.png", height: height / 50),
           ),
         ),
         actions: [

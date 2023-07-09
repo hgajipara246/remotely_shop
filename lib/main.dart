@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:remotely_shop/view/onboarding_screen/onBoard_screen.dart';
+import 'package:remotely_shop/view/spalsh_screen/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFCED55B)),
         useMaterial3: false,
       ),
-      home: const OnBoardScreen(),
+      home: const SplashScreen(),
     );
   }
 }

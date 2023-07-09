@@ -50,10 +50,10 @@ dependencies:
   firebase_storage: ^11.2.3
   image_picker: ^0.8.9
   path_provider: ^2.0.15
-  http: ^0.13.5
   flutter_file_dialog: ^3.0.0
   shared_preferences: ^2.1.2
-
+  animated_text_kit: ^4.2.2
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:
@@ -104,10 +104,11 @@ flutter:
         - asset: assets/fonts/Avenir/Avenir_Black.ttf
         - asset: assets/fonts/Avenir/Avenir_Heavy.ttf
         - asset: assets/fonts/Avenir/Avenir_Light.ttf
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+
+    - family: Acme
+      fonts:
+        - asset: assets/fonts/Acme/Acme-Regular.ttf
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
