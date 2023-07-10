@@ -4,7 +4,9 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleDisplayName</key>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>My App needs access to the photo library for saving images.</string>
+    <key>CFBundleDisplayName</key>
 	<string>Remotely Shop</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>

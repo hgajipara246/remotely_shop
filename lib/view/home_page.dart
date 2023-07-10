@@ -46,7 +46,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getUser();
     super.initState();
   }
@@ -910,6 +909,34 @@ class _HomePageState extends State<HomePage> {
         child: Image.asset(
           AppImages.shoppingCart,
           height: height / 32,
+        ),
+      ),
+    );
+  }
+}
+
+class HomeSreens extends StatefulWidget {
+  const HomeSreens({super.key});
+
+  @override
+  State<HomeSreens> createState() => _HomeSreensState();
+}
+
+class _HomeSreensState extends State<HomeSreens> {
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/images/profiler.png",
+              height: height / 8.5,
+            ),
+          ],
         ),
       ),
     );

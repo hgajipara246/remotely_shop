@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, use_build_context_synchronously, deprecated_member_use
 
 import 'dart:convert';
 import 'dart:io';
@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:remotely_shop/model/remotely_model.dart';
@@ -26,44 +27,20 @@ class _ProfilePageState extends State<ProfilePage> {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   FirebaseStorage firebaseStorage = FirebaseStorage.instance;
-  final storageRef = FirebaseStorage.instance.ref();
-  final String imageReferencePath = 'images/profile.jpg'; // Replace with the reference path of your image in Firebase Storage
-  String dataUrl = 'https://images.unsplash.com/photo-1582911131929-b5fa50720002?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80';
 
   UserModel userModel = UserModel();
   Utils utils = Utils();
 
-  // final ImagePicker picker = ImagePicker();
-  // XFile? image;
-  // File? cameraImage;
-  // FirebaseStorage storage = FirebaseStorage.instance;
-  // String? profileUrl;
-
-  // File? imgFile;
-  // String? imgPath;
-  //
-  // Future<void> getImgFromGallery() async {
-  //   final pickedImage = await ImagePicker().getImage(source: ImageSource.gallery);
-  //   if (pickedImage != null) {
-  //     saveData(pickedImage.path.toString());
-  //     setState(() {
-  //       imgFile = File(pickedImage.path);
-  //     });
-  //   }
-  // }
-  //
-  // Future<void> saveData(String val) async {
-  //   final sharedPref = await SharedPreferences.getInstance();
-  //   sharedPref.setString('path', val);
-  //   getData();
-  // }
-  //
-  // void getData() {
-  //   final sharedPref = SharedPreferences.getInstance();
-  //   setState(() {
-  //     imgPath = sharedPref.toString(path);
-  //   });
-  // }
+  getUser() {
+    CollectionReference users = firebaseFirestore.collection("user");
+    users.doc(firebaseAuth.currentUser!.uid).get().then((value) {
+      debugPrint("User Added successfully  --------> ${jsonEncode(value.data())}");
+      userModel = userModelFromJson(jsonEncode(value.data()));
+      setState(() {});
+    }).catchError((error) {
+      debugPrint("Failed to get user  : $error");
+    });
+  }
 
   File? imgFile;
   String? imgPath;
@@ -75,6 +52,8 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         imgFile = File(pickedImage.path);
       });
+    } else {
+      debugPrint("No image selected------->");
     }
   }
 
@@ -85,6 +64,8 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         imgFile = File(pickedImage.path);
       });
+    } else {
+      debugPrint("No image selected------->");
     }
   }
 
@@ -101,24 +82,58 @@ class _ProfilePageState extends State<ProfilePage> {
       imgPath = imagePath;
     });
   }
-  //
-  // Future<void> downloadImage() async {
-  //   if (imgPath == null) {
-  //     // No image path stored in shared preferences
-  //     return;
-  //   }
-  //
-  //   final response = await http.get(Uri.parse(imgPath!));
-  //   final documentsDirectory = await getApplicationDocumentsDirectory();
-  //   final file = File('${documentsDirectory.path}/image.jpg');
-  //   await file.writeAsBytes(response.bodyBytes);
-  // }
+
+  Future<void> saveImageToGallery() async {
+    if (imgFile != null || imgPath != null) {
+      final directory = await getTemporaryDirectory();
+      final imagePath = '${directory.path}/profile_image.jpg';
+      if (imgFile != null) {
+        await imgFile!.copy(imagePath);
+      } else if (imgPath != null) {
+        final originalFile = File(imgPath!);
+        await originalFile.copy(imagePath);
+      }
+
+      try {
+        await GallerySaver.saveImage(imagePath);
+        debugPrint('Image saved successfully to the gallery.');
+      } catch (e) {
+        debugPrint('Failed to save the image to the gallery: $e');
+      }
+    } else {
+      debugPrint('No image file available. Please select or capture an image.');
+    }
+  }
+
+  Future<void> downloadImage() async {
+    if (imgPath != null) {
+      final appDir = await getExternalStorageDirectory();
+      final String localPath = '${appDir!.path}/downloaded_image.jpg';
+
+      final File originalFile = File(imgPath!);
+      final File downloadedFile = await originalFile.copy(localPath);
+
+      try {
+        await GallerySaver.saveImage(downloadedFile.path);
+        utils.showSnackBar(context, message: "Image downloaded successfully. Check Your Gallery");
+        debugPrint("Image downloaded successfully. Check Your Gallery");
+      } catch (e) {
+        utils.showSnackBar(context, message: 'Failed to save the image to the gallery: $e');
+
+        debugPrint('Failed to save the image to the gallery: $e');
+      }
+    } else {
+      utils.showSnackBar(context, message: 'No image path available.');
+
+      debugPrint('No image path available.');
+    }
+  }
 
   @override
   void initState() {
-    // TODO: implement initState
     getUser();
     getData();
+
     super.initState();
   }
 
@@ -150,10 +165,10 @@ class _ProfilePageState extends State<ProfilePage> {
           IconButton(
             icon: const Icon(
               Icons.download,
-              color: Colors.pink,
+              color: Colors.black,
             ),
-            onPressed: () async {
-              // await getDownloadUrl();
+            onPressed: () {
+              downloadImage();
             },
           ),
         ],
@@ -298,7 +313,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         child: IconButton(
                                           onPressed: () {
-                                            // pickImageFromCamera();
+                                            pickImageFromCamera();
                                             Navigator.of(context).pop();
                                           },
                                           icon: const Icon(
@@ -390,6 +405,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: IconButton(
                                     onPressed: () {
                                       // pickImageFromCamera();
+                                      pickImageFromCamera();
                                       Navigator.of(context).pop();
                                     },
                                     icon: const Icon(
@@ -541,158 +557,4 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
-
-  getUser() {
-    CollectionReference users = firebaseFirestore.collection("user");
-    users.doc(firebaseAuth.currentUser!.uid).get().then((value) {
-      debugPrint("User Added successfully  --------> ${jsonEncode(value.data())}");
-      userModel = userModelFromJson(jsonEncode(value.data()));
-      setState(() {});
-    }).catchError((error) {
-      debugPrint("Failed to get user  : $error");
-    });
-  }
-//
-//   storeImage() async {
-//     try {
-//       final UploadTask uploadTask = firebaseStorage.ref().child("images").child("profile.png").putFile(cameraImage!);
-// // Listen for state changes, errors, and completion of the upload.
-//       uploadTask.snapshotEvents.listen((TaskSnapshot taskSnapshot) {
-//         switch (taskSnapshot.state) {
-//           case TaskState.running:
-//             final progress = 100.0 * (taskSnapshot.bytesTransferred / taskSnapshot.totalBytes);
-//             debugPrint("Upload is $progress% complete.");
-//             break;
-//           case TaskState.paused:
-//             debugPrint("Upload is paused.");
-//             break;
-//           case TaskState.canceled:
-//             debugPrint("Upload was canceled");
-//             break;
-//           case TaskState.error:
-//             debugPrint("Upload was error");
-//             // Handle unsuccessful uploads
-//             break;
-//           case TaskState.success:
-//             debugPrint("Upload was success");
-//             // Handle successful uploads on complete
-//             // ...
-//             break;
-//         }
-//       });
-//     } on FirebaseException catch (e) {
-//       utils.showSnackBar(context, message: e.message);
-//     }
-//   }
-//
-//   pickImageFromCamera() async {
-//     image = await picker.pickImage(source: ImageSource.camera);
-//
-//     setState(() {
-//       if (image != null) {
-//         cameraImage = File(image!.path);
-//         storeImage();
-//       } else {
-//         debugPrint("No image selected------->");
-//       }
-//     });
-//   }
-//
-//   pickImageFromGallery() async {
-//     image = await picker.pickImage(source: ImageSource.gallery);
-//     setState(() {
-//       if (image != null) {
-//         cameraImage = File(image!.path);
-//         storeImage();
-//       } else {
-//         debugPrint("No image selected");
-//       }
-//     });
-//   }
-//
-//   uploadFromString() async {
-//     try {
-//       await firebaseStorage.ref().child("images").child("url_image").putString(
-//             dataUrl,
-//             format: PutStringFormat.dataUrl,
-//           );
-//     } on FirebaseException catch (e) {
-//       utils.showSnackBar(context, message: e.message);
-//     }
-//   }
-  //
-  // Future<void> saveImage(BuildContext context) async {
-  //   final islandRef = storageRef.child("images/profile.png");
-  //
-  //   // final appDocDir = await getApplicationDocumentsDirectory();
-  //   // final filePath = "${appDocDir.absolute}/images/profile.png";
-  //
-  //   final imageUrl = await storageRef.child("images/profile.png").getDownloadURL();
-  //   final file = File(imageUrl);
-  //
-  //   final downloadTask = islandRef.writeToFile(file);
-  //   downloadTask.snapshotEvents.listen((taskSnapshot) {
-  //     switch (taskSnapshot.state) {
-  //       case TaskState.running:
-  //         debugPrint("Running  <<----------->>");
-  //         break;
-  //       case TaskState.paused:
-  //         debugPrint("paused-----------");
-  //         break;
-  //       case TaskState.success:
-  //         debugPrint("success-----------");
-  //         break;
-  //       case TaskState.canceled:
-  //         debugPrint("canceled-----------");
-  //         break;
-  //       case TaskState.error:
-  //         debugPrint("error-----------");
-  //         break;
-  //     }
-  //   });
-  // }
-  //
-
-  ///  -------
-
-  Future<void> saveImage(BuildContext context) async {
-    final imageUrl = await storageRef.child("users/me/profile.png").getDownloadURL();
-    debugPrint("Image Url ------------ >>>>>>>>    $imageUrl");
-
-    String? message;
-    final scaffoldMessenger = ScaffoldMessenger.of(context);
-
-    try {
-      final imageUrl = await storageRef.child("users/me/profile.png").getDownloadURL();
-      debugPrint("Image Url ------------ >>>>>>>>    $imageUrl");
-      // Reference to the image in Firebase Storage
-      final ref = FirebaseStorage.instance.ref().child('images/profile.jpg'); // Replace with the reference path of your image in Firebase Storage
-
-      // Get temporary directory
-      final dir = await getTemporaryDirectory();
-
-      // Create a file
-      final file = File('${dir.path}/image.jpg');
-
-      // Download and save the image
-      await ref.writeToFile(file);
-
-      // Show success message
-      message = 'Image saved to disk';
-    } catch (e) {
-      // Handle the StorageException
-      debugPrint('StorageException: $e');
-    }
-
-    if (message != null) {
-      scaffoldMessenger.showSnackBar(SnackBar(content: Text(message)));
-    }
-  }
-
-  // getDownloadUrl() async {
-  //   final imageUrl = await firebaseStorage.ref().child("images").child("profile.png").getDownloadURL();
-  //   profileUrl = imageUrl.toString();
-  //   setState(() {});
-  //   debugPrint("image url=======>$imageUrl");
-  // }
 }
